@@ -11,7 +11,7 @@ import java.util.UUID;
 public class TestUtil {
 
 
-	public static ProductDTO createProduct() {
+	public static ProductDTO createProductDTO() {
 		ProductDTO dto = new ProductDTO();
 		double price = ((Math.random() * (100 - 20)) + 20);
 		dto.price = new BigDecimal(price);

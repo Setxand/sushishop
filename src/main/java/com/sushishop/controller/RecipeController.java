@@ -3,7 +3,6 @@ package com.sushishop.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.RecipeDTORequest;
 import com.sushishop.dto.RecipeDTOResponse;
-import com.sushishop.model.Recipe;
 import com.sushishop.service.RecipeService;
 import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -22,8 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ProductIntegrationTest extends BaseIntegrationTest {
 
+	private static final String PIC_JSON_PATH = "$.picture";
+	private static final String PRICE_JSON_PATH = "$.price";
+	private static final String URI_WITH_ID_VAR = PRODUCTS_BASE_URL + "/{productId}";
+
+
 	@Test
-//	@Sql("clean.sql")
+	@Sql("classpath:clean.sql")
 	public void productIntegrationTest() throws Exception {
 
 
@@ -35,12 +41,12 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		Assert.assertEquals(productResponse.price.scale(), 2);
 
 		// Get new product
-		mockMvc.perform(get("/v1/products/{productId}", productId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(productResponse.id))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(productResponse.name))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.price").value(productResponse.price))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.picture").value(productResponse.picture));
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(productResponse.id))
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(productResponse.name))
+				.andExpect(MockMvcResultMatchers.jsonPath(PRICE_JSON_PATH).value(productResponse.price))
+				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON_PATH).value(productResponse.picture));
 
 		// Update product
 		ProductDTO productRequestBodyToUpdate = new ProductDTO();
@@ -48,31 +54,31 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		productRequestBodyToUpdate.name = "Product-test-name New product name";
 		productRequestBodyToUpdate.picture = "New product picture";
 
-		mockMvc.perform(patch("/v1/products/{productId}", productId)
+		mockMvc.perform(patch(URI_WITH_ID_VAR, productId)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(productRequestBodyToUpdate)))
 				.andExpect(status().isNoContent());
 
 		// Get updated product
-		mockMvc.perform(get("/v1/products/{productId}", productId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(productResponse.id))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(productRequestBodyToUpdate.name))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.price").value(productRequestBodyToUpdate.price))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.picture").value(productRequestBodyToUpdate.picture));
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(productResponse.id))
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(productRequestBodyToUpdate.name))
+				.andExpect(MockMvcResultMatchers.jsonPath(PRICE_JSON_PATH).value(productRequestBodyToUpdate.price))
+				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON_PATH).value(productRequestBodyToUpdate.picture));
 
 		// Remove product
-		mockMvc.perform(delete("/v1/products/{productId}", productId)
+		mockMvc.perform(delete(URI_WITH_ID_VAR, productId)
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent());
 
 		// Get removed product ( Must be 400 error )
-		mockMvc.perform(get("/v1/products/{productId}", productId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId))
 				.andExpect(status().isBadRequest());
 
 		// Get page of products (size = 3)
 		mockMvc.perform(get(PRODUCTS_BASE_URL + "?page=0&size=3"))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.content", hasSize(3)));
+				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON_PATH, hasSize(3)));
 	}
 }

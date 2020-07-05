@@ -3,7 +3,6 @@ package com.sushishop.integration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.ProductDTO;
-import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -12,11 +11,15 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sushishop.TestUtil.createProduct;
+import static com.sushishop.TestUtil.createProductDTO;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class BaseIntegrationTest {
+
+	protected static final String ID_JSON_PATH = "$.id";
+	protected static final String NAME_JSON_PATH = "$.name";
+	protected static final String CONTENT_JSON_PATH = "$.content";
 
 
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
@@ -32,7 +35,7 @@ public class BaseIntegrationTest {
 	@Autowired protected ObjectMapper objectMapper;
 
 	protected ProductDTO createProductPostRequest() throws Exception {
-		ProductDTO productRequestBody = createProduct();
+		ProductDTO productRequestBody = createProductDTO();
 		MockHttpServletRequestBuilder postRequest = postRequestWithUrl(PRODUCTS_BASE_URL, productRequestBody);
 
 		return objectMapper.readValue(mockMvc.perform(postRequest)
