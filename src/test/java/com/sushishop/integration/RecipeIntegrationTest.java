@@ -3,6 +3,7 @@ package com.sushishop.integration;
 import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTORequest;
 import com.sushishop.dto.RecipeDTOResponse;
+import com.sushishop.security.dto.JwtResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,13 +41,16 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		// in case of DEFAULT_PRODUCTS_SIZE has changed
 		Assert.assertTrue(DEFAULT_PRODUCTS_SIZE >= 3);
 
+		JwtResponse jwtResponse = signUpRequest();
+		accessToken = jwtResponse.getAccessToken();
 
 		// Create recipe
 		RecipeDTOResponse recipeWithFiveProducts = createRecipeWithFiveProducts();
 		String recipeId = recipeWithFiveProducts.id;
 
 		// Get created recipe
-		String getRecipeResponse = mockMvc.perform(get(RECIPES_BASE_URL + "/{recipeId}", recipeId))
+		String getRecipeResponse = mockMvc.perform(get(URI_WITH_ID_VAR, recipeId)
+				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeWithFiveProducts.name))
@@ -64,13 +68,14 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		recipeDTORequest.productIds.remove(0);
 
 		mockMvc.perform(patch(URI_WITH_ID_VAR, recipe.id)
+				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(recipeDTORequest)))
-				.andExpect(status().isNoContent());
+					.andExpect(status().isNoContent());
 
 
 		// Get updated recipe
-		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId).headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(recipeId))
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeDTORequest.name))
@@ -82,13 +87,15 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		recipeDTORequest.productIds.add(createProductPostRequest().id);
 
 		mockMvc.perform(patch(URI_WITH_ID_VAR, recipe.id)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(recipeDTORequest)))
+					.headers(authHeader(accessToken))
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(recipeDTORequest)))
 				.andExpect(status().isNoContent());
 
 
 		// Get updated recipe with two products
-		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId)
+					.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(recipeId))
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeDTORequest.name))
@@ -98,7 +105,7 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		removeRecipeRequest(recipeId);
 
 		// Get removed recipe ( Must be 400 error )
-		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId).headers(authHeader(accessToken)))
 				.andExpect(status().isBadRequest());
 
 
@@ -109,40 +116,21 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 			recipeResponses.add(createRecipeWithFiveProducts());
 		}
 
-		mockMvc.perform(get(RECIPES_BASE_URL + "?page=0&size=3"))
+		mockMvc.perform(get(RECIPES_BASE_URL + "?page=0&size=3")
+					.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON_PATH, hasSize(3)));
 
-		mockMvc.perform(get(RECIPES_BASE_URL + "?page=1&size=2"))
+		mockMvc.perform(get(RECIPES_BASE_URL + "?page=1&size=2")
+					.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.content", hasSize(2)));
 	}
 
 	private void removeRecipeRequest(String recipeId) throws Exception {
 		mockMvc.perform(delete(URI_WITH_ID_VAR, recipeId)
+				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNoContent());
-	}
-
-	private RecipeDTOResponse createRecipeWithFiveProducts() throws Exception {
-		// Create products for the recipe
-
-		List<ProductDTO> productDTOS = new ArrayList<>();
-		for (int i = 0; i < DEFAULT_PRODUCTS_SIZE; i++) {
-			productDTOS.add(createProductPostRequest());
-		}
-		RecipeDTORequest recipeRequest = createRequestRecipe(productDTOS.stream().map(p -> p.id)
-				.collect(Collectors.toList()));
-
-
-		// Create recipe
-		String recipeJsonResponse = mockMvc.perform(postRequest(recipeRequest))
-				.andExpect(status().isCreated())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeRequest.name))
-				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE)))
-				.andReturn().getResponse().getContentAsString();
-
-		return objectMapper.readValue(recipeJsonResponse, RecipeDTOResponse.class);
+					.andExpect(status().isNoContent());
 	}
 }

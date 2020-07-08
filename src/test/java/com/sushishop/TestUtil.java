@@ -2,7 +2,9 @@ package com.sushishop;
 
 import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTORequest;
+import com.sushishop.dto.UserDTO;
 import com.sushishop.model.Product;
+import com.sushishop.model.User;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,6 +26,16 @@ public class TestUtil {
 		RecipeDTORequest dto = new RecipeDTORequest();
 		dto.name = "Recipe-test-name " + generateUUID();
 		dto.productIds = productIds;
+		return dto;
+	}
+
+	public static UserDTO createUserDTO() {
+		UserDTO dto = new UserDTO();
+		dto.email = "Email-test" + generateUUID();
+		dto.phone = "Phone-test" + generateUUID();
+		dto.name = "John Doe-test-name" + generateUUID();
+		dto.password = generateUUID();
+		dto.role = User.UserRole.ROLE_USER.name();
 		return dto;
 	}
 

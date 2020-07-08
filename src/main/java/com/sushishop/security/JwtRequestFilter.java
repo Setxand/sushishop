@@ -1,11 +1,13 @@
 package com.sushishop.security;
 
 
+import com.sushishop.controller.AuthController;
 import com.sushishop.model.User;
 import com.sushishop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,7 +39,7 @@ public class JwtRequestFilter extends GenericFilterBean {
 		String userId = null;
 		String jwtToken = null;
 
-		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ") && requestTokenHeader.length() > 7) {
 			jwtToken = requestTokenHeader.substring(7);
 			try {
 				userId = jwtTokenUtil.getUserIdFromToken(jwtToken);
@@ -49,10 +51,10 @@ public class JwtRequestFilter extends GenericFilterBean {
 				String tokenType = jwtTokenUtil.getTokenType(jwtToken);
 
 				if (requestURI.contains("/refresh-token")) {
-					if (!tokenType.equals("refresh"))
-						throw new AccessDeniedException("This is not an refresh token");
+					if (!tokenType.equals(JwtTokenUtil.TokenType.REFRESH.name()))
+						throw new AccessDeniedException("This is not a refresh token");
 				} else {
-					if (!tokenType.equals("access")) {
+					if (!tokenType.equals(JwtTokenUtil.TokenType.ACCESS.name())) {
 						throw new AccessDeniedException("This is not an access token");
 					}
 				}
@@ -71,13 +73,14 @@ public class JwtRequestFilter extends GenericFilterBean {
 
 			User user = userService.getUser(userId);
 			UserDetails userDetails = this.jwtUserDetails.createUserDetails(user);
-//			if (jwtTokenUtil.validateToken(jwtToken, user)) {
+
+			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 			UsernamePasswordAuthenticationToken authToken =
 					new UsernamePasswordAuthenticationToken(userId, userDetails, userDetails.getAuthorities());
 
 			authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(authToken);
-//			}
+			}
 		}
 	}
 }

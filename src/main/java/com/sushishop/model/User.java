@@ -26,7 +26,10 @@ public class User {
 	private String phone;
 	private String password;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private Cart cart;
+
 	@Enumerated(EnumType.STRING)
-	private UserRole role;
+	private UserRole role = UserRole.ROLE_USER;
 
 }

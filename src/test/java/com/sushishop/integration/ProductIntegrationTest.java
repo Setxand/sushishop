@@ -1,6 +1,7 @@
 package com.sushishop.integration;
 
 import com.sushishop.dto.ProductDTO;
+import com.sushishop.security.dto.JwtResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,10 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 	public void productIntegrationTest() throws Exception {
 
 
+		// Create User to authenticate
+		JwtResponse jwtResponse = signUpRequest();
+		accessToken = jwtResponse.getAccessToken();
+
 		// Create new Product
 		ProductDTO productResponse = createProductPostRequest();
 		String productId = productResponse.id;
@@ -41,7 +46,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		Assert.assertEquals(productResponse.price.scale(), 2);
 
 		// Get new product
-		mockMvc.perform(get(URI_WITH_ID_VAR, productId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(productResponse.id))
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(productResponse.name))
@@ -54,13 +59,13 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		productRequestBodyToUpdate.name = "Product-test-name New product name";
 		productRequestBodyToUpdate.picture = "New product picture";
 
-		mockMvc.perform(patch(URI_WITH_ID_VAR, productId)
+		mockMvc.perform(patch(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(productRequestBodyToUpdate)))
 				.andExpect(status().isNoContent());
 
 		// Get updated product
-		mockMvc.perform(get(URI_WITH_ID_VAR, productId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(productResponse.id))
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(productRequestBodyToUpdate.name))
@@ -68,16 +73,16 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON_PATH).value(productRequestBodyToUpdate.picture));
 
 		// Remove product
-		mockMvc.perform(delete(URI_WITH_ID_VAR, productId)
+		mockMvc.perform(delete(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent());
 
 		// Get removed product ( Must be 400 error )
-		mockMvc.perform(get(URI_WITH_ID_VAR, productId))
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
 				.andExpect(status().isBadRequest());
 
 		// Get page of products (size = 3)
-		mockMvc.perform(get(PRODUCTS_BASE_URL + "?page=0&size=3"))
+		mockMvc.perform(get(PRODUCTS_BASE_URL + "?page=0&size=3").headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON_PATH, hasSize(3)));
 	}

@@ -1,5 +1,6 @@
 package com.sushishop.security;
 
+import com.sushishop.exception.GlobalErrorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.servlet.Filter;
+
 @Configuration
 @EnableWebMvc
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -21,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired JwtUserDetails jwtUserDetailsService;
 	@Autowired JwtRequestFilter jwtRequestFilter;
 	@Autowired PasswordEncoder passwordEncoder;
+	@Autowired ExceptionHandlerJwtFilter exceptionHandlerInFilter;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,12 +40,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors().and().csrf().disable()
-				.authorizeRequests().antMatchers("/signup").permitAll()
+				.authorizeRequests()
+				.antMatchers("/signup").permitAll()
 				.antMatchers("/login").permitAll()
-				.anyRequest().authenticated().and().exceptionHandling().disable();
+				.anyRequest().authenticated();
 
 
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterBefore(exceptionHandlerInFilter, JwtRequestFilter.class);
 		httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 }
