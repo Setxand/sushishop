@@ -12,6 +12,8 @@ public class ProductDTO {
 	public String picture;
 	public String description;
 	public double weight;
+
+	// Amount of the products in the cart
 	public int amount;
 	public BigDecimal price; ///todo need calculation of pricesl
 

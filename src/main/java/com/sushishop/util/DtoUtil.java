@@ -9,6 +9,7 @@ import com.sushishop.model.Product;
 import com.sushishop.model.Recipe;
 import com.sushishop.model.User;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,7 @@ public class DtoUtil {
 
 		dto.products.forEach(p -> {
 			p.amount = entity.getAmounts().get(p.id);
+			p.price = p.price.multiply(new BigDecimal(entity.getAmounts().get(p.id)));
 			p.weight = entity.getAmounts().get(p.id) * p.weight;
 		});
 //		dto.amounts = entity.getAmounts().entrySet().stream()

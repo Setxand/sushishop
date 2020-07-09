@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,8 +28,6 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 	private static final String PRODUCTS_JSON = "$.products";
 	private static final String USER_ID_JSON = "$.userId";
 	private static final String TOTAL_PRICE_JSON = "$.totalPrice";
-	private static final String AMOUNT_JSON = "$.amount";
-	private static final String WEIGHT_JSON = "$.amount";
 
 	@Test
 	@Sql("classpath:clean.sql")
@@ -49,8 +48,8 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 
 		// Get cart with new product
 		CartDTO cart = getCart(jwtResponse.getUserId());
-		Assert.assertEquals(product.id, cart.products.get(0).id);
-		Assert.assertEquals(jwtResponse.getUserId(), cart.userId);
+		assertEquals(product.id, cart.products.get(0).id);
+		assertEquals(jwtResponse.getUserId(), cart.userId);
 
 		// Add list of products to cart (recipe) (Cart is creating if not exists)
 		RecipeDTOResponse recipeWithFiveProducts = createRecipeWithFiveProducts();
@@ -63,11 +62,19 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 
 		// Get cart with new 5 products and assert it
 		cart = getCart(jwtResponse.getUserId());
-		Assert.assertEquals(6, cart.products.size());
-		Assert.assertEquals(jwtResponse.getUserId(), cart.userId);
+		assertEquals(6, cart.products.size());
+		assertEquals(jwtResponse.getUserId(), cart.userId);
 
 		// Add the same product
 		putInTheCart(product, jwtResponse.getUserId(), 6, cart.totalPrice.add(product.price));
+
+		// Get cart and check product amount, price and weight
+		cart = getCart(jwtResponse.getUserId());
+		assertEquals(product.weight * 2, cart.products.stream()
+				.filter(p -> p.id.equals(product.id)).findFirst().get().weight, 0.0);
+		assertEquals(2, cart.products.stream().filter(p -> p.id.equals(product.id)).findFirst().get().amount);
+		assertEquals(product.price.multiply(new BigDecimal(2)), cart.products.stream()
+				.filter(p -> p.id.equals(product.id)).findFirst().get().price);
 
 		// Remove product from cart
 		mockMvc.perform(delete(CARTS_BASE_URL + "/products/{productId}", jwtResponse.getUserId(), product.id)
@@ -78,9 +85,9 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 
 		// Get cart with 5 products (one was removed)
 		cart = getCart(jwtResponse.getUserId());
-		Assert.assertEquals(6, cart.products.size());
-		Assert.assertEquals(jwtResponse.getUserId(), cart.userId);
-		Assert.assertEquals(1, cart.products.stream().filter(p -> p.id.equals(product.id)).findFirst().get().amount);
+		assertEquals(6, cart.products.size());
+		assertEquals(jwtResponse.getUserId(), cart.userId);
+		assertEquals(1, cart.products.stream().filter(p -> p.id.equals(product.id)).findFirst().get().amount);
 
 		// Checkout ( order creation)
 

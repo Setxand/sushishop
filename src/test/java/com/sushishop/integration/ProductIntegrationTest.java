@@ -30,6 +30,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 	private static final String PRICE_JSON = "$.price";
 	private static final String DESC_JSON = "$.description";
 	private static final String WEIGHT_JSON = "$.weight";
+
 	private static final String URI_WITH_ID_VAR = PRODUCTS_BASE_URL + "/{productId}";
 
 
