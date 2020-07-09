@@ -22,6 +22,8 @@ public class Product {
 	private String id;
 	private String name;
 	private String picture;
+	private String description;
+	private double weight;
 	private BigDecimal price;
 
 	public void setPrice(BigDecimal price) {

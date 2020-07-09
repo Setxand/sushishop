@@ -10,6 +10,8 @@ public class ProductDTO {
 	public String id;
 	public String name;
 	public String picture;
+	public String description;
+	public double weight;
 	public BigDecimal price;
 
 	@JsonIgnore

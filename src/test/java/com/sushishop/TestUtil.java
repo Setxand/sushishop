@@ -18,6 +18,8 @@ public class TestUtil {
 		double price = ((Math.random() * (100 - 20)) + 20);
 		dto.price = new BigDecimal(price);
 		dto.name = "Product-test-name " + generateUUID();
+		dto.description = "Product-test-description" + generateUUID();
+		dto.weight = 0.1;
 		dto.picture = "Picture-test-url " + generateUUID();
 		return dto;
 	}
@@ -34,7 +36,7 @@ public class TestUtil {
 		dto.email = "Email-test" + generateUUID();
 		dto.phone = "Phone-test" + generateUUID();
 		dto.name = "John Doe-test-name" + generateUUID();
-		dto.password = generateUUID();
+		dto.password = dto.email + "1111";
 		dto.role = User.UserRole.ROLE_USER.name();
 		return dto;
 	}

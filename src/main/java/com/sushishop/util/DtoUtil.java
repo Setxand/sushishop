@@ -20,6 +20,8 @@ public class DtoUtil {
 		dto.name = entity.getName();
 		dto.price = entity.getPrice();
 		dto.picture = entity.getPicture();
+		dto.description = entity.getDescription();
+		dto.weight = entity.getWeight();
 
 		return dto;
 	}

@@ -6,7 +6,6 @@ import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTORequest;
 import com.sushishop.dto.RecipeDTOResponse;
 import com.sushishop.dto.UserDTO;
-import com.sushishop.model.User;
 import com.sushishop.security.JwtTokenUtil;
 import com.sushishop.security.dto.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class BaseIntegrationTest {
 
-	protected static final String ID_JSON_PATH = "$.id";
-	protected static final String NAME_JSON_PATH = "$.name";
-	protected static final String CONTENT_JSON_PATH = "$.content";
-	protected String accessToken = "";
+	protected static final String ID_JSON = "$.id";
+	protected static final String NAME_JSON = "$.name";
+	protected static final String CONTENT_JSON = "$.content";
 
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
 	protected static final String RECIPES_BASE_URL = "/v1/recipes";
@@ -49,6 +47,8 @@ public class BaseIntegrationTest {
 	@Autowired protected MockMvc mockMvc;
 	@Autowired protected ObjectMapper objectMapper;
 	@Autowired private JwtTokenUtil jwtTokenUtil;
+
+	protected String accessToken = "";
 
 	protected ProductDTO createProductPostRequest() throws Exception {
 		ProductDTO productRequestBody = createProductDTO();
@@ -90,8 +90,8 @@ public class BaseIntegrationTest {
 		String recipeJsonResponse = mockMvc.perform(postRequestWithUrl(RECIPES_BASE_URL, recipeRequest)
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isCreated())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeRequest.name))
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeRequest.name))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.products", hasSize(5)))
 				.andReturn().getResponse().getContentAsString();
 
@@ -104,8 +104,8 @@ public class BaseIntegrationTest {
 				.andExpect(status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId")
-						.isNotEmpty()).andReturn().getResponse().getContentAsString(), JwtResponse.class);
+				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").isNotEmpty())
+				.andReturn().getResponse().getContentAsString(), JwtResponse.class);
 	}
 
 	protected HttpHeaders authHeader(String token) {

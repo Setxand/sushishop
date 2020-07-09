@@ -12,8 +12,7 @@ import javax.transaction.Transactional;
 @Service
 public class ProductService {
 
-	private static final String INVALID_PRODUCT = "Invalid Product ID"
-			;
+	private static final String INVALID_PRODUCT = "Invalid Product ID";
 	private final ProductRepository productRepo;
 
 	public ProductService(ProductRepository productRepo) {
@@ -26,6 +25,8 @@ public class ProductService {
 		product.setName(dto.name);
 		product.setPrice(dto.price);
 		product.setPicture(dto.picture);
+		product.setDescription(dto.description);
+		product.setWeight(dto.weight);
 
 		return productRepo.saveAndFlush(product);
 	}
@@ -63,6 +64,14 @@ public class ProductService {
 
 		if (dto.keys.contains("picture")) {
 			product.setPicture(dto.picture);
+		}
+
+		if (dto.keys.contains("description")) {
+			product.setDescription(dto.description);
+		}
+
+		if (dto.keys.contains("weight")) {
+			product.setWeight(dto.weight);
 		}
 
 		productRepo.save(product);

@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,8 +41,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 		String jsonResponse = mockMvc.perform(get(BY_ID, jwtResponse.getUserId())
 				.headers(authHeader(jwtResponse.getAccessToken())))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(user.getName()))
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(user.getId()))
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(user.getName()))
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(user.getId()))
 				.andExpect(MockMvcResultMatchers.jsonPath(EMAIL_JSON_PATH).value(user.getEmail()))
 				.andExpect(MockMvcResultMatchers.jsonPath(PHONE_JSON_PATH).value(user.getPhone()))
 				.andReturn().getResponse().getContentAsString();

@@ -1,6 +1,5 @@
 package com.sushishop.integration;
 
-import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTORequest;
 import com.sushishop.dto.RecipeDTOResponse;
 import com.sushishop.security.dto.JwtResponse;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.sushishop.TestUtil.createRequestRecipe;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,8 +50,8 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		String getRecipeResponse = mockMvc.perform(get(URI_WITH_ID_VAR, recipeId)
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeWithFiveProducts.name))
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeWithFiveProducts.name))
 				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE)))
 				.andReturn().getResponse().getContentAsString();
 
@@ -77,8 +75,8 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		// Get updated recipe
 		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId).headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(recipeId))
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeDTORequest.name))
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(recipeId))
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeDTORequest.name))
 				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE - 1)));
 
 
@@ -97,8 +95,8 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		mockMvc.perform(get(URI_WITH_ID_VAR, recipeId)
 					.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON_PATH).value(recipeId))
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON_PATH).value(recipeDTORequest.name))
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(recipeId))
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeDTORequest.name))
 				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE + 1)));
 
 		// Remove recipe
@@ -119,7 +117,7 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		mockMvc.perform(get(RECIPES_BASE_URL + "?page=0&size=3")
 					.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON_PATH, hasSize(3)));
+				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON, hasSize(3)));
 
 		mockMvc.perform(get(RECIPES_BASE_URL + "?page=1&size=2")
 					.headers(authHeader(accessToken)))
