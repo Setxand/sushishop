@@ -12,7 +12,8 @@ public class ProductDTO {
 	public String picture;
 	public String description;
 	public double weight;
-	public BigDecimal price;
+	public int amount;
+	public BigDecimal price; ///todo need calculation of pricesl
 
 	@JsonIgnore
 	public Set<String> keys;

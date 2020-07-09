@@ -20,7 +20,10 @@ public class CartController {
 
 	@PutMapping("/v1/users/{userId}/carts/products/{productId}")
 	public CartDTO addToCart(@PathVariable String userId, @PathVariable String productId) {
-		return DtoUtil.cart(cartService.addToCart(userId, productId));
+		CartDTO dto = DtoUtil.cart(cartService.addToCart(userId, productId));
+
+
+		return dto;
 	}
 
 	@PutMapping("/v1/users/{userId}/carts/recipes/{recipeId}")
@@ -30,7 +33,7 @@ public class CartController {
 
 	@DeleteMapping("/v1/users/{userId}/carts/products/{productId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void removeProductFromCart(@PathVariable String userId, @PathVariable String productId) {
-		cartService.removeProductFromCart(userId, productId);
+	public CartDTO removeProductFromCart(@PathVariable String userId, @PathVariable String productId) {
+		return DtoUtil.cart(cartService.removeProductFromCart(userId, productId));
 	}
 }

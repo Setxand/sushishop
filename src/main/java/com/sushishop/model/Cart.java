@@ -6,8 +6,11 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -20,6 +23,10 @@ public class Cart {
 	@GeneratedValue(generator = "uuid")
 	private String id;
 	private String userId;
+	private BigDecimal totalPrice = new BigDecimal("0.00");
+
+	@ElementCollection
+	private Map<String, Integer> amounts = new HashMap<>();
 
 	@ManyToMany
 	private List<Product> products = new ArrayList<>();

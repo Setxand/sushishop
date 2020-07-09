@@ -35,7 +35,8 @@ public class BaseIntegrationTest {
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
 	protected static final String RECIPES_BASE_URL = "/v1/recipes";
 	protected static final String USERS_BASE_URL = "/v1/users";
-	protected static final String CARTS_BASE_URL = "/v1/carts";
+	protected static final String CARTS_BASE_URL = USERS_BASE_URL + "/{userId}/carts";
+
 	private static final Map<Class<? extends BaseIntegrationTest>, String> baseUrlMap = new HashMap<>();
 
 	static {

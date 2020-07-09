@@ -9,6 +9,7 @@ import com.sushishop.model.Product;
 import com.sushishop.model.Recipe;
 import com.sushishop.model.User;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DtoUtil {
@@ -48,7 +49,19 @@ public class DtoUtil {
 		CartDTO dto = new CartDTO();
 		dto.id = entity.getId();
 		dto.userId = entity.getUserId();
+		dto.totalPrice = entity.getTotalPrice();
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());
+
+		dto.products.forEach(p -> {
+			p.amount = entity.getAmounts().get(p.id);
+			p.weight = entity.getAmounts().get(p.id) * p.weight;
+		});
+//		dto.amounts = entity.getAmounts().entrySet().stream()
+//				.collect(Collectors.toMap(k -> entity.getProducts().stream()
+//								.filter(p -> p.getId().equals(k.getKey())).map(Product::getName)
+//								.findFirst().orElseThrow(() -> new IllegalArgumentException("Invalid product amount")),
+//						Map.Entry::getValue));
+
 		return dto;
 	}
 }
