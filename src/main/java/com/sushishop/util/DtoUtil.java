@@ -5,18 +5,16 @@ import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTOResponse;
 import com.sushishop.dto.UserDTO;
 import com.sushishop.model.Cart;
-import com.sushishop.model.Product;
 import com.sushishop.model.Recipe;
 import com.sushishop.model.User;
 
 import java.math.BigDecimal;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DtoUtil {
 
 
-	public static ProductDTO product(Product entity) {
+	public static ProductDTO product(com.sushishop.model.Product entity) {
 		ProductDTO dto = new ProductDTO();
 		dto.id = entity.getId();
 		dto.name = entity.getName();

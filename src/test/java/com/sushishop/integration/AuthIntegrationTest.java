@@ -15,12 +15,13 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@WebMvcTest
+@AutoConfigureMockMvc
 @AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class AuthIntegrationTest extends BaseIntegrationTest {
 
@@ -44,13 +45,15 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isAccepted())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
+				.andDo(document("login-ok"));
 
 		// Login with invalid credentials
 		loginRequestDTO.password = loginRequestDTO.password + "@";
 		mockMvc.perform(postRequestWithUrl("/login", loginRequestDTO))
 				.andExpect(status().isForbidden())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.code").value("ACCESS_DENIED"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.code").value("ACCESS_DENIED"))
+				.andDo(document("login-forbidden"));
 
 		// Refresh token
 		mockMvc.perform(get("/refresh-token")
@@ -58,6 +61,7 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
+				.andDo(document("refresh-token-ok"));
 	}
 }

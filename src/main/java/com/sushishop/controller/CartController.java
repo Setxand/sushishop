@@ -1,7 +1,6 @@
 package com.sushishop.controller;
 
 import com.sushishop.dto.CartDTO;
-import com.sushishop.dto.ProductDTO;
 import com.sushishop.service.CartService;
 import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,7 @@ public class CartController {
 
 	@PutMapping("/v1/users/{userId}/carts/products/{productId}")
 	public CartDTO addToCart(@PathVariable String userId, @PathVariable String productId) {
-		CartDTO dto = DtoUtil.cart(cartService.addToCart(userId, productId));
-
-
-		return dto;
+		return DtoUtil.cart(cartService.addToCart(userId, productId));
 	}
 
 	@PutMapping("/v1/users/{userId}/carts/recipes/{recipeId}")

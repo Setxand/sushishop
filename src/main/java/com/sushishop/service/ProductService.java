@@ -1,7 +1,6 @@
 package com.sushishop.service;
 
 import com.sushishop.dto.ProductDTO;
-import com.sushishop.model.Product;
 import com.sushishop.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +19,8 @@ public class ProductService {
 	}
 
 	@Transactional
-	public Product createProduct(ProductDTO dto) {
-		Product product = new Product();
+	public com.sushishop.model.Product createProduct(ProductDTO dto) {
+		com.sushishop.model.Product product = new com.sushishop.model.Product();
 		product.setName(dto.name);
 		product.setPrice(dto.price);
 		product.setPicture(dto.picture);
@@ -31,7 +30,7 @@ public class ProductService {
 		return productRepo.saveAndFlush(product);
 	}
 
-	public Product getProduct(String productId) {
+	public com.sushishop.model.Product getProduct(String productId) {
 		return findProduct(productId);
 	}
 
@@ -39,16 +38,16 @@ public class ProductService {
 		productRepo.deleteById(productId);
 	}
 
-	public Page<Product> getProducts(Pageable pageable) {
+	public Page<com.sushishop.model.Product> getProducts(Pageable pageable) {
 		return productRepo.findAll(pageable);
 	}
 
-	private Product findProduct(String productId) {
+	private com.sushishop.model.Product findProduct(String productId) {
 		return productRepo.findById(productId).orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT));
 	}
 
 	public void updateProduct(ProductDTO dto) {
-		Product product = findProduct(dto.id);
+		com.sushishop.model.Product product = findProduct(dto.id);
 
 		if (dto.keys.contains("name")) {
 			product.setName(dto.name);
