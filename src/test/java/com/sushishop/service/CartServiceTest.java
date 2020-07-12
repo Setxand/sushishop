@@ -9,10 +9,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
@@ -21,7 +19,6 @@ import java.util.*;
 import static com.sushishop.TestUtil.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -92,9 +89,7 @@ public class CartServiceTest {
 
 	@Test
 	public void addRecipeToCartTest() {
-		cart.setAmounts(new HashMap<>());
-		cart.setProducts(new ArrayList<>());
-		cart.setTotalPrice(BigDecimal.ZERO);
+		removeDefaultProductsFromCart();
 
 		List<Product> products = Arrays.asList(createTestProduct(), createTestProduct(), createTestProduct());
 
@@ -112,5 +107,41 @@ public class CartServiceTest {
 				.reduce(BigDecimal.ZERO, BigDecimal::add), cart.getTotalPrice());
 		assertEquals(3, cart.getAmounts().size());
 		assertEquals(3, cart.getProducts().size());
+		assertTrue(cart.getAmounts().entrySet().stream().allMatch(a -> a.getValue() == 1));
+	}
+
+	@Test
+	public void addTheSameProductsInTheCartTest() {
+		removeDefaultProductsFromCart();
+
+		Product testProduct = createTestProduct();
+
+		List<Product> products = new ArrayList<>(Arrays.asList(createTestProduct(),
+				createTestProduct(), createTestProduct()));
+		products.add(testProduct);
+
+		for (Product product : products) {
+			when(productService.getProduct(product.getId())).thenReturn(product);
+			cartService.addToCart(USER_ID_TEST, product.getId());
+		}
+
+		// Adding test product one more time
+		Cart cart = cartService.addToCart(USER_ID_TEST, testProduct.getId());
+
+		Assert.assertEquals(Integer.valueOf(2), cart.getAmounts().get(testProduct.getId()));
+
+		assertTrue(products.containsAll(cart.getProducts()));
+		assertEquals(4, cart.getAmounts().size());
+		assertEquals(4, cart.getProducts().size());
+
+		// All other products except testProduct have amount 1 in the cart, checking...
+		assertTrue(cart.getAmounts().entrySet().stream()
+				.filter(k -> !k.getKey().equals(testProduct.getId())).allMatch(v -> v.getValue() == 1));
+	}
+
+	private void removeDefaultProductsFromCart() {
+		cart.setAmounts(new HashMap<>());
+		cart.setProducts(new ArrayList<>());
+		cart.setTotalPrice(BigDecimal.ZERO);
 	}
 }

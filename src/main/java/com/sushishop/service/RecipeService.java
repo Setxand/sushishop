@@ -1,7 +1,6 @@
 package com.sushishop.service;
 
 import com.sushishop.dto.RecipeDTORequest;
-import com.sushishop.dto.RecipeDTOResponse;
 import com.sushishop.model.Product;
 import com.sushishop.model.Recipe;
 import com.sushishop.repository.RecipeRepository;
@@ -48,16 +47,15 @@ public class RecipeService {
 			List<Product> products = recipe.getProducts();
 			List<String> productIds = dto.productIds;
 
-			if (productIds.size() < products.size()) {
-				products.removeAll(products.stream()
-						.filter(p -> productIds.stream()
-								.noneMatch(id -> p.getId().equals(id))).collect(Collectors.toList()));
-			} else {
-				products.addAll(productIds.stream()
-						.filter(id -> products.stream()
-								.noneMatch(p -> p.getId().equals(id)))
-						.map(productService::getProduct).collect(Collectors.toList()));
-			}
+			products.removeAll(products.stream()
+					.filter(p -> productIds.stream()
+							.noneMatch(id -> p.getId().equals(id))).collect(Collectors.toList()));
+
+			products.addAll(productIds.stream()
+					.filter(id -> products.stream()
+							.noneMatch(p -> p.getId().equals(id)))
+					.map(productService::getProduct).collect(Collectors.toList()));
+
 		}
 		recipeRepo.saveAndFlush(recipe);
 	}
