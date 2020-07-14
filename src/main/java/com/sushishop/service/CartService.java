@@ -1,14 +1,12 @@
 package com.sushishop.service;
 
-import com.sushishop.dto.CartDTO;
 import com.sushishop.model.Cart;
 import com.sushishop.model.Product;
+import com.sushishop.model.User;
 import com.sushishop.repository.CartRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
-import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -19,11 +17,14 @@ public class CartService {
 	private final CartRepository cartRepo;
 	private final ProductService productService;
 	private final RecipeService recipeService;
+	private final UserService userService;
 
-	public CartService(CartRepository cartRepo, ProductService productService, RecipeService recipeService) {
+	public CartService(CartRepository cartRepo, ProductService productService,
+					   RecipeService recipeService, UserService userService) {
 		this.cartRepo = cartRepo;
 		this.productService = productService;
 		this.recipeService = recipeService;
+		this.userService = userService;
 	}
 
 	public Cart getCart(String userId) {
@@ -48,6 +49,7 @@ public class CartService {
 
 		if (cart.getId() == null) {
 			cart = cartRepo.saveAndFlush(cart);
+			userService.getUser(userId).setCart(cart);
 		}
 
 		return cart;
@@ -79,5 +81,13 @@ public class CartService {
 		}
 
 		return cart;
+	}
+
+	@Transactional
+	public void removeCart(String userId) {
+		User user = userService.getUser(userId);
+		Cart cart = getCart(userId);
+		user.setCart(null);
+		cartRepo.delete(cart);
 	}
 }

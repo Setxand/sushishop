@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -32,6 +34,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 	private static final String WEIGHT_JSON = "$.weight";
 
 	private static final String URI_WITH_ID_VAR = PRODUCTS_BASE_URL + "/{productId}";
+	private static final String STOCK_JSON = "$.inStock";
 
 
 	@Test
@@ -63,28 +66,43 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productResponse.picture));
 
 		// Update product
-		ProductDTO productRequestBodyToUpdate = new ProductDTO();
-		productRequestBodyToUpdate.price = new BigDecimal("32.99");
-		productRequestBodyToUpdate.name = "Product-test-name New product name";
-		productRequestBodyToUpdate.picture = "New product picture";
-		productRequestBodyToUpdate.weight = new BigDecimal("1.2").setScale(2).doubleValue();
-		productRequestBodyToUpdate.description = TestUtil.generateUUID();
+		Map<String, Object> productRequestBodyToUpdate = new HashMap<>();
+		productRequestBodyToUpdate.put("price", new BigDecimal("32.99"));
 
+		productRequestBodyToUpdate.put("name", "Product-test-name New product name");
+		productRequestBodyToUpdate.put("picture", "New product picture");
+		productRequestBodyToUpdate.put("weight", new BigDecimal("1.2").setScale(2).doubleValue());
+		productRequestBodyToUpdate.put("description", TestUtil.generateUUID());
 
-		mockMvc.perform(patch(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken))
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(productRequestBodyToUpdate)))
-				.andExpect(status().isNoContent());
+		// Request update
+		updateProductRequest(productId, productRequestBodyToUpdate);
 
 		// Get updated product
 		mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(productResponse.id))
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(productRequestBodyToUpdate.name))
-				.andExpect(MockMvcResultMatchers.jsonPath(PRICE_JSON).value(productRequestBodyToUpdate.price))
-				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.picture))
-				.andExpect(MockMvcResultMatchers.jsonPath(DESC_JSON).value(productRequestBodyToUpdate.description))
-				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.picture));
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(productRequestBodyToUpdate.get("name")))
+				.andExpect(MockMvcResultMatchers.jsonPath(PRICE_JSON).value(productRequestBodyToUpdate.get("price")))
+				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.get("picture")))
+				.andExpect(MockMvcResultMatchers.jsonPath(DESC_JSON).value(productRequestBodyToUpdate.get("description")))
+				.andExpect(MockMvcResultMatchers.jsonPath(STOCK_JSON).value(true))
+				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.get("picture")));
+
+		// Change product's 'inStock' to false
+		Map<String, Object> productInStockFalse = new HashMap<>();
+		productInStockFalse.put("inStock", false);
+		updateProductRequest(productId, productInStockFalse);
+
+		// Get product that's not in stock
+		mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(productResponse.id))
+				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(productRequestBodyToUpdate.get("name")))
+				.andExpect(MockMvcResultMatchers.jsonPath(PRICE_JSON).value(productRequestBodyToUpdate.get("price")))
+				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.get("picture")))
+				.andExpect(MockMvcResultMatchers.jsonPath(DESC_JSON).value(productRequestBodyToUpdate.get("description")))
+				.andExpect(MockMvcResultMatchers.jsonPath(STOCK_JSON).value(productInStockFalse.get("inStock")))
+				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.get("picture")));
 
 		// Remove product
 		mockMvc.perform(delete(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken))
@@ -96,8 +114,20 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isBadRequest());
 
 		// Get page of products (size = 3)
+		// Create 5 products
+		for (int i = 0; i < 5; i++) {
+			createProductPostRequest();
+		}
 		mockMvc.perform(get(PRODUCTS_BASE_URL + "?page=0&size=3").headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON, hasSize(3)));
+	}
+
+	private void updateProductRequest(String productId, Map<String, Object> productRequestBodyToUpdate)
+			throws Exception {
+		mockMvc.perform(patch(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken))
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(productRequestBodyToUpdate)))
+				.andExpect(status().isNoContent());
 	}
 }

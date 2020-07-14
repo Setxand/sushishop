@@ -69,6 +69,10 @@ public class ProductService {
 			product.setDescription(dto.description);
 		}
 
+		if (dto.keys.contains("inStock")) {
+			product.setInStock(dto.inStock);
+		}
+
 		if (dto.keys.contains("weight")) {
 			product.setWeight(dto.weight);
 		}

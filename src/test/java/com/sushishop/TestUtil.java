@@ -1,12 +1,10 @@
 package com.sushishop;
 
+import com.sushishop.dto.AddressDTO;
 import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTORequest;
 import com.sushishop.dto.UserDTO;
-import com.sushishop.model.Cart;
-import com.sushishop.model.Product;
-import com.sushishop.model.Recipe;
-import com.sushishop.model.User;
+import com.sushishop.model.*;
 import com.sushishop.util.DtoUtil;
 
 import java.math.BigDecimal;
@@ -90,5 +88,22 @@ public class TestUtil {
 		recipe.setName("Recipe-test-name" + generateUUID());
 		recipe.setProducts(products);
 		return recipe;
+	}
+
+	public static AddressDTO createAddressDTO() {
+		return DtoUtil.address(createTestAddress());
+	}
+
+	private static Address createTestAddress() {
+		Address address = new Address();
+		address.setCity("city-test" + generateUUID());
+		address.setEntrance(generateUUID());
+		address.setFloor(generateUUID());
+		address.setHouse(generateUUID());
+		address.setHousing(generateUUID());
+		address.setRoomNumber(generateUUID());
+		address.setStreet(generateUUID());
+
+		return  address;
 	}
 }

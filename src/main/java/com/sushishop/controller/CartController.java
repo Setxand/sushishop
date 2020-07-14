@@ -32,4 +32,10 @@ public class CartController {
 	public CartDTO removeProductFromCart(@PathVariable String userId, @PathVariable String productId) {
 		return DtoUtil.cart(cartService.removeProductFromCart(userId, productId));
 	}
+
+	@DeleteMapping("/v1/users/{userId}/carts")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void removeCart(@PathVariable String userId) {
+		cartService.removeCart(userId);
+	}
 }

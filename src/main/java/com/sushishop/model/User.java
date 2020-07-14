@@ -31,6 +31,9 @@ public class User {
 	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	public Address address;
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Cart cart;
 
 	@Enumerated(EnumType.STRING)

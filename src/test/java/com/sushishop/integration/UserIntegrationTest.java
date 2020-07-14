@@ -1,5 +1,7 @@
 package com.sushishop.integration;
 
+import com.sushishop.TestUtil;
+import com.sushishop.dto.AddressDTO;
 import com.sushishop.dto.UserDTO;
 import com.sushishop.model.User;
 import com.sushishop.security.dto.JwtResponse;
@@ -9,11 +11,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -33,21 +37,46 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
 		// Create new user
 		JwtResponse jwtResponse = signUpRequest();
+		accessToken = jwtResponse.getAccessToken();
 
 		User user = userService.getUser(jwtResponse.getUserId());
 
 
 		// Get User by id
-		String jsonResponse = mockMvc.perform(get(BY_ID, jwtResponse.getUserId())
-				.headers(authHeader(jwtResponse.getAccessToken())))
+		UserDTO userRequest = getUserRequest(jwtResponse.getUserId());
+		assertEquals(jwtResponse.getUserId(), userRequest.id);
+		assertEquals(user.getEmail(), userRequest.email);
+		assertEquals(user.getPhone(), userRequest.phone);
+		assertEquals(user.getName(), userRequest.name);
+
+		// Add address to user
+		AddressDTO addressDTO = TestUtil.createAddressDTO();
+		mockMvc.perform(put(BY_ID + "/addresses", jwtResponse.getUserId())
+				.contentType(MediaType.APPLICATION_JSON)
+				.headers(authHeader(accessToken))
+				.content(objectMapper.writeValueAsString(addressDTO)))
+				.andExpect(status().isOk());
+
+		// Get user and check address
+		userRequest = getUserRequest(jwtResponse.getUserId());
+		assertEquals(addressDTO.city, userRequest.address.city);
+		assertEquals(addressDTO.entrance, userRequest.address.entrance);
+		assertEquals(addressDTO.floor, userRequest.address.floor);
+		assertEquals(addressDTO.house, userRequest.address.house);
+		assertEquals(addressDTO.housing, userRequest.address.housing);
+		assertEquals(addressDTO.roomNumber, userRequest.address.roomNumber);
+		assertEquals(addressDTO.street, userRequest.address.street);
+		assertEquals(jwtResponse.getUserId(), userRequest.address.id);
+
+	}
+
+	private UserDTO getUserRequest(String userId) throws Exception {
+		String jsonResponse = mockMvc.perform(get(BY_ID, userId)
+				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(user.getName()))
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(user.getId()))
-				.andExpect(MockMvcResultMatchers.jsonPath(EMAIL_JSON_PATH).value(user.getEmail()))
-				.andExpect(MockMvcResultMatchers.jsonPath(PHONE_JSON_PATH).value(user.getPhone()))
 				.andReturn().getResponse().getContentAsString();
 
-		UserDTO dto = objectMapper.readValue(jsonResponse, UserDTO.class);
+		return objectMapper.readValue(jsonResponse, UserDTO.class);
 	}
 
 }

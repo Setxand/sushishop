@@ -1,7 +1,5 @@
 package com.sushishop.dto;
 
-import com.sushishop.model.User;
-
 public class UserDTO {
 
 	public String id;
@@ -10,5 +8,6 @@ public class UserDTO {
 	public String password;
 	public String phone;
 	public String role;
+	public AddressDTO address;
 
 }

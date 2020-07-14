@@ -1,13 +1,9 @@
 package com.sushishop.service;
 
-import com.sushishop.TestUtil;
 import com.sushishop.dto.RecipeDTORequest;
-import com.sushishop.model.Cart;
 import com.sushishop.model.Product;
 import com.sushishop.model.Recipe;
-import com.sushishop.repository.CartRepository;
 import com.sushishop.repository.RecipeRepository;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,17 +13,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.sushishop.TestUtil.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
-import static com.sushishop.TestUtil.generateUUID;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceTest {

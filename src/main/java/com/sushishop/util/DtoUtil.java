@@ -1,9 +1,7 @@
 package com.sushishop.util;
 
-import com.sushishop.dto.CartDTO;
-import com.sushishop.dto.ProductDTO;
-import com.sushishop.dto.RecipeDTOResponse;
-import com.sushishop.dto.UserDTO;
+import com.sushishop.dto.*;
+import com.sushishop.model.Address;
 import com.sushishop.model.Cart;
 import com.sushishop.model.Recipe;
 import com.sushishop.model.User;
@@ -22,6 +20,7 @@ public class DtoUtil {
 		dto.picture = entity.getPicture();
 		dto.description = entity.getDescription();
 		dto.weight = entity.getWeight();
+		dto.inStock = entity.isInStock();
 
 		return dto;
 	}
@@ -41,6 +40,8 @@ public class DtoUtil {
 		dto.phone = entity.getPhone();
 		dto.role = entity.getRole().name();
 		dto.email = entity.getEmail();
+		dto.address = entity.getAddress() != null ? address(entity.getAddress()) : null;
+
 		return dto;
 	}
 
@@ -56,11 +57,21 @@ public class DtoUtil {
 			p.price = p.price.multiply(new BigDecimal(entity.getAmounts().get(p.id)));
 			p.weight = entity.getAmounts().get(p.id) * p.weight;
 		});
-//		dto.amounts = entity.getAmounts().entrySet().stream()
-//				.collect(Collectors.toMap(k -> entity.getProducts().stream()
-//								.filter(p -> p.getId().equals(k.getKey())).map(Product::getName)
-//								.findFirst().orElseThrow(() -> new IllegalArgumentException("Invalid product amount")),
-//						Map.Entry::getValue));
+
+		return dto;
+	}
+
+	public static AddressDTO address(Address entity) {
+		AddressDTO dto = new AddressDTO();
+		dto.id = entity.getId();
+//		dto.userId = entity.getUserId();
+		dto.city = entity.getCity();
+		dto.floor = entity.getFloor();
+		dto.entrance = entity.getEntrance();
+		dto.house = entity.getHouse();
+		dto.housing = entity.getHousing();
+		dto.roomNumber = entity.getRoomNumber();
+		dto.street = entity.getStreet();
 
 		return dto;
 	}

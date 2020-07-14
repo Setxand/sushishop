@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -92,6 +93,12 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		// Checkout ( order creation)
 
 		// Remove cart after checkout
+		mockMvc.perform(delete(CARTS_BASE_URL, jwtResponse.getUserId()).headers(authHeader(accessToken)))
+				.andExpect(status().isNoContent());
+
+		// Check cart (must be empty)
+		cart = getCart(jwtResponse.getUserId());
+		assertTrue(cart.products.isEmpty());
 	}
 
 	private void putInTheCart(ProductDTO product, String userId,
