@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,24 +17,37 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Cart {
+public class OrderModel {
+
+	public enum OrderStatus {
+		CREATED,
+		ACTIVE,
+		CANCELED,
+		FAILED,
+		SUCCEED
+	}
 
 	@Id
-	@GenericGenerator(name = "uuid", strategy = "uuid")
+	@GenericGenerator(name = "uuid`", strategy = "uuid")
 	@GeneratedValue(generator = "uuid")
 	private String id;
+	private String orderNumber;
 	private String userId;
-	private BigDecimal totalPrice = new BigDecimal("0.00");
+	private BigDecimal totalPrice;
+
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status = OrderStatus.CREATED; // only one order can be active
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Address address;
 
 	@ElementCollection
-	private Map<String, Integer> amounts = new HashMap<>();
+	Map<String, Integer> productAmounts = new HashMap<>();
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Product> products = new ArrayList<>();
 
-	public Cart(String userId) {
-		this.userId = userId;
-	}
+	private LocalDateTime createdAt = LocalDateTime.now();
 
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_UP);

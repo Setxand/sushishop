@@ -1,5 +1,6 @@
 package com.sushishop.exception;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,11 +12,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalErrorHandler {
 
+	private static final Logger logger = Logger.getLogger(GlobalErrorHandler.class);
+
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse handleIllegalArgumentException(final IllegalArgumentException ex) {
 		return new ErrorResponse("INVALID_ARGUMENT", ex.getMessage());
+	}
+
+	@ExceptionHandler(IllegalStateException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorResponse handleIllegalStateException(final IllegalStateException ex) {
+		return new ErrorResponse("INVALID_STATE", ex.getMessage());
 	}
 
 	@ResponseStatus(HttpStatus.FORBIDDEN)
@@ -33,7 +42,8 @@ public class GlobalErrorHandler {
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse handleRuntimeException(final RuntimeException ex) {
-		return new ErrorResponse("BAD_REQUEST", ex.getMessage());
+		logger.warn("Runtime exception: ", ex);
+		return new ErrorResponse("INTERNAL_ERROR", ex.getMessage());
 	}
 
 	@ExceptionHandler(Exception.class)

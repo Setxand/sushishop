@@ -1,6 +1,5 @@
 package com.sushishop.security;
 
-import com.sushishop.exception.GlobalErrorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import javax.servlet.Filter;
 
 @Configuration
 @EnableWebMvc
@@ -43,6 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/signup").permitAll()
 				.antMatchers("/login").permitAll()
+				.antMatchers("/v1/users/**").permitAll()
+				.antMatchers("/v1/payments/webhook").permitAll()
 				.anyRequest().authenticated();
 
 

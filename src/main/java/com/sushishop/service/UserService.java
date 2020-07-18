@@ -36,6 +36,7 @@ public class UserService {
 		return userRepo.findById(userId).orElseThrow(() -> new IllegalArgumentException(INVALID_USER));
 	}
 
+	@Transactional
 	public User createUser(UserDTO dto) {
 		User user = new User();
 
@@ -53,8 +54,12 @@ public class UserService {
 		user.setName(dto.name);
 		user.setPassword(passwordEncoder.encode(dto.password));
 
+		User savedUser = userRepo.saveAndFlush(user);
 
-		return userRepo.saveAndFlush(user);
+
+		savedUser.setAddress(addressRepo.saveAndFlush(new Address(savedUser.getId())));
+
+		return savedUser;
 	}
 
 	@Transactional

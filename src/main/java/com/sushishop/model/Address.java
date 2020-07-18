@@ -15,7 +15,6 @@ public class Address {
 
 	@Id
 	private String id;
-//	private String userId;
 	private String city;
 	private String street;
 	private String house;
@@ -24,4 +23,7 @@ public class Address {
 	private String roomNumber;
 	private String floor;
 
+	public Address(String id) {
+		this.id = id;
+	}
 }

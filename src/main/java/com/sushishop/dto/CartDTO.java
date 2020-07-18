@@ -10,8 +10,6 @@ public class CartDTO {
 	public String userId;
 	public BigDecimal totalPrice;
 
-	// key -> productId or name; val -> amount of product
-//	public Map<Object, Object> amounts = new HashMap<>();
 	public List<ProductDTO> products = new ArrayList<>();
 
 }

@@ -18,7 +18,8 @@ import java.math.BigDecimal;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -45,7 +46,7 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		ProductDTO product = createProductPostRequest();
 
 		// Put product in the cart
-		putInTheCart(product, jwtResponse.getUserId(), 1, product.price);
+		putInTheCart(product, jwtResponse.getUserId());
 
 		// Get cart with new product
 		CartDTO cart = getCart(jwtResponse.getUserId());
@@ -67,7 +68,11 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		assertEquals(jwtResponse.getUserId(), cart.userId);
 
 		// Add the same product
-		putInTheCart(product, jwtResponse.getUserId(), 6, cart.totalPrice.add(product.price));
+		CartDTO testCart = putInTheCart(product, jwtResponse.getUserId());
+		assertEquals(jwtResponse.getUserId(), cart.userId);
+		assertEquals(cart.totalPrice.add(product.price), testCart.totalPrice);
+		assertEquals(6, testCart.products.size());
+
 
 		// Get cart and check product amount, price and weight
 		cart = getCart(jwtResponse.getUserId());
@@ -100,23 +105,4 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		cart = getCart(jwtResponse.getUserId());
 		assertTrue(cart.products.isEmpty());
 	}
-
-	private void putInTheCart(ProductDTO product, String userId,
-							  int expProductsSize, BigDecimal expTotalPrice)
-			throws Exception {
-		mockMvc.perform(put(CARTS_BASE_URL + "/products/{productId}", userId, product.id)
-					.headers(authHeader(accessToken)))
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(userId))
-				.andExpect(MockMvcResultMatchers.jsonPath(TOTAL_PRICE_JSON).value(expTotalPrice))
-				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON, hasSize(expProductsSize)));
-	}
-
-	private CartDTO getCart(String userId) throws Exception {
-		return objectMapper.readValue(mockMvc.perform(get(CARTS_BASE_URL, userId)
-				.headers(authHeader(accessToken)))
-				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(userId))
-				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), CartDTO.class);
-	}
-
 }
