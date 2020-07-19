@@ -35,7 +35,7 @@ public class Cart {
 		this.userId = userId;
 	}
 
-	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_UP);
+	public BigDecimal getTotalPrice() {
+		return totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 }

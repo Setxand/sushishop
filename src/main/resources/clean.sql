@@ -1,22 +1,21 @@
-delete from cart_products where cart_id in (select id from cart where user_id in (select id from user where user.name like "John Doe-test-name%"));
-delete from cart_amounts where cart_id in (select id from cart where user_id in (select id from user where user.name like "John Doe-test-name%"));
+DELETE FROM cart_products WHERE cart_id IN (SELECT id FROM cart WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%"));
+DELETE FROM cart_amounts WHERE cart_id IN (SELECT id FROM cart WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%"));
 
-update user set user.cart_id=null where id in (select u.id from (select id from user where user.name like "John Doe-test-name%") as u);
-delete from cart where cart.user_id in (select id from user where user.name like "John Doe-test-name%");
+UPDATE user SET user.cart_id=null WHERE id IN (SELECT u.id FROM (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%") AS u);
+DELETE FROM cart WHERE cart.user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%");
 
-delete from recipe_products where recipe_id in (select id from recipe where recipe.name like "Recipe-test-name%");
+DELETE FROM recipe_products WHERE recipe_id IN (SELECT id FROM recipe WHERE recipe.name LIKE "Recipe-test-name%");
 
-delete from order_model_products where order_model_id in (select id from order_model where user_id in (select id from user where user.name like "John Doe-test-name%"));
-delete from order_model_product_amounts where order_model_id in (select id from order_model where user_id in (select id from user where user.name like "John Doe-test-name%"));
-delete from order_model where user_id in (select id from user where user.name like "John Doe-test-name%");
+DELETE FROM order_model_products WHERE order_model_id IN (SELECT id FROM order_model WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%"));
+DELETE FROM order_model_product_amounts WHERE order_model_id IN (SELECT id FROM order_model WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%"));
+DELETE FROM order_model WHERE id IN (SELECT o.id FROM (SELECT id FROM order_model WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%")) AS o);
 
+DELETE FROM product WHERE product.name LIKE "Product-test-name%";
 
-delete from product where product.name like "Product-test-name%";
-delete from recipe where recipe.name like "Recipe-test-name%";
+DELETE FROM recipe WHERE recipe.name LIKE "Recipe-test-name%";
 
---delete from cart_products where cart_id in (select id from cart where user_id in (select id from user where user.name like "John Doe-test-name%"));
---delete from cart where cart.user_id in (select id from user where user.name like "John Doe-test-name%");
+UPDATE user SET user.address_id=null WHERE id IN (SELECT u.id FROM (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%") AS u);
 
-update user set user.address_id=null where id in (select u.id from (select id from user where user.name like "John Doe-test-name%") as u);
-delete from address where id in (select id from user where user.name like "John Doe-test-name%");
-delete from user where user.name like "John Doe-test-name%";
+DELETE FROM address WHERE id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%");
+
+DELETE FROM user WHERE user.name LIKE "John Doe-test-name%";

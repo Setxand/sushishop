@@ -1,6 +1,7 @@
 package com.sushishop.service;
 
 import com.sushishop.dto.ProductDTO;
+import com.sushishop.model.Product;
 import com.sushishop.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +31,7 @@ public class ProductService {
 		return productRepo.saveAndFlush(product);
 	}
 
-	public com.sushishop.model.Product getProduct(String productId) {
+	public Product getProduct(String productId) {
 		return findProduct(productId);
 	}
 
@@ -38,16 +39,17 @@ public class ProductService {
 		productRepo.deleteById(productId);
 	}
 
-	public Page<com.sushishop.model.Product> getProducts(Pageable pageable) {
+	public Page<Product> getProducts(Pageable pageable) {
 		return productRepo.findAll(pageable);
 	}
 
-	private com.sushishop.model.Product findProduct(String productId) {
+	private Product findProduct(String productId) {
 		return productRepo.findById(productId).orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT));
 	}
 
+	@Transactional
 	public void updateProduct(ProductDTO dto) {
-		com.sushishop.model.Product product = findProduct(dto.id);
+		Product product = findProduct(dto.id);
 
 		if (dto.keys.contains("name")) {
 			product.setName(dto.name);

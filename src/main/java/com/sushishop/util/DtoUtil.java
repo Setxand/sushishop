@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class DtoUtil {
 
 
-	public static ProductDTO product(com.sushishop.model.Product entity) {
+	public static ProductDTO product(Product entity) {
 		ProductDTO dto = new ProductDTO();
 		dto.id = entity.getId();
 		dto.name = entity.getName();

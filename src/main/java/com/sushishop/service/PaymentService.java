@@ -56,11 +56,10 @@ public class PaymentService {
 
 		if (liqpayResponse.status.equals("success")) {
 			order.setStatus(OrderModel.OrderStatus.SUCCEED);
+			order.setOrderNumber(liqpayResponse.paymentId);
 		} else {
 			order.setStatus(OrderModel.OrderStatus.FAILED);
 		}
-
-		order.setOrderNumber(liqpayResponse.paymentId);
 	}
 
 	@Transactional
@@ -68,7 +67,7 @@ public class PaymentService {
 		OrderModel order = orderService.getActiveOrder(userId);
 		String orderProductDescription = order.getProducts()
 				.stream().map(o -> o.getName() + " ("+o.getPrice() +" UAH) x" + order.getProductAmounts()
-						.get(o.getId())).collect(Collectors.joining(","));
+						.get(o.getId())).collect(Collectors.joining(";\n"));
 		return liqpayClient.createPaymentForm(order.getTotalPrice().toString(), order.getId(), orderProductDescription);
 	}
 }

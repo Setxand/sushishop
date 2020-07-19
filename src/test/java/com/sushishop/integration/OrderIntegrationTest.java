@@ -15,13 +15,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,6 +42,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 	@Autowired UserService userService;
 
 	@Test
+	@Sql("classpath:clean.sql")
 	public void orderIntegrationTest() throws Exception {
 
 		JwtResponse jwtResponse = signUpRequest();
@@ -50,7 +54,6 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 
 		// Create order (Add address data and something else)
 		OrderDTO order = createOrder(user);
-
 
 		// Get order
 		order = getOrder(user);
@@ -66,11 +69,11 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		AddressDTO addressToUpdate = TestUtil.createAddressDTO();
 		HashMap<String, Object> addressMap = objectMapper
 				.convertValue(addressToUpdate, new TypeReference<HashMap<String, Object>>() {});
-		addressMap.entrySet().removeAll(addressMap.entrySet().stream().filter(m -> m.getValue() == null).collect(Collectors.toList()));
+		addressMap.entrySet()
+				.removeAll(addressMap.entrySet().stream().filter(m -> m.getValue() == null).collect(Collectors.toList()));
 
 		mockMvc.perform(patchRequestWithUrl("/v1/orders/{orderId}/addresses", addressMap, jwtResponse.getUserId()))
 				.andExpect(jsonPath("$.products", hasSize(order.products.size())))
-				.andExpect(jsonPath("$.totalPrice").value(order.totalPrice))
 				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
 				.andExpect(jsonPath("$.address.city").value(addressToUpdate.city))
 				.andExpect(jsonPath("$.address.street").value(addressToUpdate.street))
@@ -87,18 +90,29 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 
 		assertTrue(paymentForm.startsWith(CHECKOUT_FORM_SNIPPET));
 
-
 		// Cancel order
-//		mockMvc.perform(delete("/v1/orders/{orderId}", order.id));
+		cancelOrder(order.id);
+
 		// Find orders by user
+		OrderDTO order1 = createOrder(user);
+		cancelOrder(order1.id);
+		OrderDTO order2 = createOrder(user);
+
+		mockMvc.perform(get(ORDERS_BASE_URL, user.getId()))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.content", hasSize(3)));
+	}
+
+	private void cancelOrder(String orderId) throws Exception {
+		mockMvc.perform(delete("/v1/orders/{orderId}", orderId)
+				.headers(authHeader(accessToken)))
+				.andExpect(status().isNoContent());
 	}
 
 	private OrderDTO getOrder(User user) throws Exception {
-		return objectMapper.readValue(mockMvc.perform(get(ORDERS_BASE_URL, user.getId())
+		return objectMapper.readValue(mockMvc.perform(get("/v1/users/{userId}/active-order", user.getId())
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-//				.andExpect(jsonPath("$.products", hasSize(order.products.size())))
-//				.andExpect(jsonPath("$.totalPrice").value(order.totalPrice))
 				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
 				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
 				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
@@ -115,10 +129,9 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 	private OrderDTO createOrder(User user) throws Exception {
 		CartDTO cart = createCart(user.getId());
 
-		return objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
+		OrderDTO dto = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.products", hasSize(cart.products.size())))
-				.andExpect(jsonPath("$.totalPrice").value(cart.totalPrice))
 				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
 				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
 				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
@@ -131,6 +144,9 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.createdAt").isNotEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
+
+		assertEquals(0, dto.totalPrice.compareTo(cart.totalPrice));
+		return dto;
 	}
 
 	private CartDTO createCart(String userId) throws Exception {

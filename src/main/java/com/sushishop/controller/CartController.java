@@ -36,6 +36,6 @@ public class CartController {
 	@DeleteMapping("/v1/users/{userId}/carts")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void removeCart(@PathVariable String userId) {
-		cartService.removeCart(userId);
+		cartService.removeCartByUser(userId);
 	}
 }

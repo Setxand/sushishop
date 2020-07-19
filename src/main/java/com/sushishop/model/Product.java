@@ -27,7 +27,7 @@ public class Product {
 	private boolean inStock = true;
 	private BigDecimal price;
 
-	public void setPrice(BigDecimal price) {
-		this.price = price.setScale(2, BigDecimal.ROUND_UP);
+	public BigDecimal getPrice() {
+		return price.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 }

@@ -84,7 +84,7 @@ public class CartService {
 	}
 
 	@Transactional
-	public void removeCart(String userId) {
+	public void removeCartByUser(String userId) {
 		User user = userService.getUser(userId);
 		Cart cart = getCart(userId);
 		user.setCart(null);

@@ -9,6 +9,8 @@ import com.sushishop.model.OrderModel.OrderStatus;
 import com.sushishop.model.User;
 import com.sushishop.repository.AddressRepository;
 import com.sushishop.repository.OrderModelRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -24,6 +26,7 @@ public class OrderService {
 	private static final String EMPTY_CART = "Cart is empty";
 	private static final String INVALID_ORDER = "Invalid Order ID";
 	private static final String ACTIVE_ORDER_EX_MESSAGE = "Active order must be only one";
+	private static final String NOT_ACTIVE = "There is non-active order";
 
 	private final UserService userService;
 	private final AddressRepository addressRepo;
@@ -108,6 +111,21 @@ public class OrderService {
 		return orderRepo.findById(orderId).orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER));
 	}
 
+	@Transactional
+	public void cancelOrder(String orderId) {
+		OrderModel order = getOrderById(orderId);
+
+		if (order.getStatus() == OrderStatus.ACTIVE) {
+			order.setStatus(OrderStatus.CANCELED);
+		} else {
+			throw new IllegalArgumentException(NOT_ACTIVE);
+		}
+	}
+
+	public Page<OrderModel> getOrders(String userId, Pageable pageable) {
+		return orderRepo.findByUserId(userId, pageable);
+	}
+
 	private boolean checkActiveOrderByUserId(String userId) {
 		return !orderRepo.findByUserIdAndStatus(userId, OrderStatus.ACTIVE).isEmpty();
 	}
@@ -120,7 +138,7 @@ public class OrderService {
 		}
 
 		if (activeOrders.isEmpty()) {
-			throw new IllegalArgumentException("There is no active order");
+			throw new IllegalArgumentException(NOT_ACTIVE);
 		}
 
 		return activeOrders.get(0);

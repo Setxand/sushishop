@@ -106,4 +106,19 @@ public class TestUtil {
 
 		return  address;
 	}
+
+	public static OrderModel createOrder(String userId) {
+		OrderModel orderModel = new OrderModel();
+		orderModel.setUserId(userId);
+		orderModel.setId(generateUUID());
+		orderModel.setStatus(OrderModel.OrderStatus.CREATED);
+
+		Cart testCart = createTestCart(orderModel.getUserId());
+		orderModel.setProductAmounts(testCart.getAmounts());
+		orderModel.setProducts(testCart.getProducts());
+		orderModel.setTotalPrice(testCart.getTotalPrice());
+		orderModel.setAddress(createTestAddress());
+
+		return orderModel;
+	}
 }
