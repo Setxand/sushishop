@@ -83,6 +83,14 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -111,6 +119,11 @@
                         <configuration>
                             <backend>html</backend>
                             <doctype>book</doctype>
+                            <attributes>
+                                <snippets>${project.build.directory}/generated-sources/snippets</snippets>
+                            </attributes>
+                            <sourceDirectory>src/docs/asciidocs</sourceDirectory>
+                            <outputDirectory>src/main/resources/templates</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -126,7 +139,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+            </plugin>
+
         </plugins>
+
     </build>
 
 </project>

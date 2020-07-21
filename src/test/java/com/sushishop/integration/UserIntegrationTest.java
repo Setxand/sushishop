@@ -9,18 +9,24 @@ import com.sushishop.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class UserIntegrationTest extends BaseIntegrationTest {
 
 	private static final String BY_ID = USERS_BASE_URL + "/{userId}";
@@ -41,7 +47,13 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
 
 		// Get User by id
-		UserDTO userRequest = getUserRequest(jwtResponse.getUserId());
+		UserDTO userRequest = objectMapper.readValue(mockMvc.perform(get(BY_ID, jwtResponse.getUserId())
+				.headers(authHeader(accessToken)))
+				.andExpect(status().isOk())
+				.andDo(document("get-user", preprocessRequest(prettyPrint()),
+						preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), UserDTO.class);
+
 		assertEquals(jwtResponse.getUserId(), userRequest.id);
 		assertEquals(user.getEmail(), userRequest.email);
 		assertEquals(user.getPhone(), userRequest.phone);
@@ -49,7 +61,13 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
 		// Add address to user
 		AddressDTO addressDTO = TestUtil.createAddressDTO();
-		addTestAddressToUser(jwtResponse.getUserId(), addressDTO);
+		mockMvc.perform(put(USERS_BASE_URL + "/{userId}/addresses", jwtResponse.getUserId())
+				.contentType(MediaType.APPLICATION_JSON)
+				.headers(authHeader(accessToken))
+				.content(objectMapper.writeValueAsString(addressDTO)))
+				.andExpect(status().isOk())
+				.andDo(document("user-add-address", preprocessRequest(prettyPrint()),
+						preprocessResponse(prettyPrint())));
 
 		// Get user and check address
 		userRequest = getUserRequest(jwtResponse.getUserId());

@@ -20,4 +20,9 @@ public class ProductDTO {
 
 	@JsonIgnore
 	public Set<String> keys;
+
+	@Override
+	public String toString() {
+		return " " + name + " x" + amount + " ";
+	}
 }

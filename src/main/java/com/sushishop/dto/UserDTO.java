@@ -10,4 +10,11 @@ public class UserDTO {
 	public String role;
 	public AddressDTO address;
 
+
+	@Override
+	public String toString() {
+		return "\nname: " + name +
+				"\nemail: " + email +
+				"\nphone: " + phone;
+	}
 }

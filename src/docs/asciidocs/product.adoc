@@ -1,0 +1,75 @@
+= Product flow documentation
+
+== Create product
+
+=== Request structure
+include::{snippets}/create-product/http-request.adoc[]
+
+=== Example response
+include::{snippets}/create-product/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/create-product/curl-request.adoc[]
+
+
+
+== Get product
+
+=== Request structure
+include::{snippets}/get-product/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-product/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-product/curl-request.adoc[]
+
+
+
+== Update product
+
+=== Request structure
+include::{snippets}/update-product/http-request.adoc[]
+
+=== Example response
+include::{snippets}/update-product/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/update-product/curl-request.adoc[]
+
+
+
+== Change product's 'inStock' to false
+
+=== Request structure
+include::{snippets}/change-stock-level/http-request.adoc[]
+
+=== Example response
+include::{snippets}/change-stock-level/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/change-stock-level/curl-request.adoc[]
+
+== Remove product
+
+=== Request structure
+include::{snippets}/remove-product/http-request.adoc[]
+
+=== Example response
+include::{snippets}/remove-product/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/remove-product/curl-request.adoc[]
+
+
+== Get products list
+
+=== Request structure
+include::{snippets}/get-products-list/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-products-list/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-products-list/curl-request.adoc[]
+

@@ -1,0 +1,10 @@
+= Seaproducts Documentation
+
+:toc: left
+
+include::authentication.adoc[]
+include::user.adoc[]
+include::product.adoc[]
+include::recipe.adoc[]
+include::cart.adoc[]
+include::order.adoc[]

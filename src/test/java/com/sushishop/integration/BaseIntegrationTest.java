@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 
 import static com.sushishop.TestUtil.*;
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,10 +47,10 @@ public class BaseIntegrationTest {
 	}
 
 	@Autowired protected MockMvc mockMvc;
-	@Autowired protected ObjectMapper objectMapper;
-	@Autowired private JwtTokenUtil jwtTokenUtil;
 
+	@Autowired protected ObjectMapper objectMapper;
 	protected String accessToken = "";
+	@Autowired private JwtTokenUtil jwtTokenUtil;
 
 	protected ProductDTO createProductPostRequest() throws Exception {
 		ProductDTO productRequestBody = createProductDTO();
@@ -62,7 +64,7 @@ public class BaseIntegrationTest {
 	}
 
 	protected MockHttpServletRequestBuilder postRequest(Object requestBody, Object... uriVars)
-																		throws JsonProcessingException {
+			throws JsonProcessingException {
 		return post(baseUrlMap.get(this.getClass()), uriVars)
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
@@ -70,7 +72,7 @@ public class BaseIntegrationTest {
 	}
 
 	protected MockHttpServletRequestBuilder patchRequest(Object requestBody, Object... uriVars)
-																		throws JsonProcessingException {
+			throws JsonProcessingException {
 		return patch(baseUrlMap.get(this.getClass()), uriVars)
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
@@ -78,7 +80,7 @@ public class BaseIntegrationTest {
 	}
 
 	protected MockHttpServletRequestBuilder patchRequestWithUrl(String url, Object requestBody, Object... uriVars)
-																		throws JsonProcessingException {
+			throws JsonProcessingException {
 		return patch(url, uriVars)
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
@@ -118,6 +120,7 @@ public class BaseIntegrationTest {
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeRequest.name))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.products", hasSize(5)))
+				.andDo(document("create-recipe", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString();
 
 		return objectMapper.readValue(recipeJsonResponse, RecipeDTOResponse.class);

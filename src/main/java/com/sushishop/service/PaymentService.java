@@ -3,9 +3,11 @@ package com.sushishop.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liqpay.LiqPayUtil;
+import com.sushishop.client.EmailClient;
 import com.sushishop.client.LiqpayClient;
 import com.sushishop.dto.LiqpayResponse;
 import com.sushishop.model.OrderModel;
+import com.sushishop.util.DtoUtil;
 import config.LiqpayConfigProps;
 import org.apache.log4j.Logger;
 import org.springframework.security.access.AccessDeniedException;
@@ -22,15 +24,19 @@ public class PaymentService {
 	private final LiqpayClient liqpayClient;
 	private final ObjectMapper objectMapper;
 	private final LiqpayConfigProps liqpayProps;
+	private final EmailClient emailClient;
+	private final UserService userService;
 
 	private static final Logger logger = Logger.getLogger(PaymentService.class);
 
 	public PaymentService(OrderService orderService, LiqpayClient liqpayClient, ObjectMapper objectMapper,
-						  LiqpayConfigProps liqpayProps) {
+						  LiqpayConfigProps liqpayProps, EmailClient emailClient, UserService userService) {
 		this.orderService = orderService;
 		this.liqpayClient = liqpayClient;
 		this.objectMapper = objectMapper;
 		this.liqpayProps = liqpayProps;
+		this.emailClient = emailClient;
+		this.userService = userService;
 	}
 
 	@Transactional
@@ -60,6 +66,8 @@ public class PaymentService {
 		} else {
 			order.setStatus(OrderModel.OrderStatus.FAILED);
 		}
+
+		emailClient.sendEmail(DtoUtil.order(order), DtoUtil.user(userService.getUser(order.getUserId())));
 	}
 
 	@Transactional

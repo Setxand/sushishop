@@ -1,0 +1,25 @@
+= User flow documentation
+
+
+== Get user by id
+
+=== Request structure
+include::{snippets}/get-user/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-user/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-user/curl-request.adoc[]
+
+
+== Add address to user
+
+=== Request structure
+include::{snippets}/user-add-address/http-request.adoc[]
+
+=== Example response
+include::{snippets}/user-add-address/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/user-add-address/curl-request.adoc[]

@@ -7,6 +7,7 @@ import com.sushishop.security.dto.JwtResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -18,13 +19,15 @@ import java.math.BigDecimal;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class CartIntegrationTest extends BaseIntegrationTest {
 
 	private static final String PRODUCTS_JSON = "$.products";
@@ -39,17 +42,34 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		accessToken = jwtResponse.getAccessToken();
 
 		// Get empty cart
-		CartDTO emptyCart = getCart(jwtResponse.getUserId());
+		CartDTO emptyCart = objectMapper.readValue(mockMvc.perform(get(CARTS_BASE_URL, jwtResponse.getUserId())
+				.headers(authHeader(accessToken)))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
+				.andExpect(status().isOk())
+				.andDo(document("get-empty-cart", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), CartDTO.class);
+
 		Assert.assertTrue(emptyCart.products.isEmpty());
 
 		// Add product to cart (Cart is creating if not exists)
 		ProductDTO product = createProductPostRequest();
 
 		// Put product in the cart
-		putInTheCart(product, jwtResponse.getUserId());
+		objectMapper.readValue(
+				mockMvc.perform(put(CARTS_BASE_URL + "/products/{productId}", jwtResponse.getUserId(), product.id)
+				.headers(authHeader(accessToken)))
+				.andExpect(status().isOk())
+				.andDo(document("put-in-the-cart", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), CartDTO.class);
 
 		// Get cart with new product
-		CartDTO cart = getCart(jwtResponse.getUserId());
+		CartDTO cart = objectMapper.readValue(mockMvc.perform(get(CARTS_BASE_URL, jwtResponse.getUserId())
+				.headers(authHeader(accessToken)))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
+				.andExpect(status().isOk())
+				.andDo(document("get-cart", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), CartDTO.class);
+
 		assertEquals(product.id, cart.products.get(0).id);
 		assertEquals(jwtResponse.getUserId(), cart.userId);
 
@@ -60,7 +80,9 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(jwtResponse.getUserId()))
-				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON, hasSize(6)));
+				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON, hasSize(6)))
+				.andDo(document("add-recipe-to-cart",
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get cart with new 5 products and assert it
 		cart = getCart(jwtResponse.getUserId());
@@ -87,7 +109,9 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 					.headers(authHeader(accessToken)))
 				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(jwtResponse.getUserId()))
 				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON, hasSize(6)))
-				.andExpect(status().isNoContent());
+				.andExpect(status().isNoContent())
+				.andDo(document("remove-from-cart",
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get cart with 5 products (one was removed)
 		cart = getCart(jwtResponse.getUserId());
@@ -95,11 +119,10 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		assertEquals(jwtResponse.getUserId(), cart.userId);
 		assertEquals(1, cart.products.stream().filter(p -> p.id.equals(product.id)).findFirst().get().amount);
 
-		// Checkout ( order creation)
-
-		// Remove cart after checkout
+		// Remove cart
 		mockMvc.perform(delete(CARTS_BASE_URL, jwtResponse.getUserId()).headers(authHeader(accessToken)))
-				.andExpect(status().isNoContent());
+				.andExpect(status().isNoContent())
+				.andDo(document("remove-cart", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Check cart (must be empty)
 		cart = getCart(jwtResponse.getUserId());

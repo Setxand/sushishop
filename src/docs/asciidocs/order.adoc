@@ -1,0 +1,79 @@
+= Order flow documentation
+
+== Create order
+
+=== Request structure
+include::{snippets}/create-order/http-request.adoc[]
+
+=== Example response
+include::{snippets}/create-order/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/create-order/curl-request.adoc[]
+
+
+
+== Get order
+
+=== Request structure
+include::{snippets}/get-order/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-order/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-order/curl-request.adoc[]
+
+
+
+== Update order address
+
+=== Request structure
+include::{snippets}/add-order-address/http-request.adoc[]
+
+=== Example response
+include::{snippets}/add-order-address/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/add-order-address/curl-request.adoc[]
+
+
+
+== Create Payment button
+
+=== Request structure
+include::{snippets}/checkout/http-request.adoc[]
+
+=== Example response
+include::{snippets}/checkout/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/checkout/curl-request.adoc[]
+
+
+
+== Cancel order
+
+=== Request structure
+include::{snippets}/cancel-order/http-request.adoc[]
+
+=== Example response
+include::{snippets}/cancel-order/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/cancel-order/curl-request.adoc[]
+
+
+
+== Find orders by user
+
+=== Request structure
+include::{snippets}/find-user-orders/http-request.adoc[]
+
+=== Example response
+include::{snippets}/find-user-orders/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/find-user-orders/curl-request.adoc[]
+
+

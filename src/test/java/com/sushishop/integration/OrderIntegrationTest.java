@@ -13,6 +13,7 @@ import com.sushishop.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class OrderIntegrationTest extends BaseIntegrationTest {
 
 	private static final String USER_ID_JSON = "$.userId";
@@ -53,10 +57,30 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		User user = userService.getUser(jwtResponse.getUserId());
 
 		// Create order (Add address data and something else)
-		OrderDTO order = createOrder(user);
+		createCart(user.getId());
+
+		mockMvc.perform(postRequest(null, user.getId()))
+				.andExpect(status().isCreated())
+				.andDo(document("create-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+
 
 		// Get order
-		order = getOrder(user);
+		OrderDTO order = objectMapper.readValue(mockMvc.perform(get("/v1/users/{userId}/active-order", user.getId())
+				.headers(authHeader(accessToken)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
+				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
+				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
+				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
+				.andExpect(jsonPath("$.address.entrance").value(user.getAddress().getEntrance()))
+				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
+				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
+				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath("$.createdAt").isNotEmpty())
+				.andDo(document("get-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
+				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 
 		// Create another order while active orer is exists
 		mockMvc.perform(postRequest(null, user.getId()))
@@ -81,24 +105,52 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.housing").value(addressToUpdate.housing))
 				.andExpect(jsonPath("$.address.entrance").value(addressToUpdate.entrance))
 				.andExpect(jsonPath("$.address.floor").value(addressToUpdate.floor))
-				.andExpect(jsonPath("$.address.roomNumber").value(addressToUpdate.roomNumber));
+				.andExpect(jsonPath("$.address.roomNumber").value(addressToUpdate.roomNumber))
+				.andDo(document("add-order-address",
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+
 
 		// Checkout
-		String paymentForm = mockMvc.perform(get("/v1/users/{userId}/payments", jwtResponse.getUserId()))
+		String paymentForm = mockMvc.perform(get("/v1/users/{userId}/payments", jwtResponse.getUserId())
+				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
+				.andDo(document("checkout", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString();
 
 		assertTrue(paymentForm.startsWith(CHECKOUT_FORM_SNIPPET));
 
 		// Cancel order
-		cancelOrder(order.id);
+		mockMvc.perform(delete("/v1/orders/{orderId}", order.id)
+				.headers(authHeader(accessToken)))
+				.andDo(document("cancel-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andExpect(status().isNoContent());
 
 		// Find orders by user
-		OrderDTO order1 = createOrder(user);
+		CartDTO cart = createCart(user.getId());
+
+		OrderDTO order1 = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.products", hasSize(cart.products.size())))
+				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
+				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
+				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
+				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
+				.andExpect(jsonPath("$.address.entrance").value(user.getAddress().getEntrance()))
+				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
+				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
+				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath("$.createdAt").isNotEmpty())
+				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
+				.andDo(document("find-user-orders",
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
+
 		cancelOrder(order1.id);
 		OrderDTO order2 = createOrder(user);
 
-		mockMvc.perform(get(ORDERS_BASE_URL, user.getId()))
+		mockMvc.perform(get(ORDERS_BASE_URL, user.getId())
+				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.content", hasSize(3)));
 	}
@@ -123,7 +175,8 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
 				.andExpect(jsonPath("$.orderNumber").isEmpty())
 				.andExpect(jsonPath("$.createdAt").isNotEmpty())
-				.andExpect(jsonPath(USER_ID_JSON).value(user.getId())).andReturn().getResponse().getContentAsString(), OrderDTO.class);
+				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
+				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 	}
 
 	private OrderDTO createOrder(User user) throws Exception {

@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sushishop.model.OrderModel.OrderStatus.SUCCEED;
+
 public class OrderDTO {
 
 	public String id;
@@ -16,7 +18,18 @@ public class OrderDTO {
 	public BigDecimal totalPrice;
 	public List<ProductDTO> products;
 	public AddressDTO address;
+	public String paymentDate;///todo
 
 	public LocalDateTime createdAt;
 
+	@Override
+	public String toString() {
+		return
+				"\norderNumber: " + orderNumber +
+				"\nstatus: " + (status == SUCCEED ? "payed" : "unpayed") +
+				"\ntotalPrice: " + totalPrice +
+				"\nproducts: " + products +
+				"\naddress: " + address +
+				"\npaymentDate: " + paymentDate;
+	}
 }

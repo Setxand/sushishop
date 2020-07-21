@@ -1,0 +1,79 @@
+= Cart flow documentation
+
+==  Get empty cart
+
+=== Request structure
+include::{snippets}/get-empty-cart/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-empty-cart/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-empty-cart/curl-request.adoc[]
+
+
+
+== Put the product in the cart
+
+=== Request structure
+include::{snippets}/put-in-the-cart/http-request.adoc[]
+
+=== Example response
+include::{snippets}/put-in-the-cart/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/put-in-the-cart/curl-request.adoc[]
+
+
+
+
+== Get cart with new product
+
+=== Request structure
+include::{snippets}/get-cart/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-cart/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-cart/curl-request.adoc[]
+
+
+
+== Add list of products to cart (recipe) (Cart is creating if not exists)
+
+=== Request structure
+include::{snippets}/add-recipe-to-cart/http-request.adoc[]
+
+=== Example response
+include::{snippets}/add-recipe-to-cart/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/add-recipe-to-cart/curl-request.adoc[]
+
+
+
+== Remove product from cart
+
+=== Request structure
+include::{snippets}/remove-from-cart/http-request.adoc[]
+
+=== Example response
+include::{snippets}/remove-from-cart/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/remove-from-cart/curl-request.adoc[]
+
+
+
+== Remove cart
+
+=== Request structure
+include::{snippets}/remove-cart/http-request.adoc[]
+
+=== Example response
+include::{snippets}/remove-cart/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/remove-cart/curl-request.adoc[]
+

@@ -18,4 +18,14 @@ public class AddressDTO {
 	@JsonIgnore
 	public Set<String> keys;
 
+	@Override
+	public String toString() {
+		return "\ncity: " + city +
+				"\nstreet: " + street +
+				"\nhouse: " + house +
+				"\nentrance: " + entrance +
+				"\nhousing: " + housing +
+				"\nroomNumber: " + roomNumber +
+				"\nfloor: " + floor;
+	}
 }

@@ -1,0 +1,50 @@
+= Auth flow documentation
+
+== Login
+
+=== Request structure
+include::{snippets}/login-ok/http-request.adoc[]
+
+=== Example response
+include::{snippets}/login-ok/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/login-ok/curl-request.adoc[]
+
+
+== Sign up
+
+=== Request structure
+include::{snippets}/signup-ok/http-request.adoc[]
+
+=== Example response
+include::{snippets}/signup-ok/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/signup-ok/curl-request.adoc[]
+
+== Login with invalid credentials
+
+=== Request structure
+include::{snippets}/login-forbidden/http-request.adoc[]
+
+=== Example response
+include::{snippets}/login-forbidden/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/login-forbidden/curl-request.adoc[]
+
+
+
+
+== Refresh token
+
+=== Request structure
+include::{snippets}/refresh-token-ok/http-request.adoc[]
+
+=== Example response
+include::{snippets}/refresh-token-ok/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/refresh-token-ok/curl-request.adoc[]
+
