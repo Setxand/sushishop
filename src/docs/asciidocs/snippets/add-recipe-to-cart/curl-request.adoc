@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts/recipes/4028818973773cf00173773d02e40009' -i -X PUT \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'
-----

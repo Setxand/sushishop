@@ -1,7 +1,0 @@
-[source,options="nowrap"]
-----
-{
-  "password" : "2342dfs$",
-  "email" : "Email-test@test.com"
-}
-----

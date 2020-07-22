@@ -1,7 +1,0 @@
-[source,http,options="nowrap"]
-----
-GET /v1/users/4028818973773cf00173773d1b7d004e HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxYjdkMDA0ZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNjAsImlhdCI6MTU5NTQzMzM2MCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.wjggBW5j9leVSmmyGX9ZCjlCcfZ7FLPPpRKsHQ0s2kuChlVc7qLB3N0v81hzfi22OLTuMf7z_4_E0Lwli7XhBw
-Host: localhost:8080
-
-----

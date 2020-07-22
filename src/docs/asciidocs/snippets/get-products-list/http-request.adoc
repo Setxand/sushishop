@@ -1,7 +1,0 @@
-[source,http,options="nowrap"]
-----
-GET /v1/products?page=0&size=3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
-Host: localhost:8080
-
-----

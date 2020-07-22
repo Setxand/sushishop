@@ -1,7 +1,6 @@
 package com.sushishop.service;
 
 
-import com.sushishop.client.LiqpayClient;
 import com.sushishop.model.Address;
 import com.sushishop.model.Cart;
 import com.sushishop.model.OrderModel;
@@ -27,20 +26,19 @@ public class OrderService {
 	private static final String INVALID_ORDER = "Invalid Order ID";
 	private static final String ACTIVE_ORDER_EX_MESSAGE = "Active order must be only one";
 	private static final String NOT_ACTIVE = "There is non-active order";
+	private static final String NO_SUCH_FIELD = "No such field";
 
 	private final UserService userService;
 	private final AddressRepository addressRepo;
 	private final OrderModelRepository orderRepo;
 	private final CartService cartService;
-	private final LiqpayClient liqpayClient;
 
 	public OrderService(UserService userService, AddressRepository addressRepo, OrderModelRepository orderRepo,
-						CartService cartService, LiqpayClient liqpayClient) {
+						CartService cartService) {
 		this.userService = userService;
 		this.addressRepo = addressRepo;
 		this.orderRepo = orderRepo;
 		this.cartService = cartService;
-		this.liqpayClient = liqpayClient;
 	}
 
 	@Transactional
@@ -100,7 +98,7 @@ public class OrderService {
 				declaredField.setAccessible(true);
 				ReflectionUtils.setField(declaredField, address, body.get(k));
 			} catch (NoSuchFieldException e) {
-				throw new RuntimeException("No such field");
+				throw new RuntimeException(NO_SUCH_FIELD);
 			}
 		});
 

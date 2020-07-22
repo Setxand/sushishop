@@ -1,9 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/v1/products/4028818973773cf00173773d0f200021' -i -X PATCH \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ' \
-    -d '{
-  "inStock" : false
-}'
-----

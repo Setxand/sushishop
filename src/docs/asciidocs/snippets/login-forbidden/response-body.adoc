@@ -1,8 +1,0 @@
-[source,options="nowrap"]
-----
-{
-  "code" : "ACCESS_DENIED",
-  "message" : "Bad credentials",
-  "data" : null
-}
-----

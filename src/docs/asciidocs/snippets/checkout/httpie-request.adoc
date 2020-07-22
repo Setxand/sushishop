@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ http GET 'http://localhost:8080/v1/users/4028818973773cf00173773d0618000a/payments' \
-    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw'
-----
