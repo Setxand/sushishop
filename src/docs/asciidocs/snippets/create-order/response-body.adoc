@@ -1,0 +1,68 @@
+[source,options="nowrap"]
+----
+{
+  "id" : "4028818973767ce00173767cfdde0011",
+  "userId" : "4028818973767ce00173767cfb7a000a",
+  "orderNumber" : null,
+  "status" : "ACTIVE",
+  "totalPrice" : 270.41,
+  "products" : [ {
+    "id" : "4028818973767ce00173767cfbfa000b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 72.29
+  }, {
+    "id" : "4028818973767ce00173767cfc5c000d",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.82
+  }, {
+    "id" : "4028818973767ce00173767cfcb2000e",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 27.45
+  }, {
+    "id" : "4028818973767ce00173767cfd03000f",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 41.68
+  }, {
+    "id" : "4028818973767ce00173767cfd5b0010",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 79.17
+  } ],
+  "address" : {
+    "id" : "4028818973767ce00173767cfdde0011",
+    "city" : "Kiev",
+    "street" : "Bankova",
+    "house" : "34",
+    "entrance" : "Entrance-test",
+    "housing" : "A",
+    "roomNumber" : "27",
+    "floor" : "6"
+  },
+  "paymentDate" : null,
+  "createdAt" : [ 2020, 7, 22, 15, 26, 9, 743000000 ]
+}
+----

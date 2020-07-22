@@ -1,0 +1,21 @@
+[source,options="nowrap"]
+----
+{
+  "id" : "4028818973767ce00173767d0fea004c",
+  "name" : "John Doe-test-name",
+  "email" : "Email-test@test.com",
+  "password" : null,
+  "phone" : "+380956435344",
+  "role" : "ROLE_USER",
+  "address" : {
+    "id" : "4028818973767ce00173767d0fea004c",
+    "city" : null,
+    "street" : null,
+    "house" : null,
+    "entrance" : null,
+    "housing" : null,
+    "roomNumber" : null,
+    "floor" : null
+  }
+}
+----

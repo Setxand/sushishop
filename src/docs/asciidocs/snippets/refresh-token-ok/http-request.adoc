@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+GET /refresh-token HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig
+Host: localhost:8080
+
+----

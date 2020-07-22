@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "inStock" : false
+}' | http PATCH 'http://localhost:8080/v1/products/4028818973767ce00173767d06de001f' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw'
+----

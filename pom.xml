@@ -120,7 +120,7 @@
                             <backend>html</backend>
                             <doctype>book</doctype>
                             <attributes>
-                                <snippets>${project.build.directory}/generated-sources/snippets</snippets>
+                                <snippets>${project.build.directory}/../src/docs/asciidocs/snippets</snippets>
                             </attributes>
                             <sourceDirectory>src/docs/asciidocs</sourceDirectory>
                             <outputDirectory>src/main/resources/templates</outputDirectory>

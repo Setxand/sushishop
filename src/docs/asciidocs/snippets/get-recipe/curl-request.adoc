@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/v1/recipes/4028818973767ce00173767d0a10002b' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg'
+----

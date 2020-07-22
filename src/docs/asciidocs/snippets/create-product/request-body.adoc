@@ -1,0 +1,13 @@
+[source,options="nowrap"]
+----
+{
+  "id" : "d3f8a07a-5572-4412-908c-df5b33d10371",
+  "name" : "Product-test-name a",
+  "picture" : "Picture-test-url",
+  "description" : "Product-test-description",
+  "weight" : 0.1,
+  "inStock" : true,
+  "amount" : 0,
+  "price" : 99.35
+}
+----

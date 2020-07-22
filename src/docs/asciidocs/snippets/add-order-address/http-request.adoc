@@ -1,0 +1,18 @@
+[source,http,options="nowrap"]
+----
+PATCH /v1/orders/4028818973767ce00173767cfb7a000a/addresses HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Content-Length: 162
+Host: localhost:8080
+
+{
+  "roomNumber" : "27",
+  "city" : "Kiev",
+  "housing" : "A",
+  "street" : "Bankova",
+  "entrance" : "Entrance-test",
+  "floor" : "6",
+  "house" : "34"
+}
+----

@@ -1,0 +1,11 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/login' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: Bearer ' \
+    -d '{
+  "email" : "Email-test@test.com",
+  "phone" : null,
+  "password" : "2342dfs$"
+}'
+----

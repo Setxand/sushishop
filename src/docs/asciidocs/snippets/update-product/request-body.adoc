@@ -1,0 +1,10 @@
+[source,options="nowrap"]
+----
+{
+  "price" : 32.99,
+  "name" : "Product-test-name New product name",
+  "weight" : 1.2,
+  "description" : "6c376e79-2874-4026-805b-cc3a177853fc",
+  "picture" : "New product picture"
+}
+----

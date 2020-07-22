@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/v1/orders/4028818973767ce00173767cfdde0011' -i -X DELETE \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'
+----

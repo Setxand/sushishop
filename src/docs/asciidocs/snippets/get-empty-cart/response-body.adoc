@@ -1,0 +1,9 @@
+[source,options="nowrap"]
+----
+{
+  "id" : null,
+  "userId" : "4028818973767ce00173767cf6f50001",
+  "totalPrice" : 0.0,
+  "products" : [ ]
+}
+----

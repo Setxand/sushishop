@@ -1,0 +1,66 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 201 Created
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 1416
+
+{
+  "id" : "4028818973767ce00173767d0ede004b",
+  "name" : "Recipe-test-name",
+  "products" : [ {
+    "id" : "4028818973767ce00173767d0e530046",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 94.01
+  }, {
+    "id" : "4028818973767ce00173767d0e6d0047",
+    "name" : "Product-test-name 3",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 44.86
+  }, {
+    "id" : "4028818973767ce00173767d0e8d0048",
+    "name" : "Product-test-name 3",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 62.92
+  }, {
+    "id" : "4028818973767ce00173767d0ea40049",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 38.54
+  }, {
+    "id" : "4028818973767ce00173767d0ec0004a",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 52.95
+  } ]
+}
+----

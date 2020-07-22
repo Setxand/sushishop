@@ -1,0 +1,16 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767d0fea004c/addresses' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwZmVhMDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzQsImlhdCI6MTU5NTQyMDc3NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.SlliHFbJZyiBLug-7RWFkqaLPjZt8yjGOEp51S1v3vee9FeeGcw6chFCEveZptqUrRBzYjVmzU09XTqvjU7fRA' \
+    -d '{
+  "id" : null,
+  "city" : "Kiev",
+  "street" : "Bankova",
+  "house" : "34",
+  "entrance" : "Entrance-test",
+  "housing" : "A",
+  "roomNumber" : "27",
+  "floor" : "6"
+}'
+----

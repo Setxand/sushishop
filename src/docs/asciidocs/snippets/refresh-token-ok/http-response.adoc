@@ -1,0 +1,21 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 643
+
+{
+  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjYsImlhdCI6MTU5NTQyMDc2NiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.7oSGCYCqg8-zrlkmv5O-BUEl5CmEHIqUN4zSHcIA7oWCDFpxqOWvvBv9dJQPMVFZKYQJIwRlXuS_qK7UEVJS0A",
+  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig",
+  "userId" : "4028818973767ce00173767ceb020000"
+}
+----

@@ -1,0 +1,71 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 1288
+
+{
+  "content" : [ {
+    "id" : "4028818973767ce00173767d07e70020",
+    "name" : "Product-test-name d",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 91.92
+  }, {
+    "id" : "4028818973767ce00173767d08030021",
+    "name" : "Product-test-name c",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 75.98
+  }, {
+    "id" : "4028818973767ce00173767d08230022",
+    "name" : "Product-test-name c",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 59.52
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : false,
+      "unsorted" : true,
+      "empty" : true
+    },
+    "offset" : 0,
+    "pageSize" : 3,
+    "pageNumber" : 0,
+    "unpaged" : false,
+    "paged" : true
+  },
+  "last" : false,
+  "totalElements" : 5,
+  "totalPages" : 2,
+  "size" : 3,
+  "number" : 0,
+  "numberOfElements" : 3,
+  "sort" : {
+    "sorted" : false,
+    "unsorted" : true,
+    "empty" : true
+  },
+  "first" : true,
+  "empty" : false
+}
+----
