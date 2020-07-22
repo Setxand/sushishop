@@ -3,7 +3,6 @@ package com.sushishop.dto;
 import com.sushishop.model.OrderModel;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.sushishop.model.OrderModel.OrderStatus.SUCCEED;
@@ -18,9 +17,7 @@ public class OrderDTO {
 	public BigDecimal totalPrice;
 	public List<ProductDTO> products;
 	public AddressDTO address;
-	public String paymentDate;///todo
-
-	public LocalDateTime createdAt;
+	public String paymentDate;
 
 	@Override
 	public String toString() {

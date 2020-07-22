@@ -116,6 +116,7 @@ public class OrderService {
 		OrderModel order = getOrderById(orderId);
 
 		if (order.getStatus() == OrderStatus.ACTIVE) {
+			cartService.removeCartByUser(order.getUserId());
 			order.setStatus(OrderStatus.CANCELED);
 		} else {
 			throw new IllegalArgumentException(NOT_ACTIVE);

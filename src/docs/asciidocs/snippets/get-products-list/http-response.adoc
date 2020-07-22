@@ -15,32 +15,32 @@ Content-Length: 1288
 
 {
   "content" : [ {
-    "id" : "4028818973767ce00173767d07e70020",
-    "name" : "Product-test-name d",
+    "id" : "4028818973773cf00173773d106a0022",
+    "name" : "Product-test-name e",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 91.92
+    "price" : 79.04
   }, {
-    "id" : "4028818973767ce00173767d08030021",
-    "name" : "Product-test-name c",
+    "id" : "4028818973773cf00173773d10930023",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 75.98
+    "price" : 36.95
   }, {
-    "id" : "4028818973767ce00173767d08230022",
-    "name" : "Product-test-name c",
+    "id" : "4028818973773cf00173773d10b30024",
+    "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 59.52
+    "price" : 86.28
   } ],
   "pageable" : {
     "sort" : {
@@ -49,22 +49,22 @@ Content-Length: 1288
       "empty" : true
     },
     "offset" : 0,
-    "pageSize" : 3,
     "pageNumber" : 0,
-    "unpaged" : false,
-    "paged" : true
+    "pageSize" : 3,
+    "paged" : true,
+    "unpaged" : false
   },
-  "last" : false,
-  "totalElements" : 5,
   "totalPages" : 2,
+  "totalElements" : 5,
+  "last" : false,
   "size" : 3,
   "number" : 0,
-  "numberOfElements" : 3,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
+  "numberOfElements" : 3,
   "first" : true,
   "empty" : false
 }

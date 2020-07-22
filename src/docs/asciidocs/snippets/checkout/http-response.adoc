@@ -15,8 +15,8 @@ X-Frame-Options: DENY
 
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8">
-<input type="hidden" name="data" value="eyJhY3Rpb24iOiJwYXkiLCJhbW91bnQiOiIyNzAuNDEiLCJjdXJyZW5jeSI6IlVBSCIsImRlc2NyaXB0aW9uIjoiUHJvZHVjdC10ZXN0LW5hbWUgMiAoNzIuMjkgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIGUgKDQ5LjgyIFVBSCkgeDE7XG5Qcm9kdWN0LXRlc3QtbmFtZSA1ICgyNy40NSBVQUgpIHgxO1xuUHJvZHVjdC10ZXN0LW5hbWUgMSAoNDEuNjggVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIDEgKDc5LjE3IFVBSCkgeDEiLCJvcmRlcl9pZCI6IjQwMjg4MTg5NzM3NjdjZTAwMTczNzY3Y2ZkZGUwMDExIiwicHVibGljX2tleSI6InNhbmRib3hfaTI2MzUwNTcwNzYyIiwic2VydmVyX3VybCI6Imh0dHBzOlwvXC82MGFlOGExNTViYjUubmdyb2suaW9cL3YxXC9wYXltZW50c1wvd2ViaG9vayIsInZlcnNpb24iOiIzIn0="/>
-<input type="hidden" name="signature" value="hzxCLq2WcpNuBhNyfVkIKJc9C5Q="/>
+<input type="hidden" name="data" value="eyJhY3Rpb24iOiJwYXkiLCJhbW91bnQiOiIyNzYuNjQiLCJjdXJyZW5jeSI6IlVBSCIsImRlc2NyaXB0aW9uIjoiUHJvZHVjdC10ZXN0LW5hbWUgZSAoNjcuNTMgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIDQgKDM0LjM2IFVBSCkgeDE7XG5Qcm9kdWN0LXRlc3QtbmFtZSAzICg2My44OSBVQUgpIHgxO1xuUHJvZHVjdC10ZXN0LW5hbWUgMiAoODYuNzQgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIGUgKDI0LjEyIFVBSCkgeDEiLCJvcmRlcl9pZCI6IjQwMjg4MTg5NzM3NzNjZjAwMTczNzczZDA4NTAwMDExIiwicHVibGljX2tleSI6InNhbmRib3hfaTI2MzUwNTcwNzYyIiwic2VydmVyX3VybCI6Imh0dHBzOlwvXC9kMDYwYjNmYWMxZGYubmdyb2suaW9cL3YxXC9wYXltZW50c1wvd2ViaG9vayIsInZlcnNpb24iOiIzIn0="/>
+<input type="hidden" name="signature" value="P+iWMX/k/43jqIIjSnPTbOdljZk="/>
 <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png" name="btn_text"/>
 </form>
 

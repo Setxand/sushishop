@@ -1,8 +1,7 @@
 [source,options="nowrap"]
 ----
 {
-  "email" : "Email-test@test.com",
-  "phone" : null,
-  "password" : "2342dfs$@"
+  "password" : "2342dfs$@",
+  "email" : "Email-test@test.com"
 }
 ----

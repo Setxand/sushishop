@@ -64,7 +64,7 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 		mockMvc.perform(put(USERS_BASE_URL + "/{userId}/addresses", jwtResponse.getUserId())
 				.contentType(MediaType.APPLICATION_JSON)
 				.headers(authHeader(accessToken))
-				.content(objectMapper.writeValueAsString(addressDTO)))
+				.content(objectMapper.writeValueAsString(convertToCorrectMap(addressDTO))))
 				.andExpect(status().isOk())
 				.andDo(document("user-add-address", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint())));

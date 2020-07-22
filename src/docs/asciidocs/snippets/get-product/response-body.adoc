@@ -1,13 +1,13 @@
 [source,options="nowrap"]
 ----
 {
-  "id" : "4028818973767ce00173767d06de001f",
-  "name" : "Product-test-name a",
+  "id" : "4028818973773cf00173773d0f200021",
+  "name" : "Product-test-name c",
   "picture" : "Picture-test-url",
   "description" : "Product-test-description",
   "weight" : 0.1,
   "inStock" : true,
   "amount" : 0,
-  "price" : 99.35
+  "price" : 35.79
 }
 ----

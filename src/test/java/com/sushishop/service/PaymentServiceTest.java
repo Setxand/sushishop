@@ -24,8 +24,7 @@ import java.util.stream.Collectors;
 import static com.sushishop.TestUtil.*;
 import static com.sushishop.model.OrderModel.OrderStatus.FAILED;
 import static com.sushishop.model.OrderModel.OrderStatus.SUCCEED;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -120,6 +119,7 @@ public class PaymentServiceTest {
 		ArgumentCaptor<String> msgCaptor = ArgumentCaptor.forClass(String.class);
 		Mockito.verify(emailClient).sendEmail(msgCaptor.capture());
 		assertEquals(DtoUtil.order(order).toString() + DtoUtil.user(user).toString(), msgCaptor.getValue());
+		assertNotNull(liqpayResponse.paymentDate, order.getPaymentDate());
 
 		return order;
 	}
@@ -129,6 +129,7 @@ public class PaymentServiceTest {
 		liqpayResponse.status = status;
 		liqpayResponse.orderId = generateUUID();
 		liqpayResponse.paymentId = generateUUID();
+		liqpayResponse.paymentDate = 1595429947555L;
 		return liqpayResponse;
 	}
 }

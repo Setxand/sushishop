@@ -1,53 +1,53 @@
 [source,options="nowrap"]
 ----
 {
-  "id" : "4028818973767ce00173767d0a10002b",
+  "id" : "4028818973773cf00173773d131b002d",
   "name" : "Recipe-test-name",
   "products" : [ {
-    "id" : "4028818973767ce00173767d096e0026",
-    "name" : "Product-test-name e",
+    "id" : "4028818973773cf00173773d126b0028",
+    "name" : "Product-test-name 5",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 51.28
+    "price" : 61.58
   }, {
-    "id" : "4028818973767ce00173767d09910027",
-    "name" : "Product-test-name 3",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 27.08
-  }, {
-    "id" : "4028818973767ce00173767d09ad0028",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 39.33
-  }, {
-    "id" : "4028818973767ce00173767d09c40029",
+    "id" : "4028818973773cf00173773d12900029",
     "name" : "Product-test-name c",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 20.58
+    "price" : 74.91
   }, {
-    "id" : "4028818973767ce00173767d09e6002a",
-    "name" : "Product-test-name e",
+    "id" : "4028818973773cf00173773d12b0002a",
+    "name" : "Product-test-name 1",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 29.22
+    "price" : 84.04
+  }, {
+    "id" : "4028818973773cf00173773d12cd002b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 54.83
+  }, {
+    "id" : "4028818973773cf00173773d12f2002c",
+    "name" : "Product-test-name c",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 20.19
   } ]
 }
 ----

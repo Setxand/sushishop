@@ -1,5 +1,5 @@
 [source,bash]
 ----
 $ http GET 'http://localhost:8080/v1/recipes?page=0&size=3' \
-    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg'
+    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ'
 ----

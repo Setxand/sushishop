@@ -11,4 +11,7 @@ public class LiqpayResponse {
 	public String paymentId;
 	public String status;
 
+	@JsonProperty("end_date")
+	public Long paymentDate;
+
 }

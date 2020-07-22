@@ -1,18 +1,18 @@
 [source,options="nowrap"]
 ----
 {
-  "id" : "4028818973767ce00173767cf79c0003",
-  "userId" : "4028818973767ce00173767cf6f50001",
-  "totalPrice" : 80.05,
+  "id" : "4028818973773cf00173773d00630003",
+  "userId" : "4028818973773cf00173773cff5a0001",
+  "totalPrice" : 77.61,
   "products" : [ {
-    "id" : "4028818973767ce00173767cf7700002",
+    "id" : "4028818973773cf00173773d00040002",
     "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 80.05
+    "price" : 77.61
   } ]
 }
 ----

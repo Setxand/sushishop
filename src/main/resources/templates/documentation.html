@@ -678,13 +678,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Authorization: Bearer
-Content-Length: 86
+Content-Length: 67
 Host: localhost:8080
 
 {
-  "email" : "Email-test@test.com",
-  "phone" : null,
-  "password" : "2342dfs$"
+  "password" : "2342dfs$",
+  "email" : "Email-test@test.com"
 }</code></pre>
 </div>
 </div>
@@ -707,9 +706,9 @@ X-Frame-Options: DENY
 Content-Length: 643
 
 {
-  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjYsImlhdCI6MTU5NTQyMDc2NiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.7oSGCYCqg8-zrlkmv5O-BUEl5CmEHIqUN4zSHcIA7oWCDFpxqOWvvBv9dJQPMVFZKYQJIwRlXuS_qK7UEVJS0A",
-  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig",
-  "userId" : "4028818973767ce00173767ceb020000"
+  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTIsImlhdCI6MTU5NTQzMzM1MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.0wR3Cli8Maarif9Z8BWEEtfWjE_jS0pefBvbUU_kYSszO7k3YjizOG3fNi8r2p8uMq82kRUjIlP7BWbV0s5a2A",
+  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDM1MTUyLCJpYXQiOjE1OTU0MzMzNTIsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.HDxqUCOrl3V3n4vTI8I8rKq56c_u_L7bemfs0WpJ9hrTQdApRsxNNbU98JOHmfkI6l-Y6wPm_2JB6CyuE74jcw",
+  "userId" : "4028818973773cf00173773cfafa0000"
 }</code></pre>
 </div>
 </div>
@@ -722,9 +721,8 @@ Content-Length: 643
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Authorization: Bearer ' \
     -d '{
-  "email" : "Email-test@test.com",
-  "phone" : null,
-  "password" : "2342dfs$"
+  "password" : "2342dfs$",
+  "email" : "Email-test@test.com"
 }'</code></pre>
 </div>
 </div>
@@ -741,17 +739,15 @@ Content-Length: 643
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /signup HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Authorization: Bearer
-Content-Length: 227
+Content-Length: 156
 Host: localhost:8080
 
 {
-  "id" : "70fb8dca-1a49-49c1-9d20-5e6e5c904e68",
-  "name" : "John Doe-test-name",
-  "email" : "Email-test@test.com",
   "password" : "2342dfs$",
-  "phone" : "+380956435344",
   "role" : "ROLE_USER",
-  "address" : null
+  "phone" : "+380956435344",
+  "name" : "John Doe-test-name",
+  "email" : "Email-test@test.com"
 }</code></pre>
 </div>
 </div>
@@ -774,9 +770,9 @@ X-Frame-Options: DENY
 Content-Length: 643
 
 {
-  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjYsImlhdCI6MTU5NTQyMDc2NiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.7oSGCYCqg8-zrlkmv5O-BUEl5CmEHIqUN4zSHcIA7oWCDFpxqOWvvBv9dJQPMVFZKYQJIwRlXuS_qK7UEVJS0A",
-  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig",
-  "userId" : "4028818973767ce00173767ceb020000"
+  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTIsImlhdCI6MTU5NTQzMzM1MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.0wR3Cli8Maarif9Z8BWEEtfWjE_jS0pefBvbUU_kYSszO7k3YjizOG3fNi8r2p8uMq82kRUjIlP7BWbV0s5a2A",
+  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDM1MTUyLCJpYXQiOjE1OTU0MzMzNTIsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.HDxqUCOrl3V3n4vTI8I8rKq56c_u_L7bemfs0WpJ9hrTQdApRsxNNbU98JOHmfkI6l-Y6wPm_2JB6CyuE74jcw",
+  "userId" : "4028818973773cf00173773cfafa0000"
 }</code></pre>
 </div>
 </div>
@@ -789,13 +785,11 @@ Content-Length: 643
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Authorization: Bearer ' \
     -d '{
-  "id" : "70fb8dca-1a49-49c1-9d20-5e6e5c904e68",
-  "name" : "John Doe-test-name",
-  "email" : "Email-test@test.com",
   "password" : "2342dfs$",
-  "phone" : "+380956435344",
   "role" : "ROLE_USER",
-  "address" : null
+  "phone" : "+380956435344",
+  "name" : "John Doe-test-name",
+  "email" : "Email-test@test.com"
 }'</code></pre>
 </div>
 </div>
@@ -812,13 +806,12 @@ Content-Length: 643
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Authorization: Bearer
-Content-Length: 87
+Content-Length: 68
 Host: localhost:8080
 
 {
-  "email" : "Email-test@test.com",
-  "phone" : null,
-  "password" : "2342dfs$@"
+  "password" : "2342dfs$@",
+  "email" : "Email-test@test.com"
 }</code></pre>
 </div>
 </div>
@@ -856,9 +849,8 @@ Content-Length: 84
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Authorization: Bearer ' \
     -d '{
-  "email" : "Email-test@test.com",
-  "phone" : null,
-  "password" : "2342dfs$@"
+  "password" : "2342dfs$@",
+  "email" : "Email-test@test.com"
 }'</code></pre>
 </div>
 </div>
@@ -873,7 +865,7 @@ Content-Length: 84
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /refresh-token HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDM1MTUyLCJpYXQiOjE1OTU0MzMzNTIsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.HDxqUCOrl3V3n4vTI8I8rKq56c_u_L7bemfs0WpJ9hrTQdApRsxNNbU98JOHmfkI6l-Y6wPm_2JB6CyuE74jcw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -896,9 +888,9 @@ X-Frame-Options: DENY
 Content-Length: 643
 
 {
-  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjYsImlhdCI6MTU5NTQyMDc2NiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.7oSGCYCqg8-zrlkmv5O-BUEl5CmEHIqUN4zSHcIA7oWCDFpxqOWvvBv9dJQPMVFZKYQJIwRlXuS_qK7UEVJS0A",
-  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig",
-  "userId" : "4028818973767ce00173767ceb020000"
+  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTIsImlhdCI6MTU5NTQzMzM1MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.0wR3Cli8Maarif9Z8BWEEtfWjE_jS0pefBvbUU_kYSszO7k3YjizOG3fNi8r2p8uMq82kRUjIlP7BWbV0s5a2A",
+  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDM1MTUyLCJpYXQiOjE1OTU0MzMzNTIsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.HDxqUCOrl3V3n4vTI8I8rKq56c_u_L7bemfs0WpJ9hrTQdApRsxNNbU98JOHmfkI6l-Y6wPm_2JB6CyuE74jcw",
+  "userId" : "4028818973773cf00173773cfafa0000"
 }</code></pre>
 </div>
 </div>
@@ -908,7 +900,7 @@ Content-Length: 643
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/refresh-token' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NlYjAyMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDIyNTY2LCJpYXQiOjE1OTU0MjA3NjYsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.hZFKtinifrPaxpdVSDUc-iJMdEwWc_Bg8YRii9-jAjEam93tBdFFlNRzGgY3g_X_6iIPr8Zr88CeMwkhuxcwig'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmYWZhMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1NDM1MTUyLCJpYXQiOjE1OTU0MzMzNTIsImVtYWlsIjoiRW1haWwtdGVzdEB0ZXN0LmNvbSJ9.HDxqUCOrl3V3n4vTI8I8rKq56c_u_L7bemfs0WpJ9hrTQdApRsxNNbU98JOHmfkI6l-Y6wPm_2JB6CyuE74jcw'</code></pre>
 </div>
 </div>
 </div>
@@ -922,8 +914,8 @@ Content-Length: 643
 <h3 id="_request_structure_5">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767d0fea004c HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwZmVhMDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzQsImlhdCI6MTU5NTQyMDc3NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.SlliHFbJZyiBLug-7RWFkqaLPjZt8yjGOEp51S1v3vee9FeeGcw6chFCEveZptqUrRBzYjVmzU09XTqvjU7fRA
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973773cf00173773d1b7d004e HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxYjdkMDA0ZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNjAsImlhdCI6MTU5NTQzMzM2MCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.wjggBW5j9leVSmmyGX9ZCjlCcfZ7FLPPpRKsHQ0s2kuChlVc7qLB3N0v81hzfi22OLTuMf7z_4_E0Lwli7XhBw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -946,14 +938,14 @@ X-Frame-Options: DENY
 Content-Length: 423
 
 {
-  "id" : "4028818973767ce00173767d0fea004c",
+  "id" : "4028818973773cf00173773d1b7d004e",
   "name" : "John Doe-test-name",
   "email" : "Email-test@test.com",
   "password" : null,
   "phone" : "+380956435344",
   "role" : "ROLE_USER",
   "address" : {
-    "id" : "4028818973767ce00173767d0fea004c",
+    "id" : "4028818973773cf00173773d1b7d004e",
     "city" : null,
     "street" : null,
     "house" : null,
@@ -970,8 +962,8 @@ Content-Length: 423
 <h3 id="_curl_request_5">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767d0fea004c' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwZmVhMDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzQsImlhdCI6MTU5NTQyMDc3NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.SlliHFbJZyiBLug-7RWFkqaLPjZt8yjGOEp51S1v3vee9FeeGcw6chFCEveZptqUrRBzYjVmzU09XTqvjU7fRA'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773d1b7d004e' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxYjdkMDA0ZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNjAsImlhdCI6MTU5NTQzMzM2MCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.wjggBW5j9leVSmmyGX9ZCjlCcfZ7FLPPpRKsHQ0s2kuChlVc7qLB3N0v81hzfi22OLTuMf7z_4_E0Lwli7XhBw'</code></pre>
 </div>
 </div>
 </div>
@@ -984,9 +976,9 @@ Content-Length: 423
 <h3 id="_request_structure_6">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/4028818973767ce00173767d0fea004c/addresses HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/4028818973773cf00173773d1b7d004e/addresses HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwZmVhMDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzQsImlhdCI6MTU5NTQyMDc3NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.SlliHFbJZyiBLug-7RWFkqaLPjZt8yjGOEp51S1v3vee9FeeGcw6chFCEveZptqUrRBzYjVmzU09XTqvjU7fRA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxYjdkMDA0ZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNjAsImlhdCI6MTU5NTQzMzM2MCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.wjggBW5j9leVSmmyGX9ZCjlCcfZ7FLPPpRKsHQ0s2kuChlVc7qLB3N0v81hzfi22OLTuMf7z_4_E0Lwli7XhBw
 Content-Length: 178
 Host: localhost:8080
 
@@ -1024,9 +1016,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_6">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767d0fea004c/addresses' -i -X PUT \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773d1b7d004e/addresses' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwZmVhMDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzQsImlhdCI6MTU5NTQyMDc3NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.SlliHFbJZyiBLug-7RWFkqaLPjZt8yjGOEp51S1v3vee9FeeGcw6chFCEveZptqUrRBzYjVmzU09XTqvjU7fRA' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxYjdkMDA0ZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNjAsImlhdCI6MTU5NTQzMzM2MCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.wjggBW5j9leVSmmyGX9ZCjlCcfZ7FLPPpRKsHQ0s2kuChlVc7qLB3N0v81hzfi22OLTuMf7z_4_E0Lwli7XhBw' \
     -d '{
   "id" : null,
   "city" : "Kiev",
@@ -1052,19 +1044,19 @@ X-Frame-Options: DENY</code></pre>
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/products HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
 Content-Length: 247
 Host: localhost:8080
 
 {
-  "id" : "d3f8a07a-5572-4412-908c-df5b33d10371",
-  "name" : "Product-test-name a",
-  "picture" : "Picture-test-url",
-  "description" : "Product-test-description",
-  "weight" : 0.1,
-  "inStock" : true,
   "amount" : 0,
-  "price" : 99.35
+  "price" : 35.79,
+  "name" : "Product-test-name c",
+  "weight" : 0.1,
+  "description" : "Product-test-description",
+  "inStock" : true,
+  "id" : "8fa24712-d44f-4b5f-8193-076339d9a6fd",
+  "picture" : "Picture-test-url"
 }</code></pre>
 </div>
 </div>
@@ -1087,14 +1079,14 @@ X-Frame-Options: DENY
 Content-Length: 243
 
 {
-  "id" : "4028818973767ce00173767d06de001f",
-  "name" : "Product-test-name a",
+  "id" : "4028818973773cf00173773d0f200021",
+  "name" : "Product-test-name c",
   "picture" : "Picture-test-url",
   "description" : "Product-test-description",
   "weight" : 0.1,
   "inStock" : true,
   "amount" : 0,
-  "price" : 99.35
+  "price" : 35.79
 }</code></pre>
 </div>
 </div>
@@ -1105,16 +1097,16 @@ Content-Length: 243
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ' \
     -d '{
-  "id" : "d3f8a07a-5572-4412-908c-df5b33d10371",
-  "name" : "Product-test-name a",
-  "picture" : "Picture-test-url",
-  "description" : "Product-test-description",
-  "weight" : 0.1,
-  "inStock" : true,
   "amount" : 0,
-  "price" : 99.35
+  "price" : 35.79,
+  "name" : "Product-test-name c",
+  "weight" : 0.1,
+  "description" : "Product-test-description",
+  "inStock" : true,
+  "id" : "8fa24712-d44f-4b5f-8193-076339d9a6fd",
+  "picture" : "Picture-test-url"
 }'</code></pre>
 </div>
 </div>
@@ -1128,8 +1120,8 @@ Content-Length: 243
 <h3 id="_request_structure_8">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/products/4028818973767ce00173767d06de001f HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/products/4028818973773cf00173773d0f200021 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1152,14 +1144,14 @@ X-Frame-Options: DENY
 Content-Length: 243
 
 {
-  "id" : "4028818973767ce00173767d06de001f",
-  "name" : "Product-test-name a",
+  "id" : "4028818973773cf00173773d0f200021",
+  "name" : "Product-test-name c",
   "picture" : "Picture-test-url",
   "description" : "Product-test-description",
   "weight" : 0.1,
   "inStock" : true,
   "amount" : 0,
-  "price" : 99.35
+  "price" : 35.79
 }</code></pre>
 </div>
 </div>
@@ -1168,8 +1160,8 @@ Content-Length: 243
 <h3 id="_curl_request_8">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973767ce00173767d06de001f' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973773cf00173773d0f200021' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ'</code></pre>
 </div>
 </div>
 </div>
@@ -1182,9 +1174,9 @@ Content-Length: 243
 <h3 id="_request_structure_9">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/products/4028818973767ce00173767d06de001f HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/products/4028818973773cf00173773d0f200021 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
 Content-Length: 189
 Host: localhost:8080
 
@@ -1192,7 +1184,7 @@ Host: localhost:8080
   "price" : 32.99,
   "name" : "Product-test-name New product name",
   "weight" : 1.2,
-  "description" : "6c376e79-2874-4026-805b-cc3a177853fc",
+  "description" : "fb5146a6-89f4-44da-9520-686aa1187321",
   "picture" : "New product picture"
 }</code></pre>
 </div>
@@ -1219,14 +1211,14 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_9">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973767ce00173767d06de001f' -i -X PATCH \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973773cf00173773d0f200021' -i -X PATCH \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ' \
     -d '{
   "price" : 32.99,
   "name" : "Product-test-name New product name",
   "weight" : 1.2,
-  "description" : "6c376e79-2874-4026-805b-cc3a177853fc",
+  "description" : "fb5146a6-89f4-44da-9520-686aa1187321",
   "picture" : "New product picture"
 }'</code></pre>
 </div>
@@ -1241,9 +1233,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_request_structure_10">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/products/4028818973767ce00173767d06de001f HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/products/4028818973773cf00173773d0f200021 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
 Content-Length: 25
 Host: localhost:8080
 
@@ -1274,9 +1266,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_10">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973767ce00173767d06de001f' -i -X PATCH \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973773cf00173773d0f200021' -i -X PATCH \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ' \
     -d '{
   "inStock" : false
 }'</code></pre>
@@ -1292,9 +1284,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_request_structure_11">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/products/4028818973767ce00173767d06de001f HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/products/4028818973773cf00173773d0f200021 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1320,9 +1312,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_11">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973767ce00173767d06de001f' -i -X DELETE \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products/4028818973773cf00173773d0f200021' -i -X DELETE \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ'</code></pre>
 </div>
 </div>
 </div>
@@ -1336,7 +1328,7 @@ X-Frame-Options: DENY</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/products?page=0&amp;size=3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1360,32 +1352,32 @@ Content-Length: 1288
 
 {
   "content" : [ {
-    "id" : "4028818973767ce00173767d07e70020",
-    "name" : "Product-test-name d",
+    "id" : "4028818973773cf00173773d106a0022",
+    "name" : "Product-test-name e",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 91.92
+    "price" : 79.04
   }, {
-    "id" : "4028818973767ce00173767d08030021",
-    "name" : "Product-test-name c",
+    "id" : "4028818973773cf00173773d10930023",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 75.98
+    "price" : 36.95
   }, {
-    "id" : "4028818973767ce00173767d08230022",
-    "name" : "Product-test-name c",
+    "id" : "4028818973773cf00173773d10b30024",
+    "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 59.52
+    "price" : 86.28
   } ],
   "pageable" : {
     "sort" : {
@@ -1394,22 +1386,22 @@ Content-Length: 1288
       "empty" : true
     },
     "offset" : 0,
-    "pageSize" : 3,
     "pageNumber" : 0,
-    "unpaged" : false,
-    "paged" : true
+    "pageSize" : 3,
+    "paged" : true,
+    "unpaged" : false
   },
-  "last" : false,
-  "totalElements" : 5,
   "totalPages" : 2,
+  "totalElements" : 5,
+  "last" : false,
   "size" : 3,
   "number" : 0,
-  "numberOfElements" : 3,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
+  "numberOfElements" : 3,
   "first" : true,
   "empty" : false
 }</code></pre>
@@ -1421,7 +1413,7 @@ Content-Length: 1288
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/products?page=0&amp;size=3' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwNmIwMDAxZSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.OmPdpXiIgCg3Avn1pXJ9AwE7MvvwSCHw7doaxHbB-ZeBtDgMx8McjmiqARZuEo9XwZjjv-Kdu26-eRy-MwlMFw'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwZWUzMDAyMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.q1au0QvqCcfgDyfEj53viYVI2o65P144eGPTMOXiPGBZFEuXxrXEKbssI1eZSJKAlQJWssVrUYqPONEH4TWQMQ'</code></pre>
 </div>
 </div>
 </div>
@@ -1437,16 +1429,14 @@ Content-Length: 1288
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/recipes HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg
-Content-Length: 271
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ
+Content-Length: 237
 Host: localhost:8080
 
 {
-  "id" : null,
-  "name" : "Recipe-test-name",
-  "productIds" : [ "4028818973767ce00173767d0e530046", "4028818973767ce00173767d0e6d0047", "4028818973767ce00173767d0e8d0048", "4028818973767ce00173767d0ea40049", "4028818973767ce00173767d0ec0004a" ],
-  "keys" : null
+  "productIds" : [ "4028818973773cf00173773d19b00048", "4028818973773cf00173773d19c20049", "4028818973773cf00173773d19d7004a", "4028818973773cf00173773d19ef004b", "4028818973773cf00173773d1a3c004c" ],
+  "name" : "Recipe-test-name"
 }</code></pre>
 </div>
 </div>
@@ -1469,53 +1459,53 @@ X-Frame-Options: DENY
 Content-Length: 1416
 
 {
-  "id" : "4028818973767ce00173767d0ede004b",
+  "id" : "4028818973773cf00173773d1a6f004d",
   "name" : "Recipe-test-name",
   "products" : [ {
-    "id" : "4028818973767ce00173767d0e530046",
-    "name" : "Product-test-name 5",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 94.01
-  }, {
-    "id" : "4028818973767ce00173767d0e6d0047",
+    "id" : "4028818973773cf00173773d19b00048",
     "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 44.86
+    "price" : 26.89
   }, {
-    "id" : "4028818973767ce00173767d0e8d0048",
+    "id" : "4028818973773cf00173773d19c20049",
+    "name" : "Product-test-name b",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 95.25
+  }, {
+    "id" : "4028818973773cf00173773d19d7004a",
     "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 62.92
+    "price" : 44.67
   }, {
-    "id" : "4028818973767ce00173767d0ea40049",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d19ef004b",
+    "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 38.54
+    "price" : 69.34
   }, {
-    "id" : "4028818973767ce00173767d0ec0004a",
-    "name" : "Product-test-name e",
+    "id" : "4028818973773cf00173773d1a3c004c",
+    "name" : "Product-test-name 4",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 52.95
+    "price" : 60.39
   } ]
 }</code></pre>
 </div>
@@ -1527,13 +1517,11 @@ Content-Length: 1416
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ' \
     -d '{
-  "id" : null,
-  "name" : "Recipe-test-name",
-  "productIds" : [ "4028818973767ce00173767d0e530046", "4028818973767ce00173767d0e6d0047", "4028818973767ce00173767d0e8d0048", "4028818973767ce00173767d0ea40049", "4028818973767ce00173767d0ec0004a" ],
-  "keys" : null
+  "productIds" : [ "4028818973773cf00173773d19b00048", "4028818973773cf00173773d19c20049", "4028818973773cf00173773d19d7004a", "4028818973773cf00173773d19ef004b", "4028818973773cf00173773d1a3c004c" ],
+  "name" : "Recipe-test-name"
 }'</code></pre>
 </div>
 </div>
@@ -1547,8 +1535,8 @@ Content-Length: 1416
 <h3 id="_request_structure_14">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/recipes/4028818973767ce00173767d0a10002b HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/recipes/4028818973773cf00173773d131b002d HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1571,53 +1559,53 @@ X-Frame-Options: DENY
 Content-Length: 1416
 
 {
-  "id" : "4028818973767ce00173767d0a10002b",
+  "id" : "4028818973773cf00173773d131b002d",
   "name" : "Recipe-test-name",
   "products" : [ {
-    "id" : "4028818973767ce00173767d096e0026",
-    "name" : "Product-test-name e",
+    "id" : "4028818973773cf00173773d126b0028",
+    "name" : "Product-test-name 5",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 51.28
+    "price" : 61.58
   }, {
-    "id" : "4028818973767ce00173767d09910027",
-    "name" : "Product-test-name 3",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 27.08
-  }, {
-    "id" : "4028818973767ce00173767d09ad0028",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 39.33
-  }, {
-    "id" : "4028818973767ce00173767d09c40029",
+    "id" : "4028818973773cf00173773d12900029",
     "name" : "Product-test-name c",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 20.58
+    "price" : 74.91
   }, {
-    "id" : "4028818973767ce00173767d09e6002a",
-    "name" : "Product-test-name e",
+    "id" : "4028818973773cf00173773d12b0002a",
+    "name" : "Product-test-name 1",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 0,
-    "price" : 29.22
+    "price" : 84.04
+  }, {
+    "id" : "4028818973773cf00173773d12cd002b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 54.83
+  }, {
+    "id" : "4028818973773cf00173773d12f2002c",
+    "name" : "Product-test-name c",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 0,
+    "price" : 20.19
   } ]
 }</code></pre>
 </div>
@@ -1627,8 +1615,8 @@ Content-Length: 1416
 <h3 id="_curl_request_14">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/4028818973767ce00173767d0a10002b' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/4028818973773cf00173773d131b002d' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ'</code></pre>
 </div>
 </div>
 </div>
@@ -1641,14 +1629,14 @@ Content-Length: 1416
 <h3 id="_request_structure_15">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/recipes/4028818973767ce00173767d0a10002b HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/recipes/4028818973773cf00173773d131b002d HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ
 Content-Length: 201
 Host: localhost:8080
 
 {
-  "productIds" : [ "4028818973767ce00173767d09910027", "4028818973767ce00173767d09ad0028", "4028818973767ce00173767d09c40029", "4028818973767ce00173767d09e6002a" ],
+  "productIds" : [ "4028818973773cf00173773d12900029", "4028818973773cf00173773d12b0002a", "4028818973773cf00173773d12cd002b", "4028818973773cf00173773d12f2002c" ],
   "name" : "Recipe-test-name"
 }</code></pre>
 </div>
@@ -1675,11 +1663,11 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_15">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/4028818973767ce00173767d0a10002b' -i -X PATCH \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/4028818973773cf00173773d131b002d' -i -X PATCH \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ' \
     -d '{
-  "productIds" : [ "4028818973767ce00173767d09910027", "4028818973767ce00173767d09ad0028", "4028818973767ce00173767d09c40029", "4028818973767ce00173767d09e6002a" ],
+  "productIds" : [ "4028818973773cf00173773d12900029", "4028818973773cf00173773d12b0002a", "4028818973773cf00173773d12cd002b", "4028818973773cf00173773d12f2002c" ],
   "name" : "Recipe-test-name"
 }'</code></pre>
 </div>
@@ -1694,9 +1682,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_request_structure_16">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/recipes/4028818973767ce00173767d0a10002b HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/recipes/4028818973773cf00173773d131b002d HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1722,9 +1710,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_16">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/4028818973767ce00173767d0a10002b' -i -X DELETE \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/4028818973773cf00173773d131b002d' -i -X DELETE \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ'</code></pre>
 </div>
 </div>
 </div>
@@ -1738,7 +1726,7 @@ X-Frame-Options: DENY</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/recipes?page=0&amp;size=3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1758,155 +1746,155 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 5045
+Content-Length: 5044
 
 {
   "content" : [ {
-    "id" : "4028818973767ce00173767d0bf10033",
+    "id" : "4028818973773cf00173773d15d90035",
     "name" : "Recipe-test-name",
     "products" : [ {
-      "id" : "4028818973767ce00173767d0b5e002e",
-      "name" : "Product-test-name b",
+      "id" : "4028818973773cf00173773d14c50030",
+      "name" : "Product-test-name 2",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 42.52
+      "price" : 80.81
     }, {
-      "id" : "4028818973767ce00173767d0b7d002f",
-      "name" : "Product-test-name e",
+      "id" : "4028818973773cf00173773d15080031",
+      "name" : "Product-test-name 4",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 47.47
+      "price" : 57.02
     }, {
-      "id" : "4028818973767ce00173767d0b930030",
-      "name" : "Product-test-name 5",
+      "id" : "4028818973773cf00173773d156f0032",
+      "name" : "Product-test-name 4",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 91.12
+      "price" : 25.82
     }, {
-      "id" : "4028818973767ce00173767d0bac0031",
-      "name" : "Product-test-name d",
+      "id" : "4028818973773cf00173773d15960033",
+      "name" : "Product-test-name 4",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 84.54
+      "price" : 85.61
     }, {
-      "id" : "4028818973767ce00173767d0bc40032",
-      "name" : "Product-test-name 5",
+      "id" : "4028818973773cf00173773d15b20034",
+      "name" : "Product-test-name 2",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 93.97
+      "price" : 38.92
     } ]
   }, {
-    "id" : "4028818973767ce00173767d0ca70039",
+    "id" : "4028818973773cf00173773d1780003b",
     "name" : "Recipe-test-name",
     "products" : [ {
-      "id" : "4028818973767ce00173767d0c240034",
+      "id" : "4028818973773cf00173773d16070036",
       "name" : "Product-test-name 5",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 33.25
+      "price" : 59.6
     }, {
-      "id" : "4028818973767ce00173767d0c3c0035",
-      "name" : "Product-test-name 1",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 82.5
-    }, {
-      "id" : "4028818973767ce00173767d0c540036",
-      "name" : "Product-test-name 5",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 29.04
-    }, {
-      "id" : "4028818973767ce00173767d0c6c0037",
-      "name" : "Product-test-name a",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 26.0
-    }, {
-      "id" : "4028818973767ce00173767d0c840038",
-      "name" : "Product-test-name d",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 64.68
-    } ]
-  }, {
-    "id" : "4028818973767ce00173767d0d5f003f",
-    "name" : "Recipe-test-name",
-    "products" : [ {
-      "id" : "4028818973767ce00173767d0cd0003a",
+      "id" : "4028818973773cf00173773d162c0037",
       "name" : "Product-test-name 3",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 60.64
+      "price" : 44.64
     }, {
-      "id" : "4028818973767ce00173767d0ceb003b",
+      "id" : "4028818973773cf00173773d170a0038",
+      "name" : "Product-test-name 2",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 32.06
+    }, {
+      "id" : "4028818973773cf00173773d17290039",
+      "name" : "Product-test-name d",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 79.47
+    }, {
+      "id" : "4028818973773cf00173773d1750003a",
+      "name" : "Product-test-name d",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 32.5
+    } ]
+  }, {
+    "id" : "4028818973773cf00173773d185a0041",
+    "name" : "Recipe-test-name",
+    "products" : [ {
+      "id" : "4028818973773cf00173773d17ae003c",
+      "name" : "Product-test-name a",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 48.3
+    }, {
+      "id" : "4028818973773cf00173773d17d0003d",
+      "name" : "Product-test-name 1",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 24.34
+    }, {
+      "id" : "4028818973773cf00173773d17f3003e",
+      "name" : "Product-test-name 4",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 88.76
+    }, {
+      "id" : "4028818973773cf00173773d1812003f",
+      "name" : "Product-test-name c",
+      "picture" : "Picture-test-url",
+      "description" : "Product-test-description",
+      "weight" : 0.1,
+      "inStock" : true,
+      "amount" : 0,
+      "price" : 29.67
+    }, {
+      "id" : "4028818973773cf00173773d182c0040",
       "name" : "Product-test-name 5",
       "picture" : "Picture-test-url",
       "description" : "Product-test-description",
       "weight" : 0.1,
       "inStock" : true,
       "amount" : 0,
-      "price" : 88.84
-    }, {
-      "id" : "4028818973767ce00173767d0d03003c",
-      "name" : "Product-test-name b",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 58.73
-    }, {
-      "id" : "4028818973767ce00173767d0d1c003d",
-      "name" : "Product-test-name 5",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 66.96
-    }, {
-      "id" : "4028818973767ce00173767d0d35003e",
-      "name" : "Product-test-name 5",
-      "picture" : "Picture-test-url",
-      "description" : "Product-test-description",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 95.05
+      "price" : 31.71
     } ]
   } ],
   "pageable" : {
@@ -1916,22 +1904,22 @@ Content-Length: 5045
       "empty" : true
     },
     "offset" : 0,
-    "pageSize" : 3,
     "pageNumber" : 0,
-    "unpaged" : false,
-    "paged" : true
+    "pageSize" : 3,
+    "paged" : true,
+    "unpaged" : false
   },
-  "last" : false,
-  "totalElements" : 5,
   "totalPages" : 2,
+  "totalElements" : 5,
+  "last" : false,
   "size" : 3,
   "number" : 0,
-  "numberOfElements" : 3,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
+  "numberOfElements" : 3,
   "first" : true,
   "empty" : false
 }</code></pre>
@@ -1943,7 +1931,7 @@ Content-Length: 5045
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes?page=0&amp;size=3' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2QwOTQ2MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NzIsImlhdCI6MTU5NTQyMDc3MiwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.J4-9ah1614ykoCLd1uXeKOAnCqhlV7DnK20vZLku_QCbumKKloylgbFxnql0US3o6qDZ0x15Pip8ZFn_iJKqRg'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QxMjNlMDAyNyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTcsImlhdCI6MTU5NTQzMzM1NywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.LHlEeWSJ6vAz7nnlR1EmL5kIkmsuCw8uTwW3Aa9wmh8r33Mj4giU1xWqENWQUB0XUbWaafaiIKzijVVUeOcOtQ'</code></pre>
 </div>
 </div>
 </div>
@@ -1957,8 +1945,8 @@ Content-Length: 5045
 <h3 id="_request_structure_18">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767cf6f50001/carts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973773cf00173773cff5a0001/carts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1982,7 +1970,7 @@ Content-Length: 113
 
 {
   "id" : null,
-  "userId" : "4028818973767ce00173767cf6f50001",
+  "userId" : "4028818973773cf00173773cff5a0001",
   "totalPrice" : 0.0,
   "products" : [ ]
 }</code></pre>
@@ -1993,8 +1981,8 @@ Content-Length: 113
 <h3 id="_curl_request_18">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cf6f50001/carts' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'</code></pre>
 </div>
 </div>
 </div>
@@ -2007,8 +1995,8 @@ Content-Length: 113
 <h3 id="_request_structure_19">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/4028818973767ce00173767cf6f50001/carts/products/4028818973767ce00173767cf7700002 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/4028818973773cf00173773cff5a0001/carts/products/4028818973773cf00173773d00040002 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2031,18 +2019,18 @@ X-Frame-Options: DENY
 Content-Length: 407
 
 {
-  "id" : "4028818973767ce00173767cf79c0003",
-  "userId" : "4028818973767ce00173767cf6f50001",
-  "totalPrice" : 80.05,
+  "id" : "4028818973773cf00173773d00630003",
+  "userId" : "4028818973773cf00173773cff5a0001",
+  "totalPrice" : 77.61,
   "products" : [ {
-    "id" : "4028818973767ce00173767cf7700002",
+    "id" : "4028818973773cf00173773d00040002",
     "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 80.05
+    "price" : 77.61
   } ]
 }</code></pre>
 </div>
@@ -2052,8 +2040,8 @@ Content-Length: 407
 <h3 id="_curl_request_19">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cf6f50001/carts/products/4028818973767ce00173767cf7700002' -i -X PUT \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts/products/4028818973773cf00173773d00040002' -i -X PUT \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'</code></pre>
 </div>
 </div>
 </div>
@@ -2066,8 +2054,8 @@ Content-Length: 407
 <h3 id="_request_structure_20">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767cf6f50001/carts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973773cf00173773cff5a0001/carts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2090,18 +2078,18 @@ X-Frame-Options: DENY
 Content-Length: 407
 
 {
-  "id" : "4028818973767ce00173767cf79c0003",
-  "userId" : "4028818973767ce00173767cf6f50001",
-  "totalPrice" : 80.05,
+  "id" : "4028818973773cf00173773d00630003",
+  "userId" : "4028818973773cf00173773cff5a0001",
+  "totalPrice" : 77.61,
   "products" : [ {
-    "id" : "4028818973767ce00173767cf7700002",
+    "id" : "4028818973773cf00173773d00040002",
     "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 80.05
+    "price" : 77.61
   } ]
 }</code></pre>
 </div>
@@ -2111,8 +2099,8 @@ Content-Length: 407
 <h3 id="_curl_request_20">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cf6f50001/carts' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'</code></pre>
 </div>
 </div>
 </div>
@@ -2125,8 +2113,8 @@ Content-Length: 407
 <h3 id="_request_structure_21">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/4028818973767ce00173767cf6f50001/carts/recipes/4028818973767ce00173767cf8cd0009 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/4028818973773cf00173773cff5a0001/carts/recipes/4028818973773cf00173773d02e40009 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2149,63 +2137,63 @@ X-Frame-Options: DENY
 Content-Length: 1722
 
 {
-  "id" : "4028818973767ce00173767cf79c0003",
-  "userId" : "4028818973767ce00173767cf6f50001",
-  "totalPrice" : 368.64,
+  "id" : "4028818973773cf00173773d00630003",
+  "userId" : "4028818973773cf00173773cff5a0001",
+  "totalPrice" : 289.42,
   "products" : [ {
-    "id" : "4028818973767ce00173767cf7700002",
+    "id" : "4028818973773cf00173773d00040002",
     "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 80.05
+    "price" : 77.61
   }, {
-    "id" : "4028818973767ce00173767cf81a0004",
+    "id" : "4028818973773cf00173773d00ea0004",
+    "name" : "Product-test-name 3",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.7
+  }, {
+    "id" : "4028818973773cf00173773d016f0005",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 25.53
+  }, {
+    "id" : "4028818973773cf00173773d01e00006",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.48
+  }, {
+    "id" : "4028818973773cf00173773d02170007",
     "name" : "Product-test-name d",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 43.63
+    "price" : 47.69
   }, {
-    "id" : "4028818973767ce00173767cf8370005",
-    "name" : "Product-test-name b",
+    "id" : "4028818973773cf00173773d02940008",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 70.1
-  }, {
-    "id" : "4028818973767ce00173767cf8510006",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 54.19
-  }, {
-    "id" : "4028818973767ce00173767cf86b0007",
-    "name" : "Product-test-name 5",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 34.24
-  }, {
-    "id" : "4028818973767ce00173767cf8800008",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 86.43
+    "price" : 64.41
   } ]
 }</code></pre>
 </div>
@@ -2215,8 +2203,8 @@ Content-Length: 1722
 <h3 id="_curl_request_21">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cf6f50001/carts/recipes/4028818973767ce00173767cf8cd0009' -i -X PUT \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts/recipes/4028818973773cf00173773d02e40009' -i -X PUT \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'</code></pre>
 </div>
 </div>
 </div>
@@ -2229,8 +2217,8 @@ Content-Length: 1722
 <h3 id="_request_structure_22">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/4028818973767ce00173767cf6f50001/carts/products/4028818973767ce00173767cf7700002 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/4028818973773cf00173773cff5a0001/carts/products/4028818973773cf00173773d00040002 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2253,63 +2241,63 @@ X-Frame-Options: DENY
 Content-Length: 1722
 
 {
-  "id" : "4028818973767ce00173767cf79c0003",
-  "userId" : "4028818973767ce00173767cf6f50001",
-  "totalPrice" : 368.64,
+  "id" : "4028818973773cf00173773d00630003",
+  "userId" : "4028818973773cf00173773cff5a0001",
+  "totalPrice" : 289.42,
   "products" : [ {
-    "id" : "4028818973767ce00173767cf7700002",
+    "id" : "4028818973773cf00173773d00040002",
     "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 80.05
+    "price" : 77.61
   }, {
-    "id" : "4028818973767ce00173767cf81a0004",
+    "id" : "4028818973773cf00173773d00ea0004",
+    "name" : "Product-test-name 3",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.7
+  }, {
+    "id" : "4028818973773cf00173773d016f0005",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 25.53
+  }, {
+    "id" : "4028818973773cf00173773d01e00006",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.48
+  }, {
+    "id" : "4028818973773cf00173773d02170007",
     "name" : "Product-test-name d",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 43.63
+    "price" : 47.69
   }, {
-    "id" : "4028818973767ce00173767cf8370005",
-    "name" : "Product-test-name b",
+    "id" : "4028818973773cf00173773d02940008",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 70.1
-  }, {
-    "id" : "4028818973767ce00173767cf8510006",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 54.19
-  }, {
-    "id" : "4028818973767ce00173767cf86b0007",
-    "name" : "Product-test-name 5",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 34.24
-  }, {
-    "id" : "4028818973767ce00173767cf8800008",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 86.43
+    "price" : 64.41
   } ]
 }</code></pre>
 </div>
@@ -2319,8 +2307,8 @@ Content-Length: 1722
 <h3 id="_curl_request_22">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cf6f50001/carts/products/4028818973767ce00173767cf7700002' -i -X DELETE \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts/products/4028818973773cf00173773d00040002' -i -X DELETE \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'</code></pre>
 </div>
 </div>
 </div>
@@ -2333,8 +2321,8 @@ Content-Length: 1722
 <h3 id="_request_structure_23">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/4028818973767ce00173767cf6f50001/carts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/4028818973773cf00173773cff5a0001/carts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2360,8 +2348,8 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_23">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cf6f50001/carts' -i -X DELETE \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmNmY1MDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjgsImlhdCI6MTU5NTQyMDc2OCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.-qkWY9_YZAGRTNoheKBlanDxJiIap2L3Kjhk7Fr-VhWqOIYK1Dj7a9UTYzRtolwSn22U6T_Hfhui_KLAjtQ05w'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773cff5a0001/carts' -i -X DELETE \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2NmZjVhMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTMsImlhdCI6MTU5NTQzMzM1MywiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.kgeokD9-JsCyFjBpb9w68TR1V4m-p6-HtVEmKLhR5PmTW6a8Cr7Od28kcZUckqneqddPyCcWVBz004Dwb40F-g'</code></pre>
 </div>
 </div>
 </div>
@@ -2375,9 +2363,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_request_structure_24">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/4028818973767ce00173767cfb7a000a/orders HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/4028818973773cf00173773d0618000a/orders HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw
 Content-Length: 4
 Host: localhost:8080
 
@@ -2400,62 +2388,62 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 1833
+Content-Length: 1777
 
 {
-  "id" : "4028818973767ce00173767cfdde0011",
-  "userId" : "4028818973767ce00173767cfb7a000a",
+  "id" : "4028818973773cf00173773d08500011",
+  "userId" : "4028818973773cf00173773d0618000a",
   "orderNumber" : null,
   "status" : "ACTIVE",
-  "totalPrice" : 270.41,
+  "totalPrice" : 276.64,
   "products" : [ {
-    "id" : "4028818973767ce00173767cfbfa000b",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 72.29
-  }, {
-    "id" : "4028818973767ce00173767cfc5c000d",
+    "id" : "4028818973773cf00173773d066b000b",
     "name" : "Product-test-name e",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 49.82
+    "price" : 67.53
   }, {
-    "id" : "4028818973767ce00173767cfcb2000e",
-    "name" : "Product-test-name 5",
+    "id" : "4028818973773cf00173773d06be000d",
+    "name" : "Product-test-name 4",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 27.45
+    "price" : 34.36
   }, {
-    "id" : "4028818973767ce00173767cfd03000f",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0733000e",
+    "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 41.68
+    "price" : 63.89
   }, {
-    "id" : "4028818973767ce00173767cfd5b0010",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0789000f",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 79.17
+    "price" : 86.74
+  }, {
+    "id" : "4028818973773cf00173773d07d30010",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.12
   } ],
   "address" : {
-    "id" : "4028818973767ce00173767cfdde0011",
+    "id" : "4028818973773cf00173773d08500011",
     "city" : "Kiev",
     "street" : "Bankova",
     "house" : "34",
@@ -2464,8 +2452,7 @@ Content-Length: 1833
     "roomNumber" : "27",
     "floor" : "6"
   },
-  "paymentDate" : null,
-  "createdAt" : [ 2020, 7, 22, 15, 26, 9, 743000000 ]
+  "paymentDate" : null
 }</code></pre>
 </div>
 </div>
@@ -2474,9 +2461,9 @@ Content-Length: 1833
 <h3 id="_curl_request_24">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/orders' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773d0618000a/orders' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw' \
     -d 'null'</code></pre>
 </div>
 </div>
@@ -2490,8 +2477,8 @@ Content-Length: 1833
 <h3 id="_request_structure_25">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767cfb7a000a/active-order HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973773cf00173773d0618000a/active-order HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2511,62 +2498,62 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 1823
+Content-Length: 1777
 
 {
-  "id" : "4028818973767ce00173767cfdde0011",
-  "userId" : "4028818973767ce00173767cfb7a000a",
+  "id" : "4028818973773cf00173773d08500011",
+  "userId" : "4028818973773cf00173773d0618000a",
   "orderNumber" : null,
   "status" : "ACTIVE",
-  "totalPrice" : 270.41,
+  "totalPrice" : 276.64,
   "products" : [ {
-    "id" : "4028818973767ce00173767cfbfa000b",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 72.29
-  }, {
-    "id" : "4028818973767ce00173767cfc5c000d",
+    "id" : "4028818973773cf00173773d066b000b",
     "name" : "Product-test-name e",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 49.82
+    "price" : 67.53
   }, {
-    "id" : "4028818973767ce00173767cfcb2000e",
-    "name" : "Product-test-name 5",
+    "id" : "4028818973773cf00173773d06be000d",
+    "name" : "Product-test-name 4",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 27.45
+    "price" : 34.36
   }, {
-    "id" : "4028818973767ce00173767cfd03000f",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0733000e",
+    "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 41.68
+    "price" : 63.89
   }, {
-    "id" : "4028818973767ce00173767cfd5b0010",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0789000f",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 79.17
+    "price" : 86.74
+  }, {
+    "id" : "4028818973773cf00173773d07d30010",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.12
   } ],
   "address" : {
-    "id" : "4028818973767ce00173767cfdde0011",
+    "id" : "4028818973773cf00173773d08500011",
     "city" : "Kiev",
     "street" : "Bankova",
     "house" : "34",
@@ -2575,8 +2562,7 @@ Content-Length: 1823
     "roomNumber" : "27",
     "floor" : "6"
   },
-  "paymentDate" : null,
-  "createdAt" : [ 2020, 7, 22, 15, 26, 10 ]
+  "paymentDate" : null
 }</code></pre>
 </div>
 </div>
@@ -2585,8 +2571,8 @@ Content-Length: 1823
 <h3 id="_curl_request_25">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/active-order' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773d0618000a/active-order' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw'</code></pre>
 </div>
 </div>
 </div>
@@ -2599,9 +2585,9 @@ Content-Length: 1823
 <h3 id="_request_structure_26">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/orders/4028818973767ce00173767cfb7a000a/addresses HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/orders/4028818973773cf00173773d0618000a/addresses HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw
 Content-Length: 162
 Host: localhost:8080
 
@@ -2632,62 +2618,62 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 1823
+Content-Length: 1777
 
 {
-  "id" : "4028818973767ce00173767cfdde0011",
-  "userId" : "4028818973767ce00173767cfb7a000a",
+  "id" : "4028818973773cf00173773d08500011",
+  "userId" : "4028818973773cf00173773d0618000a",
   "orderNumber" : null,
   "status" : "ACTIVE",
-  "totalPrice" : 270.41,
+  "totalPrice" : 276.64,
   "products" : [ {
-    "id" : "4028818973767ce00173767cfbfa000b",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 72.29
-  }, {
-    "id" : "4028818973767ce00173767cfc5c000d",
+    "id" : "4028818973773cf00173773d066b000b",
     "name" : "Product-test-name e",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 49.82
+    "price" : 67.53
   }, {
-    "id" : "4028818973767ce00173767cfcb2000e",
-    "name" : "Product-test-name 5",
+    "id" : "4028818973773cf00173773d06be000d",
+    "name" : "Product-test-name 4",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 27.45
+    "price" : 34.36
   }, {
-    "id" : "4028818973767ce00173767cfd03000f",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0733000e",
+    "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 41.68
+    "price" : 63.89
   }, {
-    "id" : "4028818973767ce00173767cfd5b0010",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0789000f",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 79.17
+    "price" : 86.74
+  }, {
+    "id" : "4028818973773cf00173773d07d30010",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.12
   } ],
   "address" : {
-    "id" : "4028818973767ce00173767cfdde0011",
+    "id" : "4028818973773cf00173773d08500011",
     "city" : "Kiev",
     "street" : "Bankova",
     "house" : "34",
@@ -2696,8 +2682,7 @@ Content-Length: 1823
     "roomNumber" : "27",
     "floor" : "6"
   },
-  "paymentDate" : null,
-  "createdAt" : [ 2020, 7, 22, 15, 26, 10 ]
+  "paymentDate" : null
 }</code></pre>
 </div>
 </div>
@@ -2706,9 +2691,9 @@ Content-Length: 1823
 <h3 id="_curl_request_26">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/orders/4028818973767ce00173767cfb7a000a/addresses' -i -X PATCH \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/orders/4028818973773cf00173773d0618000a/addresses' -i -X PATCH \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw' \
     -d '{
   "roomNumber" : "27",
   "city" : "Kiev",
@@ -2730,8 +2715,8 @@ Content-Length: 1823
 <h3 id="_request_structure_27">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767cfb7a000a/payments HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973773cf00173773d0618000a/payments HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2755,8 +2740,8 @@ X-Frame-Options: DENY
 
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;form method="post" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8"&gt;
-&lt;input type="hidden" name="data" value="eyJhY3Rpb24iOiJwYXkiLCJhbW91bnQiOiIyNzAuNDEiLCJjdXJyZW5jeSI6IlVBSCIsImRlc2NyaXB0aW9uIjoiUHJvZHVjdC10ZXN0LW5hbWUgMiAoNzIuMjkgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIGUgKDQ5LjgyIFVBSCkgeDE7XG5Qcm9kdWN0LXRlc3QtbmFtZSA1ICgyNy40NSBVQUgpIHgxO1xuUHJvZHVjdC10ZXN0LW5hbWUgMSAoNDEuNjggVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIDEgKDc5LjE3IFVBSCkgeDEiLCJvcmRlcl9pZCI6IjQwMjg4MTg5NzM3NjdjZTAwMTczNzY3Y2ZkZGUwMDExIiwicHVibGljX2tleSI6InNhbmRib3hfaTI2MzUwNTcwNzYyIiwic2VydmVyX3VybCI6Imh0dHBzOlwvXC82MGFlOGExNTViYjUubmdyb2suaW9cL3YxXC9wYXltZW50c1wvd2ViaG9vayIsInZlcnNpb24iOiIzIn0="/&gt;
-&lt;input type="hidden" name="signature" value="hzxCLq2WcpNuBhNyfVkIKJc9C5Q="/&gt;
+&lt;input type="hidden" name="data" value="eyJhY3Rpb24iOiJwYXkiLCJhbW91bnQiOiIyNzYuNjQiLCJjdXJyZW5jeSI6IlVBSCIsImRlc2NyaXB0aW9uIjoiUHJvZHVjdC10ZXN0LW5hbWUgZSAoNjcuNTMgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIDQgKDM0LjM2IFVBSCkgeDE7XG5Qcm9kdWN0LXRlc3QtbmFtZSAzICg2My44OSBVQUgpIHgxO1xuUHJvZHVjdC10ZXN0LW5hbWUgMiAoODYuNzQgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIGUgKDI0LjEyIFVBSCkgeDEiLCJvcmRlcl9pZCI6IjQwMjg4MTg5NzM3NzNjZjAwMTczNzczZDA4NTAwMDExIiwicHVibGljX2tleSI6InNhbmRib3hfaTI2MzUwNTcwNzYyIiwic2VydmVyX3VybCI6Imh0dHBzOlwvXC9kMDYwYjNmYWMxZGYubmdyb2suaW9cL3YxXC9wYXltZW50c1wvd2ViaG9vayIsInZlcnNpb24iOiIzIn0="/&gt;
+&lt;input type="hidden" name="signature" value="P+iWMX/k/43jqIIjSnPTbOdljZk="/&gt;
 &lt;input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png" name="btn_text"/&gt;
 &lt;/form&gt;</code></pre>
 </div>
@@ -2766,8 +2751,8 @@ X-Frame-Options: DENY
 <h3 id="_curl_request_27">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/payments' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773d0618000a/payments' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw'</code></pre>
 </div>
 </div>
 </div>
@@ -2780,8 +2765,8 @@ X-Frame-Options: DENY
 <h3 id="_request_structure_28">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/orders/4028818973767ce00173767cfdde0011 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/orders/4028818973773cf00173773d08500011 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2807,8 +2792,8 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_curl_request_28">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/orders/4028818973767ce00173767cfdde0011' -i -X DELETE \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/orders/4028818973773cf00173773d08500011' -i -X DELETE \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw'</code></pre>
 </div>
 </div>
 </div>
@@ -2821,9 +2806,9 @@ X-Frame-Options: DENY</code></pre>
 <h3 id="_request_structure_29">Request structure</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/4028818973767ce00173767cfb7a000a/orders HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/4028818973773cf00173773d0618000a/orders HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw
 Content-Length: 4
 Host: localhost:8080
 
@@ -2846,107 +2831,62 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 3149
+Content-Length: 1777
 
 {
-  "id" : "4028818973767ce00173767d019f0017",
-  "userId" : "4028818973767ce00173767cfb7a000a",
+  "id" : "4028818973773cf00173773d0bd10018",
+  "userId" : "4028818973773cf00173773d0618000a",
   "orderNumber" : null,
   "status" : "ACTIVE",
-  "totalPrice" : 633.81,
+  "totalPrice" : 245.94,
   "products" : [ {
-    "id" : "4028818973767ce00173767cfbfa000b",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 72.29
-  }, {
-    "id" : "4028818973767ce00173767cfc5c000d",
-    "name" : "Product-test-name e",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 49.82
-  }, {
-    "id" : "4028818973767ce00173767cfcb2000e",
-    "name" : "Product-test-name 5",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 27.45
-  }, {
-    "id" : "4028818973767ce00173767cfd03000f",
-    "name" : "Product-test-name 1",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 41.68
-  }, {
-    "id" : "4028818973767ce00173767cfd5b0010",
-    "name" : "Product-test-name 1",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 79.17
-  }, {
-    "id" : "4028818973767ce00173767cff230012",
-    "name" : "Product-test-name c",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 30.23
-  }, {
-    "id" : "4028818973767ce00173767cff690013",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 82.36
-  }, {
-    "id" : "4028818973767ce00173767cffb00014",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 98.73
-  }, {
-    "id" : "4028818973767ce00173767d00020015",
-    "name" : "Product-test-name d",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 79.36
-  }, {
-    "id" : "4028818973767ce00173767d00520016",
+    "id" : "4028818973773cf00173773d09990012",
     "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 72.72
+    "price" : 20.38
+  }, {
+    "id" : "4028818973773cf00173773d09f50014",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 22.31
+  }, {
+    "id" : "4028818973773cf00173773d0a5d0015",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 68.58
+  }, {
+    "id" : "4028818973773cf00173773d0abc0016",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 99.96
+  }, {
+    "id" : "4028818973773cf00173773d0b6a0017",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 34.71
   } ],
   "address" : {
-    "id" : "4028818973767ce00173767d019f0017",
+    "id" : "4028818973773cf00173773d0bd10018",
     "city" : "Kiev",
     "street" : "Bankova",
     "house" : "34",
@@ -2955,8 +2895,7 @@ Content-Length: 3149
     "roomNumber" : "27",
     "floor" : "6"
   },
-  "paymentDate" : null,
-  "createdAt" : [ 2020, 7, 22, 15, 26, 10, 711000000 ]
+  "paymentDate" : null
 }</code></pre>
 </div>
 </div>
@@ -2965,9 +2904,9 @@ Content-Length: 3149
 <h3 id="_curl_request_29">CURL request</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/orders' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973773cf00173773d0618000a/orders' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzczY2YwMDE3Mzc3M2QwNjE4MDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MzQyNTQsImlhdCI6MTU5NTQzMzM1NCwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.Xq9M0XLsLN40wvMOT-tn6_QaPG3XqYvDwg0_4xp9qIjVX-_wFRWaojS5J9sb_x_CzYYXagjudVYSMAaP4h5bKw' \
     -d 'null'</code></pre>
 </div>
 </div>

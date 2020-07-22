@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +33,7 @@ public class OrderModel {
 	private String orderNumber;
 	private String userId;
 	private BigDecimal totalPrice;
+	private String paymentDate;
 
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status = OrderStatus.CREATED; // only one order can be active
@@ -46,8 +46,6 @@ public class OrderModel {
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Product> products = new ArrayList<>();
-
-	private LocalDateTime createdAt = LocalDateTime.now();
 
 	public BigDecimal getTotalPrice() {
 		return totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);

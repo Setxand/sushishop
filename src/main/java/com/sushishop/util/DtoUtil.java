@@ -76,11 +76,11 @@ public class DtoUtil {
 		OrderDTO dto = new OrderDTO();
 		dto.id = entity.getId();
 		dto.orderNumber = entity.getOrderNumber();
-		dto.createdAt = entity.getCreatedAt();
 		dto.userId = entity.getUserId();
 		dto.totalPrice = entity.getTotalPrice();
 		dto.address = address(entity.getAddress());
 		dto.status = entity.getStatus();
+		dto.paymentDate = entity.getPaymentDate();
 
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());
 		dto.products.forEach(p -> {

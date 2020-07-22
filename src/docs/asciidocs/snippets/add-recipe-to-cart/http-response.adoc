@@ -14,63 +14,63 @@ X-Frame-Options: DENY
 Content-Length: 1722
 
 {
-  "id" : "4028818973767ce00173767cf79c0003",
-  "userId" : "4028818973767ce00173767cf6f50001",
-  "totalPrice" : 368.64,
+  "id" : "4028818973773cf00173773d00630003",
+  "userId" : "4028818973773cf00173773cff5a0001",
+  "totalPrice" : 289.42,
   "products" : [ {
-    "id" : "4028818973767ce00173767cf7700002",
+    "id" : "4028818973773cf00173773d00040002",
     "name" : "Product-test-name a",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 80.05
+    "price" : 77.61
   }, {
-    "id" : "4028818973767ce00173767cf81a0004",
+    "id" : "4028818973773cf00173773d00ea0004",
+    "name" : "Product-test-name 3",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.7
+  }, {
+    "id" : "4028818973773cf00173773d016f0005",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 25.53
+  }, {
+    "id" : "4028818973773cf00173773d01e00006",
+    "name" : "Product-test-name a",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.48
+  }, {
+    "id" : "4028818973773cf00173773d02170007",
     "name" : "Product-test-name d",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 43.63
+    "price" : 47.69
   }, {
-    "id" : "4028818973767ce00173767cf8370005",
-    "name" : "Product-test-name b",
+    "id" : "4028818973773cf00173773d02940008",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 70.1
-  }, {
-    "id" : "4028818973767ce00173767cf8510006",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 54.19
-  }, {
-    "id" : "4028818973767ce00173767cf86b0007",
-    "name" : "Product-test-name 5",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 34.24
-  }, {
-    "id" : "4028818973767ce00173767cf8800008",
-    "name" : "Product-test-name a",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 86.43
+    "price" : 64.41
   } ]
 }
 ----

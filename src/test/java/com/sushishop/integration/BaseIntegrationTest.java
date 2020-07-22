@@ -1,6 +1,7 @@
 package com.sushishop.integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.*;
 import com.sushishop.security.JwtTokenUtil;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.sushishop.TestUtil.*;
+import static java.util.stream.Collectors.toMap;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -89,10 +91,18 @@ public class BaseIntegrationTest {
 
 	protected MockHttpServletRequestBuilder postRequestWithUrl(String url, Object requestBody)
 			throws JsonProcessingException {
+
 		return post(url)
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(requestBody));
+				.content(objectMapper.writeValueAsString(convertToCorrectMap(requestBody)));
+	}
+
+	protected Object convertToCorrectMap(Object requestBody) {
+		Map<String, Object> requestMap = objectMapper
+				.convertValue(requestBody, new TypeReference<Map<String, Object>>() {});
+		return requestMap.entrySet().stream().filter(e -> e.getValue() != null)
+				.collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
 
 	protected void addTestAddressToUser(String userId, AddressDTO address) throws Exception {
@@ -129,6 +139,7 @@ public class BaseIntegrationTest {
 	protected JwtResponse signUpRequest() throws Exception {
 		UserDTO newUserInput = createUserDTO();
 		newUserInput.password = "1111dfd@";
+		newUserInput.id = null;
 		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
 				.andExpect(status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())

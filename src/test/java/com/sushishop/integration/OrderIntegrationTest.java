@@ -77,7 +77,6 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
 				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
 				.andExpect(jsonPath("$.orderNumber").isEmpty())
-				.andExpect(jsonPath("$.createdAt").isNotEmpty())
 				.andDo(document("get-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
@@ -140,7 +139,6 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
 				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
 				.andExpect(jsonPath("$.orderNumber").isEmpty())
-				.andExpect(jsonPath("$.createdAt").isNotEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andDo(document("find-user-orders",
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
@@ -167,6 +165,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
 				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
+				.andExpect(jsonPath("$.products", hasSize(5)))
 				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
 				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
 				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
@@ -174,7 +173,6 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
 				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
 				.andExpect(jsonPath("$.orderNumber").isEmpty())
-				.andExpect(jsonPath("$.createdAt").isNotEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 	}
@@ -184,7 +182,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 
 		OrderDTO dto = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.products", hasSize(cart.products.size())))
+				.andExpect(jsonPath("$.products", hasSize(5)))
 				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
 				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
 				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
@@ -194,7 +192,6 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
 				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
 				.andExpect(jsonPath("$.orderNumber").isEmpty())
-				.andExpect(jsonPath("$.createdAt").isNotEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 

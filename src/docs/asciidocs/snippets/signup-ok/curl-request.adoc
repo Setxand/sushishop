@@ -4,12 +4,10 @@ $ curl 'http://localhost:8080/signup' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Authorization: Bearer ' \
     -d '{
-  "id" : "70fb8dca-1a49-49c1-9d20-5e6e5c904e68",
-  "name" : "John Doe-test-name",
-  "email" : "Email-test@test.com",
   "password" : "2342dfs$",
-  "phone" : "+380956435344",
   "role" : "ROLE_USER",
-  "address" : null
+  "phone" : "+380956435344",
+  "name" : "John Doe-test-name",
+  "email" : "Email-test@test.com"
 }'
 ----

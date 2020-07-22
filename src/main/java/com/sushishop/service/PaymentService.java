@@ -3,6 +3,7 @@ package com.sushishop.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liqpay.LiqPayUtil;
+import com.sun.jmx.snmp.Timestamp;
 import com.sushishop.client.EmailClient;
 import com.sushishop.client.LiqpayClient;
 import com.sushishop.dto.LiqpayResponse;
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PaymentService {
+
+	private static final String SUCCESS_TR_STATUS = "success";
+
 
 	private final OrderService orderService;
 	private final LiqpayClient liqpayClient;
@@ -60,9 +64,10 @@ public class PaymentService {
 
 		OrderModel order = orderService.getOrderById(liqpayResponse.orderId);
 
-		if (liqpayResponse.status.equals("success")) {
+		if (liqpayResponse.status.equals(SUCCESS_TR_STATUS)) {
 			order.setStatus(OrderModel.OrderStatus.SUCCEED);
 			order.setOrderNumber(liqpayResponse.paymentId);
+			order.setPaymentDate(new Timestamp(liqpayResponse.paymentDate).getDate().toString());
 		} else {
 			order.setStatus(OrderModel.OrderStatus.FAILED);
 		}

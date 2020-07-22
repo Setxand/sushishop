@@ -1,59 +1,59 @@
 [source,options="nowrap"]
 ----
 {
-  "id" : "4028818973767ce00173767cfdde0011",
-  "userId" : "4028818973767ce00173767cfb7a000a",
+  "id" : "4028818973773cf00173773d08500011",
+  "userId" : "4028818973773cf00173773d0618000a",
   "orderNumber" : null,
   "status" : "ACTIVE",
-  "totalPrice" : 270.41,
+  "totalPrice" : 276.64,
   "products" : [ {
-    "id" : "4028818973767ce00173767cfbfa000b",
-    "name" : "Product-test-name 2",
-    "picture" : "Picture-test-url",
-    "description" : "Product-test-description",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 72.29
-  }, {
-    "id" : "4028818973767ce00173767cfc5c000d",
+    "id" : "4028818973773cf00173773d066b000b",
     "name" : "Product-test-name e",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 49.82
+    "price" : 67.53
   }, {
-    "id" : "4028818973767ce00173767cfcb2000e",
-    "name" : "Product-test-name 5",
+    "id" : "4028818973773cf00173773d06be000d",
+    "name" : "Product-test-name 4",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 27.45
+    "price" : 34.36
   }, {
-    "id" : "4028818973767ce00173767cfd03000f",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0733000e",
+    "name" : "Product-test-name 3",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 41.68
+    "price" : 63.89
   }, {
-    "id" : "4028818973767ce00173767cfd5b0010",
-    "name" : "Product-test-name 1",
+    "id" : "4028818973773cf00173773d0789000f",
+    "name" : "Product-test-name 2",
     "picture" : "Picture-test-url",
     "description" : "Product-test-description",
     "weight" : 0.1,
     "inStock" : true,
     "amount" : 1,
-    "price" : 79.17
+    "price" : 86.74
+  }, {
+    "id" : "4028818973773cf00173773d07d30010",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 24.12
   } ],
   "address" : {
-    "id" : "4028818973767ce00173767cfdde0011",
+    "id" : "4028818973773cf00173773d08500011",
     "city" : "Kiev",
     "street" : "Bankova",
     "house" : "34",
@@ -62,7 +62,6 @@
     "roomNumber" : "27",
     "floor" : "6"
   },
-  "paymentDate" : null,
-  "createdAt" : [ 2020, 7, 22, 15, 26, 9, 743000000 ]
+  "paymentDate" : null
 }
 ----
