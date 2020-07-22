@@ -27,7 +27,7 @@ public class OrderModel {
 	}
 
 	@Id
-	@GenericGenerator(name = "uuid`", strategy = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
 	@GeneratedValue(generator = "uuid")
 	private String id;
 	private String orderNumber;

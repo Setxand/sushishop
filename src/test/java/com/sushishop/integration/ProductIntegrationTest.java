@@ -55,6 +55,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 
 		// Create new Product
 		ProductDTO productRequestBody = createProductDTO();
+		productRequestBody.id = null;
 		MockHttpServletRequestBuilder postRequest = postRequestWithUrl(PRODUCTS_BASE_URL, productRequestBody);
 
 		ProductDTO productResponse = objectMapper.readValue(mockMvc.perform(postRequest)
