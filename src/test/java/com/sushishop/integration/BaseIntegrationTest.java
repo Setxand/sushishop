@@ -128,6 +128,7 @@ public class BaseIntegrationTest {
 
 	protected JwtResponse signUpRequest() throws Exception {
 		UserDTO newUserInput = createUserDTO();
+		newUserInput.password = "1111dfd@";
 		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
 				.andExpect(status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())

@@ -440,109 +440,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/recipes HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw
-Content-Length: 308
-Host: localhost:8080
-
-{
-  "id" : null,
-  "name" : "Recipe-test-name c575fd61-aef8-484d-8d67-3f03225fe6f6",
-  "productIds" : [ "402881897371aa0f017371aa40ea0046", "402881897371aa0f017371aa410a0047", "402881897371aa0f017371aa41310048", "402881897371aa0f017371aa41510049", "402881897371aa0f017371aa417d004a" ],
-  "keys" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/create-recipe/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 1991
-
-{
-  "id" : "402881897371aa0f017371aa41ab004b",
-  "name" : "Recipe-test-name c575fd61-aef8-484d-8d67-3f03225fe6f6",
-  "products" : [ {
-    "id" : "402881897371aa0f017371aa40ea0046",
-    "name" : "Product-test-name 1f9d23fd-e76c-4ee3-badc-227bb5ba1bcb",
-    "picture" : "Picture-test-url 949c42e9-8b96-4731-b58d-53796b10a318",
-    "description" : "Product-test-descriptiona7c1875b-2eb6-447a-8a2e-e30e7a1dfa97",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 55.19
-  }, {
-    "id" : "402881897371aa0f017371aa410a0047",
-    "name" : "Product-test-name 3e46c004-297a-44f8-b872-2d4b6009d629",
-    "picture" : "Picture-test-url f23c2e57-12cf-459a-8136-99016a3cbfca",
-    "description" : "Product-test-description0a105403-c633-4c76-ae36-ede1cd509db2",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 72.5
-  }, {
-    "id" : "402881897371aa0f017371aa41310048",
-    "name" : "Product-test-name 960499b8-61fd-40c5-b772-6bff1cd22c5a",
-    "picture" : "Picture-test-url 26ea4f2d-806a-4df9-85e3-0df4a092db83",
-    "description" : "Product-test-description2dcfb771-e3f2-4941-a776-1c58fb1b9dca",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 92.38
-  }, {
-    "id" : "402881897371aa0f017371aa41510049",
-    "name" : "Product-test-name 8a4ffcbb-70f2-4e89-a09d-6453ddd608a5",
-    "picture" : "Picture-test-url 54cbe044-aabf-4420-8eff-dd2de3a0559d",
-    "description" : "Product-test-descriptiona1eb4fe9-943f-4145-a65c-596538fccd56",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 64.8
-  }, {
-    "id" : "402881897371aa0f017371aa417d004a",
-    "name" : "Product-test-name 99b6650b-1772-4a8e-b664-aa0b911d5c20",
-    "picture" : "Picture-test-url 31a21227-a6c5-4b4d-b9e1-9e707ca5c9b9",
-    "description" : "Product-test-description5122ac27-7d75-48ec-b830-dac0b535674d",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 94.21
-  } ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/create-recipe/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes' -i -X POST \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw' \
-    -d '{
-  "id" : null,
-  "name" : "Recipe-test-name c575fd61-aef8-484d-8d67-3f03225fe6f6",
-  "productIds" : [ "402881897371aa0f017371aa40ea0046", "402881897371aa0f017371aa410a0047", "402881897371aa0f017371aa41310048", "402881897371aa0f017371aa41510049", "402881897371aa0f017371aa417d004a" ],
-  "keys" : null
-}'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/create-recipe/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -552,91 +463,20 @@ Content-Length: 1991
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_2">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/recipes/402881897371aa0f017371aa3c2f002b HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-recipe/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_2">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 1993
-
-{
-  "id" : "402881897371aa0f017371aa3c2f002b",
-  "name" : "Recipe-test-name 3adbb024-a966-4436-ac7e-5c5dc2836214",
-  "products" : [ {
-    "id" : "402881897371aa0f017371aa3b790026",
-    "name" : "Product-test-name 380216a0-816d-4699-90b0-d1ca72c74e82",
-    "picture" : "Picture-test-url 40147fff-7dcf-4545-bdbb-30a273225217",
-    "description" : "Product-test-description3b77dd67-f231-4e80-9f38-ffe7ff12fc7e",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 60.64
-  }, {
-    "id" : "402881897371aa0f017371aa3b960027",
-    "name" : "Product-test-name cdb37ba2-3af5-47ea-b048-59340a7d98c4",
-    "picture" : "Picture-test-url e0bd6f42-1004-47cc-823a-dbda088e5f1d",
-    "description" : "Product-test-descriptionde5ea475-f048-40da-9501-b15c1cbf8e28",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 94.58
-  }, {
-    "id" : "402881897371aa0f017371aa3baf0028",
-    "name" : "Product-test-name 80623e17-533a-4c7b-af34-a8e39f9f2233",
-    "picture" : "Picture-test-url c58391f5-c83e-4ba8-940c-70a6255d6cde",
-    "description" : "Product-test-description49e31548-d9c2-403d-8f31-5addccd60fb3",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 52.42
-  }, {
-    "id" : "402881897371aa0f017371aa3bd40029",
-    "name" : "Product-test-name 1b7b406e-0efe-4be9-9ac9-5218462e2339",
-    "picture" : "Picture-test-url 41928a2f-dffc-4683-aba6-9b0a0d548452",
-    "description" : "Product-test-descriptionb5e395de-098a-4f13-9890-e38eb85733b8",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 62.09
-  }, {
-    "id" : "402881897371aa0f017371aa3bfe002a",
-    "name" : "Product-test-name 7ae081cf-ad63-4f77-91b7-cbd3887b85a2",
-    "picture" : "Picture-test-url cc4462f2-ac04-4b2c-88c8-6be3be03120e",
-    "description" : "Product-test-descriptionf90a300b-8274-44ff-8aa0-d4e651ebec63",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 0,
-    "price" : 87.58
-  } ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-recipe/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_2">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/402881897371aa0f017371aa3c2f002b' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-recipe/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -646,50 +486,20 @@ Content-Length: 1993
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_3">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/recipes/402881897371aa0f017371aa3c2f002b HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw
-Content-Length: 238
-Host: localhost:8080
-
-{
-  "productIds" : [ "402881897371aa0f017371aa3b960027", "402881897371aa0f017371aa3baf0028", "402881897371aa0f017371aa3bd40029", "402881897371aa0f017371aa3bfe002a" ],
-  "name" : "Recipe-test-name 3adbb024-a966-4436-ac7e-5c5dc2836214"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/update-recipe/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_3">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 204 No Content
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/update-recipe/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_3">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/402881897371aa0f017371aa3c2f002b' -i -X PATCH \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw' \
-    -d '{
-  "productIds" : [ "402881897371aa0f017371aa3b960027", "402881897371aa0f017371aa3baf0028", "402881897371aa0f017371aa3bd40029", "402881897371aa0f017371aa3bfe002a" ],
-  "name" : "Recipe-test-name 3adbb024-a966-4436-ac7e-5c5dc2836214"
-}'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/update-recipe/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -699,40 +509,20 @@ X-Frame-Options: DENY</code></pre>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_4">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/recipes/402881897371aa0f017371aa3c2f002b HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-recipe/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_4">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 204 No Content
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-recipe/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_4">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes/402881897371aa0f017371aa3c2f002b' -i -X DELETE \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-recipe/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -742,216 +532,20 @@ X-Frame-Options: DENY</code></pre>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_5">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/recipes?page=0&amp;size=3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-recipes-list/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_5">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 6778
-
-{
-  "content" : [ {
-    "id" : "402881897371aa0f017371aa3e280033",
-    "name" : "Recipe-test-name 836e4687-742f-4d6a-bcb4-3b4de9d3ac0d",
-    "products" : [ {
-      "id" : "402881897371aa0f017371aa3d6f002e",
-      "name" : "Product-test-name 46a1d667-89d1-41fe-bbbd-149121012945",
-      "picture" : "Picture-test-url 190aa0fa-8fdb-406c-a842-a49cc6f9d11b",
-      "description" : "Product-test-description31f5a5c6-b961-4a78-9a61-284c12789fe3",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 37.42
-    }, {
-      "id" : "402881897371aa0f017371aa3d9e002f",
-      "name" : "Product-test-name f59c944d-b4b9-4ffa-8fcf-5bd5042bedf8",
-      "picture" : "Picture-test-url 52718f48-462b-4e43-aaad-346d937826ac",
-      "description" : "Product-test-description13e05e01-992e-4695-bf1d-bcd34637de7e",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 72.86
-    }, {
-      "id" : "402881897371aa0f017371aa3dbe0030",
-      "name" : "Product-test-name 8d38c5b3-b7bf-4cef-973f-6fff8eda920d",
-      "picture" : "Picture-test-url 7e1e8365-1606-4b89-9018-88d9a9b2a899",
-      "description" : "Product-test-description1527d333-5400-4bfe-aed1-2a6dffe9a982",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 37.13
-    }, {
-      "id" : "402881897371aa0f017371aa3ddf0031",
-      "name" : "Product-test-name ec787703-e724-4eff-9973-65a6a2b11fb1",
-      "picture" : "Picture-test-url 3efa0509-eaf8-40aa-b8b9-400c99ed2946",
-      "description" : "Product-test-descriptiond7af59aa-8574-4c50-8d9c-d98ce609d9e8",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 91.23
-    }, {
-      "id" : "402881897371aa0f017371aa3dfe0032",
-      "name" : "Product-test-name 8240a59c-c3d7-49b1-a393-a0e483aa6b51",
-      "picture" : "Picture-test-url f6247614-6234-4c24-9019-26a4c9403999",
-      "description" : "Product-test-descriptiona3ddf03c-6ab3-4150-8f9a-f6730fa8b08e",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 55.51
-    } ]
-  }, {
-    "id" : "402881897371aa0f017371aa3ef20039",
-    "name" : "Recipe-test-name ed67571f-f671-41f4-9cb4-2f63b1ee510b",
-    "products" : [ {
-      "id" : "402881897371aa0f017371aa3e5a0034",
-      "name" : "Product-test-name a177afae-a6bc-4de5-9cc5-dd86d68556bf",
-      "picture" : "Picture-test-url d04d680f-ee50-454a-b961-a12385fef70a",
-      "description" : "Product-test-description11b746fa-0d80-4075-b16a-6e8ef14be919",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 77.14
-    }, {
-      "id" : "402881897371aa0f017371aa3e760035",
-      "name" : "Product-test-name cf61d745-8b89-4303-a02c-04b3d393a8c2",
-      "picture" : "Picture-test-url 71cadda7-550b-42b9-a9fb-73fcd68d91b8",
-      "description" : "Product-test-description975bf578-9e47-4d55-8f8f-9c431ebca0be",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 53.08
-    }, {
-      "id" : "402881897371aa0f017371aa3e8e0036",
-      "name" : "Product-test-name 6744938a-e396-47c4-b73d-4940f0518b03",
-      "picture" : "Picture-test-url 8d689c70-fe2e-4baf-85f1-cbaa58b6da3b",
-      "description" : "Product-test-description31e9c3de-57f6-4326-ba9c-98acfbf3c2bc",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 46.28
-    }, {
-      "id" : "402881897371aa0f017371aa3eae0037",
-      "name" : "Product-test-name 157382b0-5916-462d-8117-5fe7c4cbf28b",
-      "picture" : "Picture-test-url 67428d5c-a5ac-4709-ac43-4cd9be7b70a7",
-      "description" : "Product-test-description26166733-2b36-4e75-97a3-cd20efd4bfaf",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 84.52
-    }, {
-      "id" : "402881897371aa0f017371aa3ece0038",
-      "name" : "Product-test-name 45e628fa-c4b6-4c41-a014-152c7dfe83ed",
-      "picture" : "Picture-test-url b924fac8-68f4-4d40-af63-8ed89bdfbe78",
-      "description" : "Product-test-description995d5a1b-77fa-4f50-b94e-a1519bc1a021",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 50.01
-    } ]
-  }, {
-    "id" : "402881897371aa0f017371aa3fe3003f",
-    "name" : "Recipe-test-name e5f8350a-8820-4440-823c-d9609260d079",
-    "products" : [ {
-      "id" : "402881897371aa0f017371aa3f36003a",
-      "name" : "Product-test-name 100026b1-377d-48d5-9eb7-a016270779de",
-      "picture" : "Picture-test-url 47d18057-8dda-486e-a9b1-7f93544eea91",
-      "description" : "Product-test-description4eec2c8a-64cf-4353-a4bb-8bd238b6b285",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 79.32
-    }, {
-      "id" : "402881897371aa0f017371aa3f6f003b",
-      "name" : "Product-test-name 81c0827e-e511-41c6-8a1c-c67a6aeb7e09",
-      "picture" : "Picture-test-url f061f4bb-8e12-439b-83f3-a52b104a286d",
-      "description" : "Product-test-description1729ed2f-28ba-47eb-b937-ef4050dc74a8",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 88.29
-    }, {
-      "id" : "402881897371aa0f017371aa3f8f003c",
-      "name" : "Product-test-name b94eb172-79ec-46af-bc94-dd4145f881f6",
-      "picture" : "Picture-test-url 2d2c9a1e-eec2-407f-bb32-1623d53988b3",
-      "description" : "Product-test-description6461e2ca-dc24-4fb8-af0a-27f2e6933a20",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 44.83
-    }, {
-      "id" : "402881897371aa0f017371aa3fa6003d",
-      "name" : "Product-test-name 0a5b0729-4037-453f-b768-6e27f113ec6c",
-      "picture" : "Picture-test-url 6652749a-04ef-44e1-bc58-1df7b5c76390",
-      "description" : "Product-test-description1132e7d0-8256-4d53-a666-faf33b0867c8",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 61.17
-    }, {
-      "id" : "402881897371aa0f017371aa3fbf003e",
-      "name" : "Product-test-name feff3782-b6e6-4ed1-ab3f-ff0ce5ae26c6",
-      "picture" : "Picture-test-url 06688210-f18c-4538-ab9e-d60edfe346d9",
-      "description" : "Product-test-descriptionb2d3b0f9-67be-4fca-a7c4-02b31acdc3a8",
-      "weight" : 0.1,
-      "inStock" : true,
-      "amount" : 0,
-      "price" : 81.77
-    } ]
-  } ],
-  "pageable" : {
-    "sort" : {
-      "sorted" : false,
-      "unsorted" : true,
-      "empty" : true
-    },
-    "offset" : 0,
-    "pageSize" : 3,
-    "pageNumber" : 0,
-    "unpaged" : false,
-    "paged" : true
-  },
-  "totalElements" : 5,
-  "last" : false,
-  "totalPages" : 2,
-  "size" : 3,
-  "number" : 0,
-  "sort" : {
-    "sorted" : false,
-    "unsorted" : true,
-    "empty" : true
-  },
-  "numberOfElements" : 3,
-  "first" : true,
-  "empty" : false
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-recipes-list/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_5">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/recipes?page=0&amp;size=3' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEzYjM0MDAyNSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDgsImlhdCI6MTU5NTMzOTg0OCwiZW1haWwiOiJFbWFpbC10ZXN0NDRhYzNjNDYtYzkyZi00ZGNiLWIzNzgtNmQ1ODBjZjU4ZWE0In0.a1cjjOWFt7J9SWkp9wczHBRzeZ1BjUipZ4eauXaT2tC7AMalk4k0aB-cn1dZ1ANV9DfHgr6r4x6xHgBUDxaBAw'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in recipe.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-recipes-list/curl-request.adoc[]</p>
 </div>
 </div>
 </div>

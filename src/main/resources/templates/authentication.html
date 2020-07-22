@@ -440,60 +440,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer
-Content-Length: 155
-Host: localhost:8080
-
-{
-  "email" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f59",
-  "phone" : null,
-  "password" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f591111"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/login-ok/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 202 Accepted
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 715
-
-{
-  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDIsImlhdCI6MTU5NTMzOTg0MiwiZW1haWwiOiJFbWFpbC10ZXN0MjM5OTM5NzktNmYwMy00YzM1LWI4YTYtZDQzYWIyZWU5ZjU5In0.se_cWY1J7HFzwAW6YSdLNE2K6q8oXtjQeUv8J_EbFsl_vVsKekUSG9r70kbIh7dTXBnvLkJ1TEsVtmQFgFf3Sg",
-  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1MzQxNjQyLCJpYXQiOjE1OTUzMzk4NDIsImVtYWlsIjoiRW1haWwtdGVzdDIzOTkzOTc5LTZmMDMtNGMzNS1iOGE2LWQ0M2FiMmVlOWY1OSJ9.H8ylehRcG2LWts5BrvL3GUkvqBR_dOu4W3luMUcSkUrJcN0aw2q4pv46lZ_5Htx04rK7rLjAHmrCp0eVObjIfg",
-  "userId" : "402881897371aa0f017371aa1fdb0000"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/login-ok/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/login' -i -X POST \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer ' \
-    -d '{
-  "email" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f59",
-  "phone" : null,
-  "password" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f591111"
-}'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/login-ok/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -503,68 +463,20 @@ Content-Length: 715
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_2">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /signup HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer
-Content-Length: 331
-Host: localhost:8080
-
-{
-  "id" : null,
-  "name" : "John Doe-test-name6eea82d3-a9d1-41ed-b6d6-65ff27b29c11",
-  "email" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f59",
-  "password" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f591111",
-  "phone" : "Phone-test4cfa7b82-160e-4fef-81a7-019ac534837c",
-  "role" : "ROLE_USER",
-  "address" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/signup-ok/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_2">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 715
-
-{
-  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDEsImlhdCI6MTU5NTMzOTg0MSwiZW1haWwiOiJFbWFpbC10ZXN0MjM5OTM5NzktNmYwMy00YzM1LWI4YTYtZDQzYWIyZWU5ZjU5In0.7KVcnceIRH2iyKzglbf36cwNaoUz8Eca1pG5iQjcb7XlZ-IkD4uud_3t63sf1WUhpZ6Z8mi-7COeBjD7SIGstg",
-  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1MzQxNjQxLCJpYXQiOjE1OTUzMzk4NDEsImVtYWlsIjoiRW1haWwtdGVzdDIzOTkzOTc5LTZmMDMtNGMzNS1iOGE2LWQ0M2FiMmVlOWY1OSJ9.qT9YXlPzworPXvSc3pljpTNY1DB2HWBS_-XHNF3LR6RxRG5vvItDpmvb8N7v88kaCqmnFE_6My7t486GdwXRTw",
-  "userId" : "402881897371aa0f017371aa1fdb0000"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/signup-ok/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_2">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/signup' -i -X POST \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer ' \
-    -d '{
-  "id" : null,
-  "name" : "John Doe-test-name6eea82d3-a9d1-41ed-b6d6-65ff27b29c11",
-  "email" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f59",
-  "password" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f591111",
-  "phone" : "Phone-test4cfa7b82-160e-4fef-81a7-019ac534837c",
-  "role" : "ROLE_USER",
-  "address" : null
-}'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/signup-ok/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -574,60 +486,20 @@ Content-Length: 715
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_3">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer
-Content-Length: 156
-Host: localhost:8080
-
-{
-  "email" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f59",
-  "phone" : null,
-  "password" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f591111@"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/login-forbidden/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_3">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 403 Forbidden
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 84
-
-{
-  "code" : "ACCESS_DENIED",
-  "message" : "Bad credentials",
-  "data" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/login-forbidden/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_3">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/login' -i -X POST \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer ' \
-    -d '{
-  "email" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f59",
-  "phone" : null,
-  "password" : "Email-test23993979-6f03-4c35-b8a6-d43ab2ee9f591111@"
-}'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/login-forbidden/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -637,46 +509,20 @@ Content-Length: 84
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_4">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /refresh-token HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1MzQxNjQxLCJpYXQiOjE1OTUzMzk4NDEsImVtYWlsIjoiRW1haWwtdGVzdDIzOTkzOTc5LTZmMDMtNGMzNS1iOGE2LWQ0M2FiMmVlOWY1OSJ9.qT9YXlPzworPXvSc3pljpTNY1DB2HWBS_-XHNF3LR6RxRG5vvItDpmvb8N7v88kaCqmnFE_6My7t486GdwXRTw
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/refresh-token-ok/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_4">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 715
-
-{
-  "accessToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDIsImlhdCI6MTU5NTMzOTg0MiwiZW1haWwiOiJFbWFpbC10ZXN0MjM5OTM5NzktNmYwMy00YzM1LWI4YTYtZDQzYWIyZWU5ZjU5In0.se_cWY1J7HFzwAW6YSdLNE2K6q8oXtjQeUv8J_EbFsl_vVsKekUSG9r70kbIh7dTXBnvLkJ1TEsVtmQFgFf3Sg",
-  "refreshToken" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1MzQxNjQyLCJpYXQiOjE1OTUzMzk4NDIsImVtYWlsIjoiRW1haWwtdGVzdDIzOTkzOTc5LTZmMDMtNGMzNS1iOGE2LWQ0M2FiMmVlOWY1OSJ9.H8ylehRcG2LWts5BrvL3GUkvqBR_dOu4W3luMUcSkUrJcN0aw2q4pv46lZ_5Htx04rK7rLjAHmrCp0eVObjIfg",
-  "userId" : "402881897371aa0f017371aa1fdb0000"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/refresh-token-ok/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_4">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/refresh-token' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWExZmRiMDAwMCIsInR5cGUiOiJSRUZSRVNIIiwiZXhwIjoxNTk1MzQxNjQxLCJpYXQiOjE1OTUzMzk4NDEsImVtYWlsIjoiRW1haWwtdGVzdDIzOTkzOTc5LTZmMDMtNGMzNS1iOGE2LWQ0M2FiMmVlOWY1OSJ9.qT9YXlPzworPXvSc3pljpTNY1DB2HWBS_-XHNF3LR6RxRG5vvItDpmvb8N7v88kaCqmnFE_6My7t486GdwXRTw'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in authentication.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/refresh-token-ok/curl-request.adoc[]</p>
 </div>
 </div>
 </div>

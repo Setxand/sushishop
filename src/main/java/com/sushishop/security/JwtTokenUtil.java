@@ -1,7 +1,6 @@
 package com.sushishop.security;
 
 
-import com.sushishop.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -26,8 +25,7 @@ public class JwtTokenUtil implements Serializable {
 	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 	private static final long serialVersionUID = -2550185165626007488L;
 
-	@Value("${jwt.secret}")
-	private String secret;
+	@Value("${jwt.secret}") private String secret;
 
 	public String getUserIdFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);

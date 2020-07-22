@@ -1,13 +1,10 @@
 package com.sushishop.security;
 
 
-import com.sushishop.controller.AuthController;
 import com.sushishop.model.User;
 import com.sushishop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +24,6 @@ public class JwtRequestFilter extends GenericFilterBean {
 
 	@Autowired private JwtTokenUtil jwtTokenUtil;
 	@Autowired private JwtUserDetails jwtUserDetails;
-//	@Autowired private LoginSessionService sessionService;
 	@Autowired private UserService userService;
 
 	@Override
@@ -43,8 +39,6 @@ public class JwtRequestFilter extends GenericFilterBean {
 			jwtToken = requestTokenHeader.substring(7);
 			try {
 				userId = jwtTokenUtil.getUserIdFromToken(jwtToken);
-
-//				if (!sessionService.validateSession(jwtToken)) throw new AccessDeniedException("Token is disabled");
 
 				String requestURI = ((HttpServletRequest) request).getRequestURI();
 

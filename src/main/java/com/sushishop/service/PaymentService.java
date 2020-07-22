@@ -67,7 +67,8 @@ public class PaymentService {
 			order.setStatus(OrderModel.OrderStatus.FAILED);
 		}
 
-		emailClient.sendEmail(DtoUtil.order(order), DtoUtil.user(userService.getUser(order.getUserId())));
+		emailClient.sendEmail(DtoUtil.order(order).toString() +
+				DtoUtil.user(userService.getUser(order.getUserId())).toString());
 	}
 
 	@Transactional

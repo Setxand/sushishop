@@ -1,6 +1,6 @@
-= Seaproducts Documentation
-
 :toc: left
+
+= Seaproducts Documentation
 
 include::authentication.adoc[]
 include::user.adoc[]

@@ -45,7 +45,7 @@ public class RecipeServiceTest {
 			when(productService.getProduct(product.getId())).thenReturn(product);
 			productIds.add(product.getId());
 		}
-		recipe = createRecipe(recipeProducts);
+		recipe = createTestRecipe(recipeProducts);
 		recipeDTORequest = createRequestRecipe(productIds);
 	}
 
@@ -69,7 +69,7 @@ public class RecipeServiceTest {
 
 	@Test
 	public void updateRecipeTest() {
-		Recipe recipe = createRecipe(recipeProducts);
+		Recipe recipe = createTestRecipe(recipeProducts);
 		recipeDTORequest.id = recipe.getId();
 		recipeDTORequest.name = "New recipe name";
 

@@ -1,7 +1,5 @@
 package com.sushishop.client;
 
-import com.sushishop.dto.OrderDTO;
-import com.sushishop.dto.UserDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -25,10 +23,9 @@ public class EmailClient {
 	}
 
 
-	public void sendEmail(OrderDTO order, UserDTO user) {
+	public void sendEmail(String htmlMsg) {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
-		String htmlMsg = user.toString() + order.toString();
 
 		try {
 //			message.setContent(htmlMsg, "text/html; charset=utf-8");

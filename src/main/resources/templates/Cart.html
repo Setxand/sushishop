@@ -440,47 +440,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/402881897371aa0f017371aa265d0001/carts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-empty-cart/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 113
-
-{
-  "id" : null,
-  "userId" : "402881897371aa0f017371aa265d0001",
-  "totalPrice" : 0.0,
-  "products" : [ ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-empty-cart/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa265d0001/carts' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-empty-cart/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -490,56 +463,20 @@ Content-Length: 113
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_2">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/402881897371aa0f017371aa265d0001/carts/products/402881897371aa0f017371aa26de0002 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/put-in-the-cart/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_2">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 513
-
-{
-  "id" : "402881897371aa0f017371aa27160003",
-  "userId" : "402881897371aa0f017371aa265d0001",
-  "totalPrice" : 84.9,
-  "products" : [ {
-    "id" : "402881897371aa0f017371aa26de0002",
-    "name" : "Product-test-name 1892ba34-19cc-4fe7-bec3-af0fd062ebf2",
-    "picture" : "Picture-test-url 517eced0-f738-440e-a6cb-3cace4bf6a55",
-    "description" : "Product-test-description8bcd7669-c2b1-4786-bb45-46626f16acd0",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 84.9
-  } ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/put-in-the-cart/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_2">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa265d0001/carts/products/402881897371aa0f017371aa26de0002' -i -X PUT \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/put-in-the-cart/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -549,56 +486,20 @@ Content-Length: 513
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_3">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/402881897371aa0f017371aa265d0001/carts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-cart/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_3">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 513
-
-{
-  "id" : "402881897371aa0f017371aa27160003",
-  "userId" : "402881897371aa0f017371aa265d0001",
-  "totalPrice" : 84.9,
-  "products" : [ {
-    "id" : "402881897371aa0f017371aa26de0002",
-    "name" : "Product-test-name 1892ba34-19cc-4fe7-bec3-af0fd062ebf2",
-    "picture" : "Picture-test-url 517eced0-f738-440e-a6cb-3cace4bf6a55",
-    "description" : "Product-test-description8bcd7669-c2b1-4786-bb45-46626f16acd0",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 84.9
-  } ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-cart/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_3">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa265d0001/carts' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-cart/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -608,101 +509,20 @@ Content-Length: 513
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_4">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/402881897371aa0f017371aa265d0001/carts/recipes/402881897371aa0f017371aa28ec0009 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/add-recipe-to-cart/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_4">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 2367
-
-{
-  "id" : "402881897371aa0f017371aa27160003",
-  "userId" : "402881897371aa0f017371aa265d0001",
-  "totalPrice" : 401.64,
-  "products" : [ {
-    "id" : "402881897371aa0f017371aa26de0002",
-    "name" : "Product-test-name 1892ba34-19cc-4fe7-bec3-af0fd062ebf2",
-    "picture" : "Picture-test-url 517eced0-f738-440e-a6cb-3cace4bf6a55",
-    "description" : "Product-test-description8bcd7669-c2b1-4786-bb45-46626f16acd0",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 84.9
-  }, {
-    "id" : "402881897371aa0f017371aa27c10004",
-    "name" : "Product-test-name e794f588-ffcf-4f18-b1c8-6daf5db9b251",
-    "picture" : "Picture-test-url 3ec383d4-3994-4b00-b0d1-9943e9002e11",
-    "description" : "Product-test-description6920df3f-b8a9-4e22-9f45-ac203819fd9a",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 70.59
-  }, {
-    "id" : "402881897371aa0f017371aa27f30005",
-    "name" : "Product-test-name 77427470-a198-421d-9a44-f45e0a1d89ff",
-    "picture" : "Picture-test-url 84cc9652-12a5-4c7a-9be1-bbed0952224a",
-    "description" : "Product-test-description6c663675-9b41-408f-b557-188d213692e0",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 71.5
-  }, {
-    "id" : "402881897371aa0f017371aa28150006",
-    "name" : "Product-test-name 6649b37a-2f39-4d0b-89a8-969c44a2a7e1",
-    "picture" : "Picture-test-url 088bbb2e-93c2-4c33-9214-b6241e2761fb",
-    "description" : "Product-test-description2efd5b36-9474-40ee-abd4-563e6a29bc65",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 46.3
-  }, {
-    "id" : "402881897371aa0f017371aa283f0007",
-    "name" : "Product-test-name c2dc7a8b-ae86-4f77-9cd8-912af752e6eb",
-    "picture" : "Picture-test-url 6f443060-55a7-468b-aae2-28e56c767f62",
-    "description" : "Product-test-description44ed83dc-2db1-40d5-9352-e1598acd1689",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 85.8
-  }, {
-    "id" : "402881897371aa0f017371aa28a20008",
-    "name" : "Product-test-name 395d827c-89e5-478f-b0c0-4d1294b92837",
-    "picture" : "Picture-test-url ad533cc0-0d80-451a-8eb9-f55d14fbb22a",
-    "description" : "Product-test-descriptiondc3c174f-2f18-4882-9b40-23debdd45a14",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 42.55
-  } ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/add-recipe-to-cart/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_4">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa265d0001/carts/recipes/402881897371aa0f017371aa28ec0009' -i -X PUT \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/add-recipe-to-cart/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -712,101 +532,20 @@ Content-Length: 2367
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_5">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/402881897371aa0f017371aa265d0001/carts/products/402881897371aa0f017371aa26de0002 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-from-cart/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_5">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 204 No Content
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 2367
-
-{
-  "id" : "402881897371aa0f017371aa27160003",
-  "userId" : "402881897371aa0f017371aa265d0001",
-  "totalPrice" : 401.64,
-  "products" : [ {
-    "id" : "402881897371aa0f017371aa26de0002",
-    "name" : "Product-test-name 1892ba34-19cc-4fe7-bec3-af0fd062ebf2",
-    "picture" : "Picture-test-url 517eced0-f738-440e-a6cb-3cace4bf6a55",
-    "description" : "Product-test-description8bcd7669-c2b1-4786-bb45-46626f16acd0",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 84.9
-  }, {
-    "id" : "402881897371aa0f017371aa27c10004",
-    "name" : "Product-test-name e794f588-ffcf-4f18-b1c8-6daf5db9b251",
-    "picture" : "Picture-test-url 3ec383d4-3994-4b00-b0d1-9943e9002e11",
-    "description" : "Product-test-description6920df3f-b8a9-4e22-9f45-ac203819fd9a",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 70.59
-  }, {
-    "id" : "402881897371aa0f017371aa27f30005",
-    "name" : "Product-test-name 77427470-a198-421d-9a44-f45e0a1d89ff",
-    "picture" : "Picture-test-url 84cc9652-12a5-4c7a-9be1-bbed0952224a",
-    "description" : "Product-test-description6c663675-9b41-408f-b557-188d213692e0",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 71.5
-  }, {
-    "id" : "402881897371aa0f017371aa28150006",
-    "name" : "Product-test-name 6649b37a-2f39-4d0b-89a8-969c44a2a7e1",
-    "picture" : "Picture-test-url 088bbb2e-93c2-4c33-9214-b6241e2761fb",
-    "description" : "Product-test-description2efd5b36-9474-40ee-abd4-563e6a29bc65",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 46.3
-  }, {
-    "id" : "402881897371aa0f017371aa283f0007",
-    "name" : "Product-test-name c2dc7a8b-ae86-4f77-9cd8-912af752e6eb",
-    "picture" : "Picture-test-url 6f443060-55a7-468b-aae2-28e56c767f62",
-    "description" : "Product-test-description44ed83dc-2db1-40d5-9352-e1598acd1689",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 85.8
-  }, {
-    "id" : "402881897371aa0f017371aa28a20008",
-    "name" : "Product-test-name 395d827c-89e5-478f-b0c0-4d1294b92837",
-    "picture" : "Picture-test-url ad533cc0-0d80-451a-8eb9-f55d14fbb22a",
-    "description" : "Product-test-descriptiondc3c174f-2f18-4882-9b40-23debdd45a14",
-    "weight" : 0.1,
-    "inStock" : true,
-    "amount" : 1,
-    "price" : 42.55
-  } ]
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-from-cart/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_5">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa265d0001/carts/products/402881897371aa0f017371aa26de0002' -i -X DELETE \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-from-cart/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -816,38 +555,20 @@ Content-Length: 2367
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_6">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/402881897371aa0f017371aa265d0001/carts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-cart/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_6">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 204 No Content
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-cart/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_6">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa265d0001/carts' -i -X DELETE \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWEyNjVkMDAwMSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NDMsImlhdCI6MTU5NTMzOTg0MywiZW1haWwiOiJFbWFpbC10ZXN0MDYzZWRmZWItMjY3OS00MzdkLWE2NmQtMDdkODE4OGFkYzA5In0.TMfM5GUIsoU3lE5YqVVq8JcRqbuNHF8PQYESlmdZ4LlBGlDReG6FNtcb1uFdjUl0PaYC6kXrcMZr0TCBt-ezpg'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in cart.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/remove-cart/curl-request.adoc[]</p>
 </div>
 </div>
 </div>

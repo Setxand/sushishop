@@ -440,59 +440,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/402881897371aa0f017371aa42e4004c HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWE0MmU0MDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NTAsImlhdCI6MTU5NTMzOTg1MCwiZW1haWwiOiJFbWFpbC10ZXN0ZDJlYjBlMmUtMGNkNC00NGMxLTgwMzYtZDA3MDdjMWU1ZGZiIn0.j7qnWfnmSV4WAfZKorMfdG8rgj0oIo72Wacr7QyuM6wG86pCJ5BEjnD7b2mPcIZp9Xn1w2rnSTM4SKwnzUsTrQ
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in user.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-user/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 519
-
-{
-  "id" : "402881897371aa0f017371aa42e4004c",
-  "name" : "John Doe-test-name236e4bc8-edf0-450b-9942-d4d4f6ab718e",
-  "email" : "Email-testd2eb0e2e-0cd4-44c1-8036-d0707c1e5dfb",
-  "password" : null,
-  "phone" : "Phone-testac4efb94-10ab-48bd-bb23-2889e3598b42",
-  "role" : "ROLE_USER",
-  "address" : {
-    "id" : "402881897371aa0f017371aa42e4004c",
-    "city" : null,
-    "street" : null,
-    "house" : null,
-    "entrance" : null,
-    "housing" : null,
-    "roomNumber" : null,
-    "floor" : null
-  }
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in user.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-user/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa42e4004c' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWE0MmU0MDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NTAsImlhdCI6MTU5NTMzOTg1MCwiZW1haWwiOiJFbWFpbC10ZXN0ZDJlYjBlMmUtMGNkNC00NGMxLTgwMzYtZDA3MDdjMWU1ZGZiIn0.j7qnWfnmSV4WAfZKorMfdG8rgj0oIo72Wacr7QyuM6wG86pCJ5BEjnD7b2mPcIZp9Xn1w2rnSTM4SKwnzUsTrQ'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in user.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-user/curl-request.adoc[]</p>
 </div>
 </div>
 </div>
@@ -502,62 +463,20 @@ Content-Length: 519
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_2">Request structure</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/users/402881897371aa0f017371aa42e4004c/addresses HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWE0MmU0MDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NTAsImlhdCI6MTU5NTMzOTg1MCwiZW1haWwiOiJFbWFpbC10ZXN0ZDJlYjBlMmUtMGNkNC00NGMxLTgwMzYtZDA3MDdjMWU1ZGZiIn0.j7qnWfnmSV4WAfZKorMfdG8rgj0oIo72Wacr7QyuM6wG86pCJ5BEjnD7b2mPcIZp9Xn1w2rnSTM4SKwnzUsTrQ
-Content-Length: 409
-Host: localhost:8080
-
-{
-  "id" : null,
-  "city" : "city-test440a52b6-6de1-4835-b0fc-4232ebb64e50",
-  "street" : "dfdccd6c-61d1-4689-8059-059be0b14dd6",
-  "house" : "86efce1e-0175-4777-93bd-55533a81063e",
-  "entrance" : "d8d85fc2-e34b-4cbc-af00-8aa7fc787b96",
-  "housing" : "7ceb188e-b6d0-4aa3-89e0-3d12edfd9ac4",
-  "roomNumber" : "7b1db86a-d61e-476b-8704-ce266407f08e",
-  "floor" : "7ea37267-159f-4bff-8938-cdee9e52e6ad"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in user.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/user-add-address/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_2">Example response</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in user.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/user-add-address/http-response.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_2">CURL request</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/402881897371aa0f017371aa42e4004c/addresses' -i -X PUT \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzFhYTBmMDE3MzcxYWE0MmU0MDA0YyIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTUzNDA3NTAsImlhdCI6MTU5NTMzOTg1MCwiZW1haWwiOiJFbWFpbC10ZXN0ZDJlYjBlMmUtMGNkNC00NGMxLTgwMzYtZDA3MDdjMWU1ZGZiIn0.j7qnWfnmSV4WAfZKorMfdG8rgj0oIo72Wacr7QyuM6wG86pCJ5BEjnD7b2mPcIZp9Xn1w2rnSTM4SKwnzUsTrQ' \
-    -d '{
-  "id" : null,
-  "city" : "city-test440a52b6-6de1-4835-b0fc-4232ebb64e50",
-  "street" : "dfdccd6c-61d1-4689-8059-059be0b14dd6",
-  "house" : "86efce1e-0175-4777-93bd-55533a81063e",
-  "entrance" : "d8d85fc2-e34b-4cbc-af00-8aa7fc787b96",
-  "housing" : "7ceb188e-b6d0-4aa3-89e0-3d12edfd9ac4",
-  "roomNumber" : "7b1db86a-d61e-476b-8704-ce266407f08e",
-  "floor" : "7ea37267-159f-4bff-8938-cdee9e52e6ad"
-}'</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in user.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/user-add-address/curl-request.adoc[]</p>
 </div>
 </div>
 </div>

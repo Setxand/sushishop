@@ -17,11 +17,9 @@ import java.util.List;
 public class JwtUserDetails implements UserDetailsService {
 
 	private final UserService userService;
-	private final JwtTokenUtil jwtTokenUtil;
 
-	public JwtUserDetails(UserService userService, JwtTokenUtil jwtTokenUtil) {
+	public JwtUserDetails(UserService userService) {
 		this.userService = userService;
-		this.jwtTokenUtil = jwtTokenUtil;
 	}
 
 	@Override

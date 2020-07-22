@@ -8,10 +8,7 @@ import com.sushishop.model.*;
 import com.sushishop.util.DtoUtil;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class TestUtil {
 
@@ -23,15 +20,17 @@ public class TestUtil {
 	public static Product createTestProduct() {
 		return createTestProduct(generateUUID());
 	}
+
 	public static Product createTestProduct(String id) {
+		String alph = "12345abcde";
 		Product product = new Product();
 		double price = randomPrice();
 		product.setId(id);
 		product.setPrice(new BigDecimal(price));
-		product.setName("Product-test-name " + generateUUID());
-		product.setDescription("Product-test-description" + generateUUID());
+		product.setName("Product-test-name " + alph.charAt(new Random().nextInt(alph.length())));
+		product.setDescription("Product-test-description");
 		product.setWeight(0.1);
-		product.setPicture("Picture-test-url " + generateUUID());
+		product.setPicture("Picture-test-url");
 		return product;
 	}
 
@@ -63,29 +62,34 @@ public class TestUtil {
 
 	public static RecipeDTORequest createRequestRecipe(List<String> productIds) {
 		RecipeDTORequest dto = new RecipeDTORequest();
-		dto.name = "Recipe-test-name " + generateUUID();
+		dto.name = "Recipe-test-name";
 		dto.productIds = productIds;
 		return dto;
 	}
 
+	public static User createTestUser() {
+		User user = new User();
+		user.setPhone("+380956435344");
+		user.setEmail("Email-test@test.com");
+		user.setId(generateUUID());
+		user.setName("John Doe-test-name");
+		user.setPassword("1111sd@f");
+		user.setRole(User.UserRole.ROLE_USER);
+		return user;
+	}
+
 	public static UserDTO createUserDTO() {
-		UserDTO dto = new UserDTO();
-		dto.email = "Email-test" + generateUUID();
-		dto.phone = "Phone-test" + generateUUID();
-		dto.name = "John Doe-test-name" + generateUUID();
-		dto.password = dto.email + "1111";
-		dto.role = User.UserRole.ROLE_USER.name();
-		return dto;
+		return DtoUtil.user(createTestUser());
 	}
 
 	public static String generateUUID() {
 		return UUID.randomUUID().toString();
 	}
 
-	public static Recipe createRecipe(List<Product> products) {
+	public static Recipe createTestRecipe(List<Product> products) {
 		Recipe recipe = new Recipe();
 		recipe.setId(generateUUID());
-		recipe.setName("Recipe-test-name" + generateUUID());
+		recipe.setName("Recipe-test-name");
 		recipe.setProducts(products);
 		return recipe;
 	}
@@ -96,18 +100,18 @@ public class TestUtil {
 
 	private static Address createTestAddress() {
 		Address address = new Address();
-		address.setCity("city-test" + generateUUID());
-		address.setEntrance(generateUUID());
-		address.setFloor(generateUUID());
-		address.setHouse(generateUUID());
-		address.setHousing(generateUUID());
-		address.setRoomNumber(generateUUID());
-		address.setStreet(generateUUID());
+		address.setCity("Kiev");
+		address.setEntrance("Entrance-test");
+		address.setFloor("6");
+		address.setHouse("34");
+		address.setHousing("A");
+		address.setRoomNumber("27");
+		address.setStreet("Bankova");
 
-		return  address;
+		return address;
 	}
 
-	public static OrderModel createOrder(String userId) {
+	public static OrderModel createTestOrder(String userId) {
 		OrderModel orderModel = new OrderModel();
 		orderModel.setUserId(userId);
 		orderModel.setId(generateUUID());

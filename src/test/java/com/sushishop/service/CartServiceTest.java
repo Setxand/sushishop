@@ -97,7 +97,7 @@ public class CartServiceTest {
 			when(productService.getProduct(product.getId())).thenReturn(product);
 		}
 
-		Recipe recipe = createRecipe(products);
+		Recipe recipe = createTestRecipe(products);
 
 		when(recipeService.getRecipe(recipe.getId())).thenReturn(recipe);
 

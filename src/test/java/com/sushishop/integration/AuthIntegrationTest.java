@@ -36,7 +36,7 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 
 		// User Register
 		UserDTO newUserInput = createUserDTO();
-
+		newUserInput.password = "2342dfs$";
 		JwtResponse jwtResponse = objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
 				.andExpect(status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
@@ -50,7 +50,7 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 		// Login
 		LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
 		loginRequestDTO.email = user.getEmail();
-		loginRequestDTO.password = user.getEmail() + "1111";
+		loginRequestDTO.password = newUserInput.password;
 
 		mockMvc.perform(postRequestWithUrl("/login", loginRequestDTO))
 				.andExpect(status().isAccepted())
