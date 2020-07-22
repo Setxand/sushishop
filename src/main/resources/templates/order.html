@@ -440,20 +440,112 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure">Request structure</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/create-order/http-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/4028818973767ce00173767cfb7a000a/orders HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Content-Length: 4
+Host: localhost:8080
+
+null</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response">Example response</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/create-order/http-response.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 1833
+
+{
+  "id" : "4028818973767ce00173767cfdde0011",
+  "userId" : "4028818973767ce00173767cfb7a000a",
+  "orderNumber" : null,
+  "status" : "ACTIVE",
+  "totalPrice" : 270.41,
+  "products" : [ {
+    "id" : "4028818973767ce00173767cfbfa000b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 72.29
+  }, {
+    "id" : "4028818973767ce00173767cfc5c000d",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.82
+  }, {
+    "id" : "4028818973767ce00173767cfcb2000e",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 27.45
+  }, {
+    "id" : "4028818973767ce00173767cfd03000f",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 41.68
+  }, {
+    "id" : "4028818973767ce00173767cfd5b0010",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 79.17
+  } ],
+  "address" : {
+    "id" : "4028818973767ce00173767cfdde0011",
+    "city" : "Kiev",
+    "street" : "Bankova",
+    "house" : "34",
+    "entrance" : "Entrance-test",
+    "housing" : "A",
+    "roomNumber" : "27",
+    "floor" : "6"
+  },
+  "paymentDate" : null,
+  "createdAt" : [ 2020, 7, 22, 15, 26, 9, 743000000 ]
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request">CURL request</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/create-order/curl-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/orders' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q' \
+    -d 'null'</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -463,20 +555,106 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_2">Request structure</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-order/http-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767cfb7a000a/active-order HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Host: localhost:8080</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_2">Example response</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-order/http-response.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 1823
+
+{
+  "id" : "4028818973767ce00173767cfdde0011",
+  "userId" : "4028818973767ce00173767cfb7a000a",
+  "orderNumber" : null,
+  "status" : "ACTIVE",
+  "totalPrice" : 270.41,
+  "products" : [ {
+    "id" : "4028818973767ce00173767cfbfa000b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 72.29
+  }, {
+    "id" : "4028818973767ce00173767cfc5c000d",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.82
+  }, {
+    "id" : "4028818973767ce00173767cfcb2000e",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 27.45
+  }, {
+    "id" : "4028818973767ce00173767cfd03000f",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 41.68
+  }, {
+    "id" : "4028818973767ce00173767cfd5b0010",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 79.17
+  } ],
+  "address" : {
+    "id" : "4028818973767ce00173767cfdde0011",
+    "city" : "Kiev",
+    "street" : "Bankova",
+    "house" : "34",
+    "entrance" : "Entrance-test",
+    "housing" : "A",
+    "roomNumber" : "27",
+    "floor" : "6"
+  },
+  "paymentDate" : null,
+  "createdAt" : [ 2020, 7, 22, 15, 26, 10 ]
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_2">CURL request</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/get-order/curl-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/active-order' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -486,20 +664,128 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_3">Request structure</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/add-order-address/http-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /v1/orders/4028818973767ce00173767cfb7a000a/addresses HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Content-Length: 162
+Host: localhost:8080
+
+{
+  "roomNumber" : "27",
+  "city" : "Kiev",
+  "housing" : "A",
+  "street" : "Bankova",
+  "entrance" : "Entrance-test",
+  "floor" : "6",
+  "house" : "34"
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_3">Example response</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/add-order-address/http-response.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 1823
+
+{
+  "id" : "4028818973767ce00173767cfdde0011",
+  "userId" : "4028818973767ce00173767cfb7a000a",
+  "orderNumber" : null,
+  "status" : "ACTIVE",
+  "totalPrice" : 270.41,
+  "products" : [ {
+    "id" : "4028818973767ce00173767cfbfa000b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 72.29
+  }, {
+    "id" : "4028818973767ce00173767cfc5c000d",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.82
+  }, {
+    "id" : "4028818973767ce00173767cfcb2000e",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 27.45
+  }, {
+    "id" : "4028818973767ce00173767cfd03000f",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 41.68
+  }, {
+    "id" : "4028818973767ce00173767cfd5b0010",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 79.17
+  } ],
+  "address" : {
+    "id" : "4028818973767ce00173767cfdde0011",
+    "city" : "Kiev",
+    "street" : "Bankova",
+    "house" : "34",
+    "entrance" : "Entrance-test",
+    "housing" : "A",
+    "roomNumber" : "27",
+    "floor" : "6"
+  },
+  "paymentDate" : null,
+  "createdAt" : [ 2020, 7, 22, 15, 26, 10 ]
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_3">CURL request</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/add-order-address/curl-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/orders/4028818973767ce00173767cfb7a000a/addresses' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q' \
+    -d '{
+  "roomNumber" : "27",
+  "city" : "Kiev",
+  "housing" : "A",
+  "street" : "Bankova",
+  "entrance" : "Entrance-test",
+  "floor" : "6",
+  "house" : "34"
+}'</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -509,20 +795,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_4">Request structure</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/checkout/http-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/4028818973767ce00173767cfb7a000a/payments HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Host: localhost:8080</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_4">Example response</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/checkout/http-response.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: text/plain;charset=ISO-8859-1
+Content-Length: 907
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;form method="post" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8"&gt;
+&lt;input type="hidden" name="data" value="eyJhY3Rpb24iOiJwYXkiLCJhbW91bnQiOiIyNzAuNDEiLCJjdXJyZW5jeSI6IlVBSCIsImRlc2NyaXB0aW9uIjoiUHJvZHVjdC10ZXN0LW5hbWUgMiAoNzIuMjkgVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIGUgKDQ5LjgyIFVBSCkgeDE7XG5Qcm9kdWN0LXRlc3QtbmFtZSA1ICgyNy40NSBVQUgpIHgxO1xuUHJvZHVjdC10ZXN0LW5hbWUgMSAoNDEuNjggVUFIKSB4MTtcblByb2R1Y3QtdGVzdC1uYW1lIDEgKDc5LjE3IFVBSCkgeDEiLCJvcmRlcl9pZCI6IjQwMjg4MTg5NzM3NjdjZTAwMTczNzY3Y2ZkZGUwMDExIiwicHVibGljX2tleSI6InNhbmRib3hfaTI2MzUwNTcwNzYyIiwic2VydmVyX3VybCI6Imh0dHBzOlwvXC82MGFlOGExNTViYjUubmdyb2suaW9cL3YxXC9wYXltZW50c1wvd2ViaG9vayIsInZlcnNpb24iOiIzIn0="/&gt;
+&lt;input type="hidden" name="signature" value="hzxCLq2WcpNuBhNyfVkIKJc9C5Q="/&gt;
+&lt;input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png" name="btn_text"/&gt;
+&lt;/form&gt;</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_4">CURL request</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/checkout/curl-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/payments' -i -X GET \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -532,20 +845,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_5">Request structure</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/cancel-order/http-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/orders/4028818973767ce00173767cfdde0011 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Host: localhost:8080</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_5">Example response</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/cancel-order/http-response.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 204 No Content
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_5">CURL request</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/cancel-order/curl-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/orders/4028818973767ce00173767cfdde0011' -i -X DELETE \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q'</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -555,20 +886,157 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_request_structure_6">Request structure</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/find-user-orders/http-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/4028818973767ce00173767cfb7a000a/orders HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q
+Content-Length: 4
+Host: localhost:8080
+
+null</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_example_response_6">Example response</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/find-user-orders/http-response.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 3149
+
+{
+  "id" : "4028818973767ce00173767d019f0017",
+  "userId" : "4028818973767ce00173767cfb7a000a",
+  "orderNumber" : null,
+  "status" : "ACTIVE",
+  "totalPrice" : 633.81,
+  "products" : [ {
+    "id" : "4028818973767ce00173767cfbfa000b",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 72.29
+  }, {
+    "id" : "4028818973767ce00173767cfc5c000d",
+    "name" : "Product-test-name e",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 49.82
+  }, {
+    "id" : "4028818973767ce00173767cfcb2000e",
+    "name" : "Product-test-name 5",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 27.45
+  }, {
+    "id" : "4028818973767ce00173767cfd03000f",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 41.68
+  }, {
+    "id" : "4028818973767ce00173767cfd5b0010",
+    "name" : "Product-test-name 1",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 79.17
+  }, {
+    "id" : "4028818973767ce00173767cff230012",
+    "name" : "Product-test-name c",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 30.23
+  }, {
+    "id" : "4028818973767ce00173767cff690013",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 82.36
+  }, {
+    "id" : "4028818973767ce00173767cffb00014",
+    "name" : "Product-test-name 2",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 98.73
+  }, {
+    "id" : "4028818973767ce00173767d00020015",
+    "name" : "Product-test-name d",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 79.36
+  }, {
+    "id" : "4028818973767ce00173767d00520016",
+    "name" : "Product-test-name 3",
+    "picture" : "Picture-test-url",
+    "description" : "Product-test-description",
+    "weight" : 0.1,
+    "inStock" : true,
+    "amount" : 1,
+    "price" : 72.72
+  } ],
+  "address" : {
+    "id" : "4028818973767ce00173767d019f0017",
+    "city" : "Kiev",
+    "street" : "Bankova",
+    "house" : "34",
+    "entrance" : "Entrance-test",
+    "housing" : "A",
+    "roomNumber" : "27",
+    "floor" : "6"
+  },
+  "paymentDate" : null,
+  "createdAt" : [ 2020, 7, 22, 15, 26, 10, 711000000 ]
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_curl_request_6">CURL request</h3>
-<div class="paragraph">
-<p>Unresolved directive in order.adoc - include::C:\Users\Boyko\IdeaProjects\seaproducts\target/src/docs/asciidocs/snippets/find-user-orders/curl-request.adoc[]</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/4028818973767ce00173767cfb7a000a/orders' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MDI4ODE4OTczNzY3Y2UwMDE3Mzc2N2NmYjdhMDAwYSIsInR5cGUiOiJBQ0NFU1MiLCJleHAiOjE1OTU0MjE2NjksImlhdCI6MTU5NTQyMDc2OSwiZW1haWwiOiJFbWFpbC10ZXN0QHRlc3QuY29tIn0.s3KOnteDHyk91J-giX0atfuaBCP-R1RuOV8-Og4OIr9Wm9p6KwCEgSodmH61ByZ5lwCvL3LhAxT4ItuUbIF59Q' \
+    -d 'null'</code></pre>
+</div>
 </div>
 </div>
 </div>
