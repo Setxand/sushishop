@@ -81,7 +81,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 
-		// Create another order while active orer is exists
+		// Create another order while active order is exists
 		mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.code").value("INVALID_STATE"))
@@ -95,7 +95,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		addressMap.entrySet()
 				.removeAll(addressMap.entrySet().stream().filter(m -> m.getValue() == null).collect(Collectors.toList()));
 
-		mockMvc.perform(patchRequestWithUrl("/v1/orders/{orderId}/addresses", addressMap, jwtResponse.getUserId()))
+		mockMvc.perform(patchRequestWithUrl("/v1/orders/{orderId}/addresses", addressMap, order.id))
 				.andExpect(jsonPath("$.products", hasSize(order.products.size())))
 				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
 				.andExpect(jsonPath("$.address.city").value(addressToUpdate.city))
@@ -150,7 +150,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		mockMvc.perform(get(ORDERS_BASE_URL, user.getId())
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.content", hasSize(3)));
+				.andExpect(jsonPath(CONTENT_JSON, hasSize(3)));
 	}
 
 	private void cancelOrder(String orderId) throws Exception {

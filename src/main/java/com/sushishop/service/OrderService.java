@@ -82,14 +82,14 @@ public class OrderService {
 
 		savedOrder.setAddress(addressRepo.saveAndFlush(address));
 
-		order.setStatus(OrderStatus.ACTIVE);
+		savedOrder.setStatus(OrderStatus.ACTIVE);
 
-		return order;
+		return savedOrder;
 	}
 
 	@Transactional
 	public OrderModel updateOrderAddress(String orderId, Map<String, Object> body) {
-		OrderModel activeOrder = getActiveOrder(orderId);
+		OrderModel activeOrder = getOrderById(orderId);
 		Address address = activeOrder.getAddress();
 
 		body.keySet().forEach(k -> {

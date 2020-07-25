@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.*;
-import com.sushishop.security.JwtTokenUtil;
+import com.sushishop.model.Product;
 import com.sushishop.security.dto.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,9 +25,12 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class BaseIntegrationTest {
+
+	private static final String GET_PRODUCTS_DOC = "get-products-list";
 
 	protected static final String ID_JSON = "$.id";
 	protected static final String NAME_JSON = "$.name";
@@ -51,11 +54,16 @@ public class BaseIntegrationTest {
 	@Autowired protected MockMvc mockMvc;
 
 	@Autowired protected ObjectMapper objectMapper;
+
 	protected String accessToken = "";
-	@Autowired private JwtTokenUtil jwtTokenUtil;
+
 
 	protected ProductDTO createProductPostRequest() throws Exception {
-		ProductDTO productRequestBody = createProductDTO();
+		return createProductSendRequest(createProductDTO());
+	}
+
+	protected ProductDTO createProductSendRequest(ProductDTO productRequestBody) throws Exception {
+
 		MockHttpServletRequestBuilder postRequest = postRequestWithUrl(PRODUCTS_BASE_URL, productRequestBody);
 
 		return objectMapper.readValue(mockMvc.perform(postRequest)
@@ -63,6 +71,24 @@ public class BaseIntegrationTest {
 				.andReturn()
 				.getResponse()
 				.getContentAsString(), ProductDTO.class);
+	}
+
+	protected List<ProductDTO> getProducts(Product.ProductType type) throws Exception {
+		int pageSize = 3;
+
+		Map<String, Object> map = objectMapper.readValue(mockMvc.perform(
+				get(PRODUCTS_BASE_URL + "?type=" + type.name() + "&page=0&size=" + pageSize)
+						.headers(authHeader(accessToken)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath(CONTENT_JSON, hasSize(pageSize)))
+				.andDo(document(GET_PRODUCTS_DOC,
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), new TypeReference<Map<String, Object>>() {
+		});
+
+		return objectMapper.convertValue(map.get("content"),
+				new TypeReference<List<ProductDTO>>() {
+				});
 	}
 
 	protected MockHttpServletRequestBuilder postRequest(Object requestBody, Object... uriVars)

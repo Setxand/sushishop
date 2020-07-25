@@ -17,6 +17,16 @@ public class TestUtil {
 		return DtoUtil.product(createTestProduct());
 	}
 
+	public static ProductDTO createProductDTO(Product.ProductType type) {
+		return DtoUtil.product(createTestProduct(type));
+	}
+
+	public static Product createTestProduct(Product.ProductType type) {
+		Product testProduct = createTestProduct();
+		testProduct.setProductType(type);
+		return testProduct;
+	}
+
 	public static Product createTestProduct() {
 		return createTestProduct(generateUUID());
 	}
@@ -27,6 +37,7 @@ public class TestUtil {
 		double price = randomPrice();
 		product.setId(id);
 		product.setPrice(new BigDecimal(price));
+		product.setProductType(Product.ProductType.COMMON);
 		product.setName("Product-test-name " + alph.charAt(new Random().nextInt(alph.length())));
 		product.setDescription("Product-test-description");
 		product.setWeight(0.1);
@@ -98,7 +109,7 @@ public class TestUtil {
 		return DtoUtil.address(createTestAddress());
 	}
 
-	private static Address createTestAddress() {
+	public static Address createTestAddress() {
 		Address address = new Address();
 		address.setCity("Kiev");
 		address.setEntrance("Entrance-test");

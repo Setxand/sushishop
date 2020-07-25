@@ -2,6 +2,7 @@ package com.sushishop.integration;
 
 import com.sushishop.TestUtil;
 import com.sushishop.dto.ProductDTO;
+import com.sushishop.model.Product;
 import com.sushishop.security.dto.JwtResponse;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,18 +15,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.sushishop.TestUtil.createProductDTO;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -42,6 +43,12 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 
 	private static final String URI_WITH_ID_VAR = PRODUCTS_BASE_URL + "/{productId}";
 	private static final String STOCK_JSON = "$.inStock";
+
+	private static final String GET_PRODUCT_DOC = "get-product";
+	private static final String UPDATE_PRODUCT_DOC = "update-product";
+	private static final String CHANGE_IN_STOCK_DOC = "change-stock-level";
+	private static final String REMOVE_PRODUCT_DOC = "remove-product";
+	private static final String CREATE_PRODUCT_DOC = "create-product";
 
 
 	@Test
@@ -60,10 +67,10 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 
 		ProductDTO productResponse = objectMapper.readValue(mockMvc.perform(postRequest)
 				.andExpect(status().isCreated())
-				.andDo(document("create-product", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
-				.andReturn()
-				.getResponse()
-				.getContentAsString(), ProductDTO.class);
+				.andDo(document(CREATE_PRODUCT_DOC,
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andReturn().getResponse().getContentAsString(), ProductDTO.class);
+
 		Assert.assertTrue(StringUtils.isNotBlank(productResponse.description));
 		Assert.assertTrue(productResponse.weight > 0.0);
 		String productId = productResponse.id;
@@ -75,12 +82,13 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		ProductDTO product = objectMapper.readValue(mockMvc.perform(get(URI_WITH_ID_VAR, productId)
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(productResponse.id))
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(productResponse.name))
-				.andExpect(MockMvcResultMatchers.jsonPath(DESC_JSON).value(productResponse.description))
-				.andExpect(MockMvcResultMatchers.jsonPath(WEIGHT_JSON).value(productResponse.weight))
-				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productResponse.picture))
-				.andDo(document("get-product", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andExpect(jsonPath(ID_JSON).value(productResponse.id))
+				.andExpect(jsonPath(NAME_JSON).value(productResponse.name))
+				.andExpect(jsonPath(DESC_JSON).value(productResponse.description))
+				.andExpect(jsonPath(WEIGHT_JSON).value(productResponse.weight))
+				.andExpect(jsonPath(PIC_JSON).value(productResponse.picture))
+				.andExpect(jsonPath("$.productType").value(Product.ProductType.COMMON.name()))
+				.andDo(document(GET_PRODUCT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString(), ProductDTO.class);
 		assertTrue(product.inStock);
 		assertEquals(0, product.price.compareTo(productResponse.price));
@@ -99,7 +107,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(productRequestBodyToUpdate)))
 				.andExpect(status().isNoContent())
-				.andDo(document("update-product", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document(UPDATE_PRODUCT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get updated product
 		product = getProduct(productId, productRequestBodyToUpdate);
@@ -114,7 +122,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(productInStockFalse)))
 				.andExpect(status().isNoContent())
-				.andDo(document("change-stock-level",
+				.andDo(document(CHANGE_IN_STOCK_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get product that's not in stock
@@ -127,7 +135,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		mockMvc.perform(delete(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent())
-				.andDo(document("remove-product", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document(REMOVE_PRODUCT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get removed product ( Must be 400 error )
 		mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
@@ -138,23 +146,20 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		for (int i = 0; i < 5; i++) {
 			createProductPostRequest();
 		}
-		mockMvc.perform(get(PRODUCTS_BASE_URL + "?page=0&size=3").headers(authHeader(accessToken)))
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(CONTENT_JSON, hasSize(3)))
-				.andDo(document("get-products-list",
-						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
+		List<ProductDTO> productsList = getProducts(Product.ProductType.COMMON);
+		assertTrue(productsList.stream().allMatch(p -> p.productType == Product.ProductType.COMMON));
 	}
 
-	private ProductDTO getProduct(String productId, Map<String, Object> productRequestBodyToUpdate) throws Exception {
+	private ProductDTO getProduct(String productId, Map<String, Object> requestBody) throws Exception {
 
 		return objectMapper.readValue(mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).value(productId))
-				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(productRequestBodyToUpdate.get("name")))
-				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.get("picture")))
-				.andExpect(MockMvcResultMatchers.jsonPath(DESC_JSON).value(productRequestBodyToUpdate.get("description")))
-				.andExpect(MockMvcResultMatchers.jsonPath(PIC_JSON).value(productRequestBodyToUpdate.get("picture")))
+						.andExpect(status().isOk())
+						.andExpect(jsonPath(ID_JSON).value(productId))
+						.andExpect(jsonPath(NAME_JSON).value(requestBody.get("name")))
+						.andExpect(jsonPath(PIC_JSON).value(requestBody.get("picture")))
+						.andExpect(jsonPath(DESC_JSON).value(requestBody.get("description")))
+						.andExpect(jsonPath(PIC_JSON).value(requestBody.get("picture")))
 						.andReturn().getResponse().getContentAsString(),
 				ProductDTO.class);
 	}

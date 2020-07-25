@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -15,6 +13,13 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class Product {
+
+	public enum ProductType {
+
+		COMMON,
+		RECIPE_COMPONENT
+
+	}
 
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "uuid")
@@ -26,6 +31,9 @@ public class Product {
 	private double weight;
 	private boolean inStock = true;
 	private BigDecimal price;
+
+	@Enumerated(EnumType.STRING)
+	private ProductType productType;
 
 	public BigDecimal getPrice() {
 		return price.setScale(2, BigDecimal.ROUND_HALF_UP);

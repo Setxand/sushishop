@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+import static com.sushishop.model.Product.ProductType;
+
 @RestController
 public class ProductController {
 
@@ -30,17 +32,14 @@ public class ProductController {
 	}
 
 	@GetMapping("/v1/products")
-	public Page<ProductDTO> getProducts(Pageable pageable) {
-		return productService.getProducts(pageable).map(DtoUtil::product);
+	public Page<ProductDTO> getProducts(@RequestParam(defaultValue = "COMMON") ProductType type, Pageable pageable) {
+		return productService.getProducts(type, pageable).map(DtoUtil::product);
 	}
 
 	@PatchMapping("/v1/products/{productId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateProduct(@RequestBody Map<String, Object> body, @PathVariable String productId) {
-		ProductDTO dto = objectMapper.convertValue(body, ProductDTO.class);
-		dto.id = productId;
-		dto.keys = body.keySet();
-		productService.updateProduct(dto);
+		productService.updateProduct(productId, body);
 	}
 
 	@DeleteMapping("/v1/products/{productId}")

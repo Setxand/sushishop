@@ -18,6 +18,7 @@ public class DtoUtil {
 		dto.description = entity.getDescription();
 		dto.weight = entity.getWeight();
 		dto.inStock = entity.isInStock();
+		dto.productType = entity.getProductType();
 
 		return dto;
 	}

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import static com.sushishop.model.Product.ProductType;
+
 public class ProductDTO {
 
 	public String id;
@@ -13,10 +15,11 @@ public class ProductDTO {
 	public String description;
 	public double weight;
 	public boolean inStock;
+	public ProductType productType;
 
-	// Amount of the products in the cart
+	// Amount of the products in the cart and order
 	public int amount;
-	public BigDecimal price; ///todo need calculation of pricesl
+	public BigDecimal price;
 
 	@JsonIgnore
 	public Set<String> keys;
