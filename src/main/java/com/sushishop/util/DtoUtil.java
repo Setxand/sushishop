@@ -19,8 +19,8 @@ public class DtoUtil {
 		dto.weight = entity.getWeight();
 		dto.inStock = entity.isInStock();
 		dto.productType = entity.getProductType();
-		dto.created = entity.getCreated();
 
+		baseConversion(dto, entity);
 		return dto;
 	}
 
@@ -28,8 +28,9 @@ public class DtoUtil {
 		RecipeDTOResponse dto = new RecipeDTOResponse();
 		dto.id = entity.getId();
 		dto.name = entity.getName();
-		dto.created = entity.getCreated();
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());
+
+		baseConversion(dto, entity);
 		return dto;
 	}
 
@@ -39,10 +40,10 @@ public class DtoUtil {
 		dto.name = entity.getName();
 		dto.phone = entity.getPhone();
 		dto.role = entity.getRole().name();
-		dto.created = entity.getCreated();
 		dto.email = entity.getEmail();
 		dto.address = entity.getAddress() != null ? address(entity.getAddress()) : null;
 
+		baseConversion(dto, entity);
 		return dto;
 	}
 
@@ -52,13 +53,14 @@ public class DtoUtil {
 		dto.userId = entity.getUserId();
 		dto.totalPrice = entity.getTotalPrice();
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());
-		dto.created = entity.getCreated();
 
 		dto.products.forEach(p -> {
 			p.amount = entity.getAmounts().get(p.id);
 			p.price = p.price.multiply(new BigDecimal(entity.getAmounts().get(p.id)));
 			p.weight = entity.getAmounts().get(p.id) * p.weight;
 		});
+
+		baseConversion(dto, entity);
 
 		return dto;
 	}
@@ -73,7 +75,8 @@ public class DtoUtil {
 		dto.housing = entity.getHousing();
 		dto.roomNumber = entity.getRoomNumber();
 		dto.street = entity.getStreet();
-		dto.created = entity.getCreated();
+
+		baseConversion(dto, entity);
 
 		return dto;
 	}
@@ -87,7 +90,6 @@ public class DtoUtil {
 		dto.address = address(entity.getAddress());
 		dto.status = entity.getStatus();
 		dto.paymentDate = entity.getPaymentDate();
-		dto.created = entity.getCreated();
 
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());
 		dto.products.forEach(p -> {
@@ -96,6 +98,12 @@ public class DtoUtil {
 			p.weight = entity.getProductAmounts().get(p.id) * p.weight;
 		});
 
+		baseConversion(dto, entity);
+
 		return dto;
+	}
+
+	private static void baseConversion(BaseDTO dto, BaseModel entity) {
+		dto.created = entity.getCreated().toString();
 	}
 }

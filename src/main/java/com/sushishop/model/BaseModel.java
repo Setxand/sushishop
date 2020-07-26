@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @MappedSuperclass
 @Getter
@@ -13,6 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BaseModel {
 
-	private LocalDateTime created = LocalDateTime.now();
+	private static final String KIEV_ZONE_ID = "Europe/Kiev";
+
+	private ZonedDateTime created = ZonedDateTime.now().withZoneSameInstant(ZoneId.of(KIEV_ZONE_ID));
 
 }
