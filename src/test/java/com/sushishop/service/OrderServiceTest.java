@@ -1,6 +1,5 @@
 package com.sushishop.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.TestUtil;
 import com.sushishop.model.Address;
@@ -71,13 +70,6 @@ public class OrderServiceTest {
 		orderService.createOrder(user.getId());
 	}
 
-	private void assertOrder(OrderModel order) {
-		assertArrayEquals(cart.getProducts().toArray(), order.getProducts().toArray());
-		assertEquals(cart.getTotalPrice(), order.getTotalPrice());
-		assertEquals(user.getId(), order.getUserId());
-		assertTrue(cart.getAmounts().entrySet().containsAll(order.getProductAmounts().entrySet()));
-	}
-
 	@Test
 	public void createOrder() {
 		when(orderRepo.saveAndFlush(any(OrderModel.class))).thenReturn(createOrderFromUserAndCart());
@@ -99,34 +91,6 @@ public class OrderServiceTest {
 
 		verify(addressRepo).saveAndFlush(addressCaptor.capture());
 		assertEquals(user.getAddress(), addressCaptor.getValue());
-	}
-
-	private OrderModel createOrderFromUserAndCart() {
-		OrderModel order = new OrderModel();
-		order.setUserId(user.getId());
-
-		order.setTotalPrice(cart.getTotalPrice());
-		cart.getProducts().forEach(p -> order.getProducts().add(p));
-
-		Map<String, Integer> amounts = cart.getAmounts();
-		Map<String, Integer> orderProductAmounts = amounts.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-		order.setProductAmounts(orderProductAmounts);
-		return order;
-	}
-
-	@Test
-	public void updateOrderAddress() {
-		Address testAddress = createTestAddress();
-		Map<String, Object> map = objectMapper.convertValue(testAddress, new TypeReference<Map<String, Object>>() {
-		});
-		order.setStatus(ACTIVE);
-		when(orderRepo.findById(order.getId())).thenReturn(Optional.of(order));
-
-		OrderModel updatedOrder = orderService.updateOrderAddress(order.getId(), map);
-
-		assertEquals(testAddress, updatedOrder.getAddress());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -162,7 +126,7 @@ public class OrderServiceTest {
 	@Test(expected = IllegalStateException.class)
 	public void getActiveOrderMoreThanOne() {
 		when(orderRepo.findByUserIdAndStatus(user.getId(), OrderModel.OrderStatus.ACTIVE))
-				.thenReturn(Arrays.asList(createTestOrder(user.getId()),createTestOrder(user.getId())));
+				.thenReturn(Arrays.asList(createTestOrder(user.getId()), createTestOrder(user.getId())));
 		orderService.getActiveOrder(user.getId());
 	}
 
@@ -171,5 +135,27 @@ public class OrderServiceTest {
 		when(orderRepo.findByUserIdAndStatus(user.getId(), OrderModel.OrderStatus.ACTIVE))
 				.thenReturn(Collections.emptyList());
 		orderService.getActiveOrder(user.getId());
+	}
+
+	private void assertOrder(OrderModel order) {
+		assertArrayEquals(cart.getProducts().toArray(), order.getProducts().toArray());
+		assertEquals(cart.getTotalPrice(), order.getTotalPrice());
+		assertEquals(user.getId(), order.getUserId());
+		assertTrue(cart.getAmounts().entrySet().containsAll(order.getProductAmounts().entrySet()));
+	}
+
+	private OrderModel createOrderFromUserAndCart() {
+		OrderModel order = new OrderModel();
+		order.setUserId(user.getId());
+
+		order.setTotalPrice(cart.getTotalPrice());
+		cart.getProducts().forEach(p -> order.getProducts().add(p));
+
+		Map<String, Integer> amounts = cart.getAmounts();
+		Map<String, Integer> orderProductAmounts = amounts.entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		order.setProductAmounts(orderProductAmounts);
+		return order;
 	}
 }

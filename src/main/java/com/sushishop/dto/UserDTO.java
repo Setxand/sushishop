@@ -1,6 +1,6 @@
 package com.sushishop.dto;
 
-public class UserDTO {
+public class UserDTO extends BaseDTO {
 
 	public String id;
 	public String name;

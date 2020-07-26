@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Address {
+public class Address extends BaseModel {
 
 	@Id
 	private String id;

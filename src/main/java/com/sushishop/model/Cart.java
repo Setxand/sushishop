@@ -16,7 +16,7 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Cart {
+public class Cart extends BaseModel {
 
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "uuid")

@@ -7,6 +7,7 @@ import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/v1/products")
-	public Page<ProductDTO> getProducts(@RequestParam(defaultValue = "COMMON") ProductType type, Pageable pageable) {
+	public Page<ProductDTO> getProducts(@RequestParam(defaultValue = "COMMON") ProductType type,
+										@PageableDefault(sort = "created") Pageable pageable) {
 		return productService.getProducts(type, pageable).map(DtoUtil::product);
 	}
 

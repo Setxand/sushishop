@@ -16,7 +16,7 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderModel {
+public class OrderModel extends BaseModel{
 
 	public enum OrderStatus {
 		CREATED,

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Product {
+public class Product extends BaseModel {
 
 	public enum ProductType {
 

@@ -63,9 +63,8 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath(ID_JSON).isNotEmpty())
 				.andExpect(jsonPath(NAME_JSON).value(recipeWithFiveProducts.name))
+				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andExpect(jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE)))
-				.andDo(document("get-recipe", preprocessRequest(prettyPrint()),
-						preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString();
 
 		// Update created recipe (minus one product)
@@ -104,6 +103,8 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 						.andExpect(jsonPath(NAME_JSON).value(recipe.get("name")))
 						.andExpect(jsonPath(PRODUCTS_JSON_PATH,
 								hasSize(WHOLE_PRODUCTS_SIZE - 1)))
+						.andDo(document("get-recipe", preprocessRequest(prettyPrint()),
+								preprocessResponse(prettyPrint())))
 						.andReturn().getResponse().getContentAsString(), RecipeDTOResponse.class);
 
 

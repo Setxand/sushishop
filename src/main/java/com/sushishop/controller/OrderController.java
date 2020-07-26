@@ -6,6 +6,7 @@ import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/v1/users/{userId}/orders")
-	public Page<OrderDTO> getOrders(@PathVariable String userId, Pageable pageable) {
+	public Page<OrderDTO> getOrders(@PathVariable String userId, @PageableDefault(sort = "created") Pageable pageable) {
 		return orderService.getOrders(userId, pageable).map(DtoUtil::order);
 	}
 }

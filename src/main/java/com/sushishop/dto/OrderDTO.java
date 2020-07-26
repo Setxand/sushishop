@@ -7,7 +7,7 @@ import java.util.List;
 
 import static com.sushishop.model.OrderModel.OrderStatus.SUCCEED;
 
-public class OrderDTO {
+public class OrderDTO extends BaseDTO {
 
 	public String id;
 	public String userId;

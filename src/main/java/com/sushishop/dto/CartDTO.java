@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartDTO {
+public class CartDTO extends BaseDTO {
 
 	public String id;
 	public String userId;

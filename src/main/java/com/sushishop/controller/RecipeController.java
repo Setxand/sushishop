@@ -8,6 +8,7 @@ import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class RecipeController {
 	}
 
 	@GetMapping("/v1/recipes")
-	public Page<RecipeDTOResponse> getRecipes(Pageable pageable) {
+	public Page<RecipeDTOResponse> getRecipes(@PageableDefault(sort = "created") Pageable pageable) {
 		return recipeService.getRecipes(pageable).map(DtoUtil::recipe);
 	}
 

@@ -35,6 +35,7 @@ public class BaseIntegrationTest {
 	protected static final String ID_JSON = "$.id";
 	protected static final String NAME_JSON = "$.name";
 	protected static final String CONTENT_JSON = "$.content";
+	protected static final String CREATED_JSON = "$.created";
 
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
 	protected static final String RECIPES_BASE_URL = "/v1/recipes";
@@ -186,6 +187,7 @@ public class BaseIntegrationTest {
 		return objectMapper.readValue(mockMvc.perform(get(CARTS_BASE_URL, userId)
 				.headers(authHeader(accessToken)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(userId))
+				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), CartDTO.class);
 	}
 

@@ -77,6 +77,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
 				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
 				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andDo(document("get-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
@@ -90,6 +91,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 
 		// Update order address
 		AddressDTO addressToUpdate = TestUtil.createAddressDTO();
+		addressToUpdate.created = null;
 		HashMap<String, Object> addressMap = objectMapper
 				.convertValue(addressToUpdate, new TypeReference<HashMap<String, Object>>() {});
 		addressMap.entrySet()

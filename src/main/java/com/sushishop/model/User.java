@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class User extends BaseModel {
 
 	public enum UserRole {
 		ROLE_USER

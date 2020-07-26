@@ -2,7 +2,7 @@ package com.sushishop.dto;
 
 import java.util.List;
 
-public class RecipeDTOResponse {
+public class RecipeDTOResponse extends BaseDTO {
 
 	public String id;
 	public String name;

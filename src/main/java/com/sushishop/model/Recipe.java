@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Recipe {
+public class Recipe extends BaseModel {
 
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "uuid")

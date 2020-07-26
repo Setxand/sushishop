@@ -7,7 +7,7 @@ import java.util.Set;
 
 import static com.sushishop.model.Product.ProductType;
 
-public class ProductDTO {
+public class ProductDTO extends BaseDTO {
 
 	public String id;
 	public String name;

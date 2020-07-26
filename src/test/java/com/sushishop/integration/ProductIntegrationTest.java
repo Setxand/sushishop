@@ -49,6 +49,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 	private static final String CHANGE_IN_STOCK_DOC = "change-stock-level";
 	private static final String REMOVE_PRODUCT_DOC = "remove-product";
 	private static final String CREATE_PRODUCT_DOC = "create-product";
+	private static final String PRODUCT_TYPE_JSON = "$.productType";
 
 
 	@Test
@@ -87,7 +88,8 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath(DESC_JSON).value(productResponse.description))
 				.andExpect(jsonPath(WEIGHT_JSON).value(productResponse.weight))
 				.andExpect(jsonPath(PIC_JSON).value(productResponse.picture))
-				.andExpect(jsonPath("$.productType").value(Product.ProductType.COMMON.name()))
+				.andExpect(jsonPath(PRODUCT_TYPE_JSON).value(Product.ProductType.COMMON.name()))
+				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andDo(document(GET_PRODUCT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString(), ProductDTO.class);
 		assertTrue(product.inStock);

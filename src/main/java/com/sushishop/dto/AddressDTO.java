@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Set;
 
-public class AddressDTO {
+public class AddressDTO extends BaseDTO {
 
 	public String id;
 	public String city;
