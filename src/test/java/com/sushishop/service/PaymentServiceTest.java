@@ -65,6 +65,11 @@ public class PaymentServiceTest {
 		LiqpayResponse liqpayResponse = createLiqpayResponse("success");
 		OrderModel order = updatePaymentStatusTest(liqpayResponse);
 
+		ArgumentCaptor<String> msgCaptor = ArgumentCaptor.forClass(String.class);
+		Mockito.verify(emailClient).sendEmail(msgCaptor.capture());
+
+		assertEquals(DtoUtil.order(order).toString() + DtoUtil.user(user).toString(), msgCaptor.getValue());
+
 		assertEquals(liqpayResponse.paymentId, order.getOrderNumber());
 		assertEquals(liqpayResponse.orderId, order.getId());
 		assertEquals(SUCCEED, order.getStatus());
@@ -115,10 +120,6 @@ public class PaymentServiceTest {
 
 		paymentService.updatePaymentStatus(updatePaymentStatusJsonData, signature);
 
-
-		ArgumentCaptor<String> msgCaptor = ArgumentCaptor.forClass(String.class);
-		Mockito.verify(emailClient).sendEmail(msgCaptor.capture());
-		assertEquals(DtoUtil.order(order).toString() + DtoUtil.user(user).toString(), msgCaptor.getValue());
 		assertNotNull(liqpayResponse.paymentDate, order.getPaymentDate());
 
 		return order;

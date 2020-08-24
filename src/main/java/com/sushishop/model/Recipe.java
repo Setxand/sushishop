@@ -20,6 +20,7 @@ public class Recipe extends BaseModel {
 	@GeneratedValue(generator = "uuid")
 	private String id;
 	private String name;
+	private String picture;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Product> products = new ArrayList<>();

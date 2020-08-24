@@ -27,6 +27,7 @@ public class RecipeService {
 	public Recipe createRecipe(RecipeDTORequest dto) {
 		Recipe recipe = new Recipe();
 		recipe.setName(dto.name);
+		recipe.setPicture(dto.picture);
 
 		List<Product> products = dto.productIds.stream().map(productService::getProduct).collect(Collectors.toList());
 		recipe.setProducts(products);
@@ -42,6 +43,10 @@ public class RecipeService {
 		Recipe recipe = getRecipe(dto.id);
 
 		if (dto.keys.contains("name")) {
+			recipe.setName(dto.name);
+		}
+
+		if (dto.keys.contains("picture")) {
 			recipe.setName(dto.name);
 		}
 

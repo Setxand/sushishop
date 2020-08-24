@@ -63,6 +63,7 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath(ID_JSON).isNotEmpty())
 				.andExpect(jsonPath(NAME_JSON).value(recipeWithFiveProducts.name))
+				.andExpect(jsonPath(PICTURE_JSON).value(recipeWithFiveProducts.picture))
 				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andExpect(jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE)))
 				.andReturn().getResponse().getContentAsString();

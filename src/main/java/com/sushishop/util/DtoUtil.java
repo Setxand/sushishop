@@ -28,6 +28,8 @@ public class DtoUtil {
 		RecipeDTOResponse dto = new RecipeDTOResponse();
 		dto.id = entity.getId();
 		dto.name = entity.getName();
+		dto.picture = entity.getPicture();
+
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());
 
 		baseConversion(dto, entity);

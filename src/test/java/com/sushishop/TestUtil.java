@@ -75,6 +75,7 @@ public class TestUtil {
 		RecipeDTORequest dto = new RecipeDTORequest();
 		dto.name = "Recipe-test-name";
 		dto.productIds = productIds;
+		dto.picture = "recipe-picture-url-test";
 		return dto;
 	}
 

@@ -36,6 +36,7 @@ public class BaseIntegrationTest {
 	protected static final String NAME_JSON = "$.name";
 	protected static final String CONTENT_JSON = "$.content";
 	protected static final String CREATED_JSON = "$.created";
+	protected static final String PICTURE_JSON = "$.picture";
 
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
 	protected static final String RECIPES_BASE_URL = "/v1/recipes";
@@ -156,6 +157,7 @@ public class BaseIntegrationTest {
 				.andExpect(status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeRequest.name))
+				.andExpect(jsonPath(PICTURE_JSON).value(recipeRequest.picture))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.products", hasSize(5)))
 				.andDo(document("create-recipe", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString();

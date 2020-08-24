@@ -36,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class ProductIntegrationTest extends BaseIntegrationTest {
 
-	private static final String PIC_JSON = "$.picture";
 	private static final String PRICE_JSON = "$.price";
 	private static final String DESC_JSON = "$.description";
 	private static final String WEIGHT_JSON = "$.weight";
@@ -87,7 +86,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath(NAME_JSON).value(productResponse.name))
 				.andExpect(jsonPath(DESC_JSON).value(productResponse.description))
 				.andExpect(jsonPath(WEIGHT_JSON).value(productResponse.weight))
-				.andExpect(jsonPath(PIC_JSON).value(productResponse.picture))
+				.andExpect(jsonPath(PICTURE_JSON).value(productResponse.picture))
 				.andExpect(jsonPath(PRODUCT_TYPE_JSON).value(Product.ProductType.COMMON.name()))
 				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andDo(document(GET_PRODUCT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
@@ -159,9 +158,9 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 						.andExpect(status().isOk())
 						.andExpect(jsonPath(ID_JSON).value(productId))
 						.andExpect(jsonPath(NAME_JSON).value(requestBody.get("name")))
-						.andExpect(jsonPath(PIC_JSON).value(requestBody.get("picture")))
+						.andExpect(jsonPath(PICTURE_JSON).value(requestBody.get("picture")))
 						.andExpect(jsonPath(DESC_JSON).value(requestBody.get("description")))
-						.andExpect(jsonPath(PIC_JSON).value(requestBody.get("picture")))
+						.andExpect(jsonPath(PICTURE_JSON).value(requestBody.get("picture")))
 						.andReturn().getResponse().getContentAsString(),
 				ProductDTO.class);
 	}

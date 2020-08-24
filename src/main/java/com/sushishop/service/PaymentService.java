@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 public class PaymentService {
 
 	private static final String SUCCESS_TR_STATUS = "success";
+	private static final Object PAYMENT_UPDATE_FAILED = "Failed to update payment status";
+	private static final String SIGNATURE_ERROR = "Signature is non-identical";
 
 
 	private final OrderService orderService;
@@ -49,7 +51,7 @@ public class PaymentService {
 				LiqPayUtil.sha1(liqpayProps.getPrivateKey() + data + liqpayProps.getPrivateKey()));
 
 		if (!sign.equals(signature)) {
-			throw new AccessDeniedException("Signature is non-identical");
+			throw new AccessDeniedException(SIGNATURE_ERROR);
 		}
 
 		String jsonData = new String(Base64.getDecoder().decode(data));
@@ -58,7 +60,7 @@ public class PaymentService {
 		try {
 			 liqpayResponse = objectMapper.readValue(jsonData, LiqpayResponse.class);
 		} catch (JsonProcessingException e) {
-			logger.warn("Failed to update payment status", e);
+			logger.warn(PAYMENT_UPDATE_FAILED, e);
 			throw new RuntimeException(e);
 		}
 
@@ -68,12 +70,12 @@ public class PaymentService {
 			order.setStatus(OrderModel.OrderStatus.SUCCEED);
 			order.setOrderNumber(liqpayResponse.paymentId);
 			order.setPaymentDate(new Timestamp(liqpayResponse.paymentDate).toLocalDateTime().toString());
+
+			emailClient.sendEmail(DtoUtil.order(order).toString() +
+					DtoUtil.user(userService.getUser(order.getUserId())).toString());
 		} else {
 			order.setStatus(OrderModel.OrderStatus.FAILED);
 		}
-
-		emailClient.sendEmail(DtoUtil.order(order).toString() +
-				DtoUtil.user(userService.getUser(order.getUserId())).toString());
 	}
 
 	@Transactional
