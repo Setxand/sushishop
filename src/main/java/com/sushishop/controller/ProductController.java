@@ -16,6 +16,7 @@ import java.util.Map;
 import static com.sushishop.model.Product.ProductType;
 
 @RestController
+@CrossOrigin
 public class ProductController {
 
 	@Autowired ProductService productService;
