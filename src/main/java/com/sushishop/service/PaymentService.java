@@ -71,7 +71,7 @@ public class PaymentService {
 			order.setOrderNumber(liqpayResponse.paymentId);
 			order.setPaymentDate(new Timestamp(liqpayResponse.paymentDate).toLocalDateTime().toString());
 
-			emailClient.sendEmail(DtoUtil.order(order).toString() +
+			emailClient.sendEmailToAdmin(DtoUtil.order(order).toString() +
 					DtoUtil.user(userService.getUser(order.getUserId())).toString());
 		} else {
 			order.setStatus(OrderModel.OrderStatus.FAILED);

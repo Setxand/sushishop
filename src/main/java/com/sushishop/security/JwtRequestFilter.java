@@ -44,13 +44,13 @@ public class JwtRequestFilter extends GenericFilterBean {
 
 				String tokenType = jwtTokenUtil.getTokenType(jwtToken);
 
-				if (requestURI.contains("/refresh-token")) {
-					if (!tokenType.equals(JwtTokenUtil.TokenType.REFRESH.name()))
-						throw new AccessDeniedException("This is not a refresh token");
-				} else {
-					if (!tokenType.equals(JwtTokenUtil.TokenType.ACCESS.name())) {
-						throw new AccessDeniedException("This is not an access token");
-					}
+				if (requestURI.contains("/refresh-token") && !tokenType.equals(JwtTokenUtil.TokenType.REFRESH.name())) {
+					throw new AccessDeniedException("This is not a refresh token");
+				}
+
+				if (requestURI.contains("/v1/users/passwords") &&
+						!tokenType.equals(JwtTokenUtil.TokenType.RESET_PASSWORD.name())) {
+					throw new AccessDeniedException("Access denied");
 				}
 
 			} catch (IllegalArgumentException e) {

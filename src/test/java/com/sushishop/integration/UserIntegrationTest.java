@@ -2,8 +2,10 @@ package com.sushishop.integration;
 
 import com.sushishop.TestUtil;
 import com.sushishop.dto.AddressDTO;
+import com.sushishop.dto.LoginRequestDTO;
 import com.sushishop.dto.UserDTO;
 import com.sushishop.model.User;
+import com.sushishop.security.JwtTokenUtil;
 import com.sushishop.security.dto.JwtResponse;
 import com.sushishop.service.UserService;
 import org.junit.Test;
@@ -16,11 +18,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -34,6 +38,7 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 	private static final String PHONE_JSON_PATH = "$.phone";
 
 	@Autowired UserService userService;
+	@Autowired JwtTokenUtil jwtTokenUtil;
 
 	@Test
 	@Sql("classpath:clean.sql")
@@ -80,6 +85,38 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 		assertEquals(addressDTO.street, userRequest.address.street);
 		assertEquals(jwtResponse.getUserId(), userRequest.address.id);
 
+
+		// Update muser (change password) error
+		Map<String, Object> changePasswordMap = new HashMap<>();
+		String newPassword = "12345";
+		changePasswordMap.put("password", newPassword);
+
+		mockMvc.perform(patch("/v1/users/passwords")
+				.headers(authHeader(accessToken))
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(changePasswordMap)))
+				.andExpect(status().is4xxClientError());
+
+		// Update user (change password)
+		String changePasswordToken = jwtTokenUtil
+				.generateToken(user.getId(), user.getEmail(), JwtTokenUtil.TokenType.RESET_PASSWORD);
+
+		mockMvc.perform(patch("/v1/users/passwords")
+				.headers(authHeader(changePasswordToken))
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(changePasswordMap)))
+				.andExpect(status().isOk())
+				.andDo(document("change-user-password", preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint())));
+
+
+		// Login with new credentials
+
+		LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
+		loginRequestDTO.email = user.getEmail();
+		loginRequestDTO.password = newPassword;
+
+		signInRequest(user.getId(), loginRequestDTO);
 	}
 
 	private UserDTO getUserRequest(String userId) throws Exception {

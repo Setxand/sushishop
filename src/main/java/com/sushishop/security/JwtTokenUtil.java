@@ -1,6 +1,7 @@
 package com.sushishop.security;
 
 
+import com.sushishop.bpp.PropertyMap;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,11 +20,14 @@ public class JwtTokenUtil implements Serializable {
 
 	public enum TokenType {
 		ACCESS,
-		REFRESH
+		REFRESH,
+		RESET_PASSWORD
 	}
 
-	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 	private static final long serialVersionUID = -2550185165626007488L;
+
+	@PropertyMap("jwtValidityMap")
+	private Map<String, Object> jwtTokenValidityMap;
 
 	@Value("${jwt.secret}") private String secret;
 
@@ -66,7 +70,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
-		int expirationDate = claims.get("type").equals(TokenType.ACCESS.name()) ? 900000 : 1800000;
+		int expirationDate = (int) jwtTokenValidityMap.get(claims.get("type"));
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + expirationDate))
 				.signWith(SignatureAlgorithm.HS512, secret).compact();

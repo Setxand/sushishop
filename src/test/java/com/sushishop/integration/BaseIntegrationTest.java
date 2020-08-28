@@ -30,20 +30,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class BaseIntegrationTest {
 
-	private static final String GET_PRODUCTS_DOC = "get-products-list";
-
 	protected static final String ID_JSON = "$.id";
 	protected static final String NAME_JSON = "$.name";
 	protected static final String CONTENT_JSON = "$.content";
 	protected static final String CREATED_JSON = "$.created";
 	protected static final String PICTURE_JSON = "$.picture";
-
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
 	protected static final String RECIPES_BASE_URL = "/v1/recipes";
 	protected static final String USERS_BASE_URL = "/v1/users";
 	protected static final String ORDERS_BASE_URL = USERS_BASE_URL + "/{userId}/orders";
 	protected static final String CARTS_BASE_URL = USERS_BASE_URL + "/{userId}/carts";
-
+	private static final String GET_PRODUCTS_DOC = "get-products-list";
 	private static final Map<Class<? extends BaseIntegrationTest>, String> baseUrlMap = new HashMap<>();
 
 	static {
@@ -128,7 +125,8 @@ public class BaseIntegrationTest {
 
 	protected Object convertToCorrectMap(Object requestBody) {
 		Map<String, Object> requestMap = objectMapper
-				.convertValue(requestBody, new TypeReference<Map<String, Object>>() {});
+				.convertValue(requestBody, new TypeReference<Map<String, Object>>() {
+				});
 		return requestMap.entrySet().stream().filter(e -> e.getValue() != null)
 				.collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
@@ -197,6 +195,18 @@ public class BaseIntegrationTest {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setBearerAuth(token);
 		return httpHeaders;
+	}
+
+	protected JwtResponse signInRequest(String userId, LoginRequestDTO loginRequest) throws Exception {
+		return objectMapper.readValue(
+				mockMvc.perform(postRequestWithUrl("/login", loginRequest))
+						.andExpect(status().isAccepted())
+						.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
+						.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
+						.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(userId))
+						.andDo(document("login-ok", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+						.andReturn().getResponse().getContentAsString(),
+				JwtResponse.class);
 	}
 
 }

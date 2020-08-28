@@ -17,7 +17,13 @@ public class Product extends BaseModel {
 	public enum ProductType {
 
 		COMMON,
-		RECIPE_COMPONENT
+		RECIPE_COMPONENT,
+		MEAT,
+		KETCHUP,
+		SHRIMPS,
+		WINE,
+		BEER,
+		SAUCE
 
 	}
 

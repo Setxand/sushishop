@@ -28,6 +28,11 @@ public class AuthController {
 		return createJwtResponse(user);
 	}
 
+	@PostMapping("/forgot-password")
+	public void forgotPassword(@RequestParam String email) {
+		userService.forgotPassword(email);
+	}
+
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public JwtResponse authenticate(@RequestBody LoginRequestDTO dto) {

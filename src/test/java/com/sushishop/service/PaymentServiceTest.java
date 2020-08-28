@@ -66,7 +66,7 @@ public class PaymentServiceTest {
 		OrderModel order = updatePaymentStatusTest(liqpayResponse);
 
 		ArgumentCaptor<String> msgCaptor = ArgumentCaptor.forClass(String.class);
-		Mockito.verify(emailClient).sendEmail(msgCaptor.capture());
+		Mockito.verify(emailClient).sendEmailToAdmin(msgCaptor.capture());
 
 		assertEquals(DtoUtil.order(order).toString() + DtoUtil.user(user).toString(), msgCaptor.getValue());
 

@@ -48,3 +48,17 @@ include::{snippets}/refresh-token-ok/http-response.adoc[]
 === CURL request
 include::{snippets}/refresh-token-ok/curl-request.adoc[]
 
+
+
+
+== Forgot pasword
+
+=== Request structure
+include::{snippets}/forgot-password/http-request.adoc[]
+
+=== Example response
+include::{snippets}/forgot-password/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/forgot-password/curl-request.adoc[]
+

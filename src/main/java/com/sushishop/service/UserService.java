@@ -1,11 +1,14 @@
 package com.sushishop.service;
 
+import com.sushishop.client.EmailClient;
 import com.sushishop.dto.AddressDTO;
 import com.sushishop.dto.UserDTO;
 import com.sushishop.model.Address;
 import com.sushishop.model.User;
 import com.sushishop.repository.AddressRepository;
 import com.sushishop.repository.UserRepository;
+import com.sushishop.security.JwtTokenUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +24,21 @@ public class UserService {
 	private final UserRepository userRepo;
 	private final PasswordEncoder passwordEncoder;
 	private final AddressRepository addressRepo;
+	private final EmailClient emailClient;
+	private final JwtTokenUtil jwtTokenUtil;
+	private final String forgotPasswordUrl;
 
-	public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder, AddressRepository addressRepo) {
+	public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder,
+					   AddressRepository addressRepo,
+					   EmailClient emailClient,
+					   JwtTokenUtil jwtTokenUtil,
+						@Value("${ui.forgotpass.url}") String forgotPasswordUrl) {
 		this.userRepo = userRepo;
 		this.passwordEncoder = passwordEncoder;
 		this.addressRepo = addressRepo;
+		this.emailClient = emailClient;
+		this.jwtTokenUtil = jwtTokenUtil;
+		this.forgotPasswordUrl = forgotPasswordUrl;
 	}
 
 	public User findByEmail(String email) {
@@ -78,5 +91,19 @@ public class UserService {
 
 		Address savedAddress = addressRepo.saveAndFlush(address);
 		user.setAddress(savedAddress);
+	}
+
+	public void forgotPassword(String email) {
+		User user = userRepo.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid user Email"));
+
+		String token = jwtTokenUtil.generateToken(user.getId(), user.getEmail(), JwtTokenUtil.TokenType.RESET_PASSWORD);
+		String recoverPasswordUrl = forgotPasswordUrl + "?token=" + token;
+		emailClient.sendResetPasswordEmail("Your url to change password: " + recoverPasswordUrl, email);
+	}
+
+	@Transactional
+	public void changePassword(String userId, String password) {
+		User user = getUser(userId);
+		user.setPassword(passwordEncoder.encode(password));
 	}
 }

@@ -150,6 +150,22 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 
 		List<ProductDTO> productsList = getProducts(Product.ProductType.COMMON);
 		assertTrue(productsList.stream().allMatch(p -> p.productType == Product.ProductType.COMMON));
+
+
+		// Create products with different types
+		ProductDTO productMeat = createProductDTO();
+		productMeat.productType = Product.ProductType.MEAT;
+
+		ProductDTO productSendRequest = createProductSendRequest(productMeat);
+
+		assertEquals(Product.ProductType.MEAT, productSendRequest.productType);
+
+		// Get products by type
+		mockMvc.perform(get(PRODUCTS_BASE_URL + "?type=" + Product.ProductType.MEAT + "&size=10&page=0"))
+				.andExpect(status().isOk())
+				.andDo(document("get-products-by-type",
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+
 	}
 
 	private ProductDTO getProduct(String productId, Map<String, Object> requestBody) throws Exception {

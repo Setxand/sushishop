@@ -46,6 +46,11 @@ public class ProductService {
 	}
 
 	public Page<Product> getProducts(Product.ProductType type, Pageable pageable) {
+
+		if (type == Product.ProductType.COMMON) {
+			return productRepo.findCommonProducts(pageable);
+		}
+
 		return productRepo.findAllByProductType(type, pageable);
 	}
 
@@ -59,7 +64,7 @@ public class ProductService {
 
 		body.computeIfPresent("price", (k, v) -> BigDecimal.valueOf((Double) v));
 
-		body.keySet().forEach(k -> {
+			body.keySet().forEach(k -> {
 			try {
 				Field declaredField = Product.class.getDeclaredField(k);
 				declaredField.setAccessible(true);

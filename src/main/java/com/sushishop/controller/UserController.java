@@ -5,7 +5,10 @@ import com.sushishop.dto.UserDTO;
 import com.sushishop.service.UserService;
 import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -23,5 +26,10 @@ public class UserController {
 		userService.addAddress(userId, dto);
 	}
 
+	@PatchMapping("/v1/users/passwords")
+	public void changePassword(@RequestBody Map<String, Object> body) {
+		String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		userService.changePassword(userId, (String) body.get("password"));
+	}
 
 }

@@ -23,15 +23,23 @@ public class EmailClient {
 	}
 
 
-	public void sendEmail(String htmlMsg) {
+	public void sendResetPasswordEmail(String message, String email) {
+		sendMessage(message, email, "Recover your password!");
+	}
+
+
+	public void sendEmailToAdmin(String emailMessage) {
+		sendMessage(emailMessage, recipientEmail, "New order!");
+	}
+
+	public void sendMessage(String emailMessage, String email, String subject) {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
 		try {
-//			message.setContent(htmlMsg, "text/html; charset=utf-8");
-			message.setContent(htmlMsg, "text/plain");
-			helper.setSubject("New order!");
-			helper.setTo(recipientEmail);
+			message.setContent(emailMessage, "text/plain");
+			helper.setSubject(subject);
+			helper.setTo(email);
 			emailSender.send(message);
 		} catch (MessagingException e) {
 			logger.warn("failed to send email message", e);

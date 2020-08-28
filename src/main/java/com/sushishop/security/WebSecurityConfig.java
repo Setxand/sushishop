@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/v1/payments/webhook").permitAll()
 				.antMatchers("/v1/recipes").permitAll()
 				.antMatchers("/v1/products").permitAll()
+				.antMatchers("/forgot-password").permitAll()
 				.anyRequest().authenticated();
 
 

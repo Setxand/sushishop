@@ -1,5 +1,6 @@
 package com.sushishop.integration;
 
+import com.sushishop.client.EmailClient;
 import com.sushishop.dto.LoginRequestDTO;
 import com.sushishop.dto.UserDTO;
 import com.sushishop.model.User;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -19,6 +21,7 @@ import static com.sushishop.TestUtil.createUserDTO;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -28,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AuthIntegrationTest extends BaseIntegrationTest {
 
 	@Autowired UserService userService;
+	@MockBean EmailClient emailClient;
 
 	@Test
 	@Sql("classpath:clean.sql")
@@ -53,12 +57,7 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 		loginRequestDTO.email = user.getEmail();
 		loginRequestDTO.password = newUserInput.password;
 
-		mockMvc.perform(postRequestWithUrl("/login", loginRequestDTO))
-				.andExpect(status().isAccepted())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
-				.andDo(document("login-ok", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+		signInRequest(jwtResponse.getUserId(), loginRequestDTO);
 
 		// Login with invalid credentials
 		loginRequestDTO.password = loginRequestDTO.password + "@";
@@ -77,5 +76,13 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
 				.andDo(document("refresh-token-ok",
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+
+		// Forgot password
+		mockMvc.perform(post("/forgot-password").param("email", user.getEmail()))
+				.andExpect(status().isOk())
+				.andDo(document("forgot-password",
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+
+//todo		Mockito.verify(emailClient).sendMessage();
 	}
 }

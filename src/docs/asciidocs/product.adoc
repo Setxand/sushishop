@@ -73,3 +73,25 @@ include::{snippets}/get-products-list/http-response.adoc[]
 === CURL request
 include::{snippets}/get-products-list/curl-request.adoc[]
 
+
+== Get products list by type
+There are such types: COMMON, RECIPE_COMPONENT,
+MEAT,
+KETCHUP,
+SHRIMPS,
+WINE,
+BEER,
+SAUCE.
+COMMON type returns all of the types except RECIPE_COMPONENT.
+Default : COMMON type.
+
+=== Request structure
+include::{snippets}/get-products-by-type/http-request.adoc[]
+
+=== Example response
+include::{snippets}/get-products-by-type/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/get-products-by-type/curl-request.adoc[]
+
+
