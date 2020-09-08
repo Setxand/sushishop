@@ -17,7 +17,7 @@ public class EmailClient {
 
 	private static final Logger logger = Logger.getLogger(EmailClient.class);
 
-	public EmailClient(JavaMailSender emailSender,@Value("${spring.mail.username}") String recipientEmail) {
+	public EmailClient(JavaMailSender emailSender, @Value("${spring.mail.username}") String recipientEmail) {
 		this.emailSender = emailSender;
 		this.recipientEmail = recipientEmail;
 	}

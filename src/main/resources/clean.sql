@@ -1,4 +1,5 @@
 DELETE FROM cart_products WHERE cart_id IN (SELECT id FROM cart WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%"));
+DELETE FROM cart_products WHERE products_id IN (SELECT id FROM product WHERE name LIKE "Product-test-name%");
 DELETE FROM cart_amounts WHERE cart_id IN (SELECT id FROM cart WHERE user_id IN (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%"));
 
 UPDATE user SET user.cart_id=null WHERE id IN (SELECT u.id FROM (SELECT id FROM user WHERE user.name LIKE "John Doe-test-name%") AS u);

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -64,6 +65,11 @@ public class UserService {
 		if (dto.phone != null) {
 			user.setPhone(dto.phone);
 		}
+
+		if (dto.role != null) {
+			user.setRole(User.UserRole.valueOf(dto.role));
+		}
+
 		user.setName(dto.name);
 		user.setPassword(passwordEncoder.encode(dto.password));
 
@@ -105,5 +111,14 @@ public class UserService {
 	public void changePassword(String userId, String password) {
 		User user = getUser(userId);
 		user.setPassword(passwordEncoder.encode(password));
+	}
+
+	@Transactional
+	public User createAnonymous() {
+		User user = new User();
+		user.setRole(User.UserRole.ROLE_ANONYMOUS);
+		user.setEmail(UUID.randomUUID().toString());
+		user.setPhone(UUID.randomUUID().toString());
+		return userRepo.saveAndFlush(user);
 	}
 }

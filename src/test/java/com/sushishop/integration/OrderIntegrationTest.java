@@ -10,6 +10,7 @@ import com.sushishop.model.OrderModel;
 import com.sushishop.model.User;
 import com.sushishop.security.dto.JwtResponse;
 import com.sushishop.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,19 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 
 	@Autowired UserService userService;
 
+	private JwtResponse adminJwtResponse;
+	private JwtResponse jwtResponse;
+
+	@Before
+	public void setUp() throws Exception {
+		adminJwtResponse = signUpRequest(User.UserRole.ROLE_ADMIN, "test@test12.com", "+3809711123");
+		jwtResponse = signUpRequest();
+	}
+
 	@Test
 	@Sql("classpath:clean.sql")
 	public void orderIntegrationTest() throws Exception {
 
-		JwtResponse jwtResponse = signUpRequest();
 		accessToken = jwtResponse.getAccessToken();
 
 		addTestAddressToUser(jwtResponse.getUserId(), TestUtil.createAddressDTO());
@@ -57,8 +66,10 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		User user = userService.getUser(jwtResponse.getUserId());
 
 		// Create order (Add address data and something else)
+		accessToken = adminJwtResponse.getAccessToken();
 		createCart(user.getId());
 
+		accessToken = jwtResponse.getAccessToken();
 		mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
 				.andDo(document("create-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
@@ -127,8 +138,10 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().isNoContent());
 
 		// Find orders by user
+		accessToken = adminJwtResponse.getAccessToken();
 		CartDTO cart = createCart(user.getId());
 
+		accessToken = jwtResponse.getAccessToken();
 		OrderDTO order1 = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.products", hasSize(cart.products.size())))
@@ -149,6 +162,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		cancelOrder(order1.id);
 		OrderDTO order2 = createOrder(user);
 
+		accessToken = jwtResponse.getAccessToken();
 		mockMvc.perform(get(ORDERS_BASE_URL, user.getId())
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
@@ -180,8 +194,11 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 	}
 
 	private OrderDTO createOrder(User user) throws Exception {
+		accessToken = adminJwtResponse.getAccessToken();
+
 		CartDTO cart = createCart(user.getId());
 
+		accessToken = jwtResponse.getAccessToken();
 		OrderDTO dto = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.products", hasSize(5)))

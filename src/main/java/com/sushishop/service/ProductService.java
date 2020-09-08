@@ -28,11 +28,15 @@ public class ProductService {
 	public Product createProduct(ProductDTO dto) {
 		com.sushishop.model.Product product = new com.sushishop.model.Product();
 		product.setName(dto.name);
+		product.setSubName(dto.subName);
 		product.setPrice(dto.price);
 		product.setPicture(dto.picture);
 		product.setDescription(dto.description);
 		product.setWeight(dto.weight);
 		product.setProductType(dto.productType);
+		product.setHoldConditions(dto.holdConditions);
+		product.setPackNumber(dto.packNumber);
+		product.setPacking(dto.packing);
 
 		return productRepo.saveAndFlush(product);
 	}

@@ -39,9 +39,13 @@ public class TestUtil {
 		product.setPrice(new BigDecimal(price));
 		product.setProductType(Product.ProductType.COMMON);
 		product.setName("Product-test-name " + alph.charAt(new Random().nextInt(alph.length())));
+		product.setSubName("Product-test--sub-name " + alph.charAt(new Random().nextInt(alph.length())));
 		product.setDescription("Product-test-description");
 		product.setWeight(0.1);
 		product.setPicture("Picture-test-url");
+		product.setHoldConditions("6 days with -5 to 0 degrees");
+		product.setPackNumber("4");
+		product.setPacking("paper box");
 		return product;
 	}
 
@@ -75,6 +79,7 @@ public class TestUtil {
 		RecipeDTORequest dto = new RecipeDTORequest();
 		dto.name = "Recipe-test-name";
 		dto.productIds = productIds;
+		dto.subName = "recipe-sub-name-test";
 		dto.picture = "recipe-picture-url-test";
 		return dto;
 	}

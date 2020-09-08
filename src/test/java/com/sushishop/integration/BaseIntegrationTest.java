@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.*;
 import com.sushishop.model.Product;
+import com.sushishop.model.User;
 import com.sushishop.security.dto.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,7 @@ public class BaseIntegrationTest {
 
 	protected static final String ID_JSON = "$.id";
 	protected static final String NAME_JSON = "$.name";
+	protected static final String SUB_NAME_JSON = "$.subName";
 	protected static final String CONTENT_JSON = "$.content";
 	protected static final String CREATED_JSON = "$.created";
 	protected static final String PICTURE_JSON = "$.picture";
@@ -165,6 +167,21 @@ public class BaseIntegrationTest {
 
 	protected JwtResponse signUpRequest() throws Exception {
 		UserDTO newUserInput = createUserDTO();
+		newUserInput.password = "1111dfd@";
+		newUserInput.id = null;
+		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
+				.andExpect(status().isCreated())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").isNotEmpty())
+				.andReturn().getResponse().getContentAsString(), JwtResponse.class);
+	}
+
+	protected JwtResponse signUpRequest(User.UserRole role, String email, String phone) throws Exception {
+		UserDTO newUserInput = createUserDTO();
+		newUserInput.role = role.name();
+		newUserInput.email = email;
+		newUserInput.phone = phone;
 		newUserInput.password = "1111dfd@";
 		newUserInput.id = null;
 		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))

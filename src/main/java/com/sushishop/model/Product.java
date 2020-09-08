@@ -32,11 +32,15 @@ public class Product extends BaseModel {
 	@GeneratedValue(generator = "uuid")
 	private String id;
 	private String name;
+	private String subName;
 	private String picture;
 	private String description;
 	private double weight;
 	private boolean inStock = true;
 	private BigDecimal price;
+	private String holdConditions;
+	private String packNumber;
+	private String packing;
 
 	@Enumerated(EnumType.STRING)
 	private ProductType productType;

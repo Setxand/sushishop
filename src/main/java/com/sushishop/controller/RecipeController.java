@@ -3,6 +3,7 @@ package com.sushishop.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.RecipeDTORequest;
 import com.sushishop.dto.RecipeDTOResponse;
+import com.sushishop.security.Auth;
 import com.sushishop.service.RecipeService;
 import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class RecipeController {
 	@PostMapping("/v1/recipes")
 	@ResponseStatus(HttpStatus.CREATED)
 	public RecipeDTOResponse createRecipe(@RequestBody RecipeDTORequest dto) {
+		Auth.isAdmin();
 		return DtoUtil.recipe(recipeService.createRecipe(dto));
 	}
 
@@ -40,6 +42,7 @@ public class RecipeController {
 	@PatchMapping("/v1/recipes/{recipeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateRecipe(@PathVariable String recipeId, @RequestBody Map<String, Object> body) {
+		Auth.isAdmin();
 		RecipeDTORequest dto = objectMapper.convertValue(body, RecipeDTORequest.class);
 		dto.keys = body.keySet();
 		dto.id = recipeId;
@@ -49,6 +52,7 @@ public class RecipeController {
 	@DeleteMapping("/v1/recipes/{recipeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteRecipe(@PathVariable String recipeId) {
+		Auth.isAdmin();
 		recipeService.deleteRecipe(recipeId);
 	}
 }

@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @CrossOrigin
@@ -23,7 +26,7 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	@ResponseStatus(HttpStatus.CREATED)
-	public JwtResponse signUp(@RequestBody UserDTO dto) {
+	public JwtResponse signUp(@Valid @RequestBody UserDTO dto, BindingResult result) {
 		User user = userService.createUser(dto);
 		return createJwtResponse(user);
 	}

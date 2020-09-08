@@ -1,8 +1,10 @@
 package com.sushishop.integration;
 
+import com.sushishop.dto.AnonymousCartResponse;
 import com.sushishop.dto.CartDTO;
 import com.sushishop.dto.ProductDTO;
 import com.sushishop.dto.RecipeDTOResponse;
+import com.sushishop.model.User;
 import com.sushishop.security.dto.JwtResponse;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,10 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -52,6 +54,8 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		Assert.assertTrue(emptyCart.products.isEmpty());
 
 		// Add product to cart (Cart is creating if not exists)
+		JwtResponse adminJwtResponse = signUpRequest(User.UserRole.ROLE_ADMIN, "test@test12.com", "+3809711123");
+		accessToken = adminJwtResponse.getAccessToken();
 		ProductDTO product = createProductPostRequest();
 
 		// Put product in the cart
@@ -63,6 +67,7 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 				.andReturn().getResponse().getContentAsString(), CartDTO.class);
 
 		// Get cart with new product
+		accessToken = jwtResponse.getAccessToken();
 		CartDTO cart = objectMapper.readValue(mockMvc.perform(get(CARTS_BASE_URL, jwtResponse.getUserId())
 				.headers(authHeader(accessToken)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
@@ -74,6 +79,7 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		assertEquals(jwtResponse.getUserId(), cart.userId);
 
 		// Add list of products to cart (recipe) (Cart is creating if not exists)
+		accessToken = adminJwtResponse.getAccessToken();
 		RecipeDTOResponse recipeWithFiveProducts = createRecipeWithFiveProducts();
 		mockMvc.perform(put(CARTS_BASE_URL + "/recipes/{recipeId}", jwtResponse.getUserId(),
 				recipeWithFiveProducts.id)
@@ -85,6 +91,7 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get cart with new 5 products and assert it
+		accessToken = jwtResponse.getAccessToken();
 		cart = getCart(jwtResponse.getUserId());
 		assertEquals(6, cart.products.size());
 		assertEquals(jwtResponse.getUserId(), cart.userId);
@@ -127,5 +134,34 @@ public class CartIntegrationTest extends BaseIntegrationTest {
 		// Check cart (must be empty)
 		cart = getCart(jwtResponse.getUserId());
 		assertTrue(cart.products.isEmpty());
+
+		// Add product to cart (Cart is creating if not exists)
+//		ProductDTO product = createProductPostRequest();
+
+		// Put product in the cart
+		AnonymousCartResponse anonymousCartResponse = objectMapper.readValue(
+				mockMvc.perform(put("/v1/anonymous-users/products/{productId}", product.id))
+						.andExpect(status().isOk())
+						.andDo(document("put-in-the-cart-anonymous",
+								preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+						.andReturn().getResponse().getContentAsString(), AnonymousCartResponse.class);
+
+		String userId = anonymousCartResponse.anonymousUserDetails.getUserId();
+		String anonymousToken = anonymousCartResponse.anonymousUserDetails.getAccessToken();
+		assertNotNull(userId);
+		assertNotNull(anonymousToken);
+		assertEquals(product.id, anonymousCartResponse.cart.products.get(0).id);
+
+		CartDTO anonCard = putInTheCart(product, userId);
+		assertEquals(2, anonCard.products.get(0).amount);
+
+		accessToken = adminJwtResponse.getAccessToken();
+		ProductDTO anotherProduct = createProductPostRequest();
+
+		// Put in the cart another product
+		anonymousToken = anonymousToken;
+		anonCard = putInTheCart(anotherProduct, userId);
+		assertTrue(anonCard.products.stream().map(p -> p.id).collect(Collectors.toList()).contains(anotherProduct.id));
+		assertEquals(2, anonCard.products.size());
 	}
 }

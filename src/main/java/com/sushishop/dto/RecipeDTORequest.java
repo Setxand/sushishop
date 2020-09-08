@@ -8,6 +8,7 @@ public class RecipeDTORequest {
 
 	public String id;
 	public String name;
+	public String subName;
 	public String picture;
 
 	public List<String> productIds;

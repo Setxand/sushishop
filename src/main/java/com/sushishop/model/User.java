@@ -14,7 +14,9 @@ import javax.persistence.*;
 public class User extends BaseModel {
 
 	public enum UserRole {
-		ROLE_USER
+		ROLE_USER,
+		ROLE_ANONYMOUS,
+		ROLE_ADMIN
 	}
 
 	@Id

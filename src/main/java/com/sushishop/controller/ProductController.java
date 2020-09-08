@@ -2,6 +2,7 @@ package com.sushishop.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sushishop.dto.ProductDTO;
+import com.sushishop.security.Auth;
 import com.sushishop.service.ProductService;
 import com.sushishop.util.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class ProductController {
 	@PostMapping("/v1/products")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ProductDTO createProduct(@RequestBody ProductDTO dto) {
+		Auth.isAdmin();
 		return DtoUtil.product(productService.createProduct(dto));
 	}
 

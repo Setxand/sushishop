@@ -77,3 +77,15 @@ include::{snippets}/remove-cart/http-response.adoc[]
 === CURL request
 include::{snippets}/remove-cart/curl-request.adoc[]
 
+
+== Add to cart for anonymous user
+
+=== Request structure
+include::{snippets}/put-in-the-cart-anonymous/http-request.adoc[]
+
+=== Example response
+include::{snippets}/put-in-the-cart-anonymous/http-response.adoc[]
+
+=== CURL request
+include::{snippets}/put-in-the-cart-anonymous/curl-request.adoc[]
+

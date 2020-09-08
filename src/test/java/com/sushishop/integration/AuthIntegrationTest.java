@@ -8,7 +8,11 @@ import com.sushishop.security.dto.JwtResponse;
 import com.sushishop.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static com.sushishop.TestUtil.createUserDTO;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,6 +37,8 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 
 	@Autowired UserService userService;
 	@MockBean EmailClient emailClient;
+
+	@Value("${ui.forgotpass.url}") String forgotPassUrl;
 
 	@Test
 	@Sql("classpath:clean.sql")
@@ -78,11 +85,16 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Forgot password
-		mockMvc.perform(post("/forgot-password").param("email", user.getEmail()))
+		mockMvc.perform(post("/forgot-password?email=" + user.getEmail()))
 				.andExpect(status().isOk())
 				.andDo(document("forgot-password",
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
-//todo		Mockito.verify(emailClient).sendMessage();
+		ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+		Mockito.verify(emailClient)
+				.sendResetPasswordEmail(stringArgumentCaptor.capture(), ArgumentMatchers.eq(user.getEmail()));
+
+		String partOfGeneratedUrl = "Your url to change password: " + forgotPassUrl;
+		assertTrue(stringArgumentCaptor.getValue().startsWith(partOfGeneratedUrl));
 	}
 }

@@ -13,12 +13,16 @@ public class DtoUtil {
 		ProductDTO dto = new ProductDTO();
 		dto.id = entity.getId();
 		dto.name = entity.getName();
+		dto.subName = entity.getSubName();
 		dto.price = entity.getPrice();
 		dto.picture = entity.getPicture();
 		dto.description = entity.getDescription();
 		dto.weight = entity.getWeight();
 		dto.inStock = entity.isInStock();
 		dto.productType = entity.getProductType();
+		dto.holdConditions = entity.getHoldConditions();
+		dto.packNumber = entity.getPackNumber();
+		dto.packing = entity.getPacking();
 
 		baseConversion(dto, entity);
 		return dto;
@@ -28,6 +32,7 @@ public class DtoUtil {
 		RecipeDTOResponse dto = new RecipeDTOResponse();
 		dto.id = entity.getId();
 		dto.name = entity.getName();
+		dto.subName = entity.getSubName();
 		dto.picture = entity.getPicture();
 
 		dto.products = entity.getProducts().stream().map(DtoUtil::product).collect(Collectors.toList());

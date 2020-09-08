@@ -28,6 +28,7 @@ public class RecipeService {
 		Recipe recipe = new Recipe();
 		recipe.setName(dto.name);
 		recipe.setPicture(dto.picture);
+		recipe.setSubName(dto.subName);
 
 		List<Product> products = dto.productIds.stream().map(productService::getProduct).collect(Collectors.toList());
 		recipe.setProducts(products);
@@ -44,6 +45,10 @@ public class RecipeService {
 
 		if (dto.keys.contains("name")) {
 			recipe.setName(dto.name);
+		}
+
+		if (dto.keys.contains("subName")) {
+			recipe.setSubName(dto.subName);
 		}
 
 		if (dto.keys.contains("picture")) {

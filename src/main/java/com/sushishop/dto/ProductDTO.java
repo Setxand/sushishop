@@ -11,11 +11,15 @@ public class ProductDTO extends BaseDTO {
 
 	public String id;
 	public String name;
+	public String subName;
 	public String picture;
 	public String description;
 	public double weight;
 	public boolean inStock;
 	public ProductType productType;
+	public String holdConditions;
+	public String packNumber;
+	public String packing;
 
 	// Amount of the products in the cart and order
 	public int amount;
