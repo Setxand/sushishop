@@ -53,6 +53,22 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 	private static final String HOLD_CONDITIONS_JSON = "$.holdConditions";
 	private static final String PACK_NUMBER_JSON = "$.packNumber";
 	private static final String PACKING_JSON = "$.packing";
+	private static final String TEST_EMAIL = "test@test12.com";
+	private static final String TEST_PHONE = "+3809711123";
+	private static final String PRICE_KEY = "price";
+	private static final String NAME_KEY = "name";
+	private static final String SUB_NAME_KEY = "subName";
+	private static final String PICTURE_KEY = "picture";
+	private static final String WEIGHT_KEY = "weight";
+	private static final String DESCRIPTION_KEY = "description";
+	private static final String HOLD_CONDITIONS_KEY = "holdConditions";
+	private static final String PACK_NUMBER_KEY = "packNumber";
+	private static final String PACKING_KEY = "packing";
+	private static final String IN_STOCK_KEY = "inStock";
+	private static final int PRODUCTS_SIZE = 5;
+	private static final String GET_PRODUCTS_BY_TYPE_URL = "" +
+			"/v1/products?type=" + Product.ProductType.MEAT + "&size=10&page=0";
+	private static final String GET_PRODUCTS_BY_TYPE_DOC = "get-products-by-type";
 
 
 	@Test
@@ -71,7 +87,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 				.andExpect(status().is4xxClientError());
 
 		// Create new Product
-		JwtResponse adminJwtResponse = signUpRequest(User.UserRole.ROLE_ADMIN, "test@test12.com", "+3809711123");
+		JwtResponse adminJwtResponse = signUpRequest(User.UserRole.ROLE_ADMIN, TEST_EMAIL, TEST_PHONE);
 		accessToken = adminJwtResponse.getAccessToken();
 
 		postRequest = postRequestWithUrl(PRODUCTS_BASE_URL, productRequestBody);
@@ -111,37 +127,38 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 
 		// Update product
 		Map<String, Object> productRequestBodyToUpdate = new HashMap<>();
-		productRequestBodyToUpdate.put("price", new BigDecimal("32.99"));
+		productRequestBodyToUpdate.put(PRICE_KEY, new BigDecimal("32.99"));
 
-		productRequestBodyToUpdate.put("name", "Product-test-name New product name");
-		productRequestBodyToUpdate.put("subName", "Product-test-sub_name New product sub name");
-		productRequestBodyToUpdate.put("picture", "New product picture");
-		productRequestBodyToUpdate.put("weight", new BigDecimal("1.2").setScale(2, BigDecimal.ROUND_HALF_UP)
+		productRequestBodyToUpdate.put(NAME_KEY, "Product-test-name New product name");
+		productRequestBodyToUpdate.put(SUB_NAME_KEY, "Product-test-sub_name New product sub name");
+		productRequestBodyToUpdate.put(PICTURE_KEY, "New product picture");
+		productRequestBodyToUpdate.put(WEIGHT_KEY, new BigDecimal("1.2").setScale(2, BigDecimal.ROUND_HALF_UP)
 				.doubleValue());
-		productRequestBodyToUpdate.put("description", TestUtil.generateUUID());
-		productRequestBodyToUpdate.put("holdConditions", "10 days with -5 to 0 degrees");
-		productRequestBodyToUpdate.put("packNumber", "7");
-		productRequestBodyToUpdate.put("packing", "metal box");
+		productRequestBodyToUpdate.put(DESCRIPTION_KEY, TestUtil.generateUUID());
+		productRequestBodyToUpdate.put(HOLD_CONDITIONS_KEY, "10 days with -5 to 0 degrees");
+		productRequestBodyToUpdate.put(PACK_NUMBER_KEY, "7");
+		productRequestBodyToUpdate.put(PACKING_KEY, "metal box");
 
 		mockMvc.perform(patch(URI_WITH_ID_VAR, productId).headers(authHeader(this.accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(productRequestBodyToUpdate)))
 				.andExpect(status().isNoContent())
-				.andDo(document(UPDATE_PRODUCT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document(UPDATE_PRODUCT_DOC,
+						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Get updated product
 		product = getProduct(productId, productRequestBodyToUpdate);
 		assertTrue(product.inStock);
-		BigDecimal price = (BigDecimal) productRequestBodyToUpdate.get("price");
+		BigDecimal price = (BigDecimal) productRequestBodyToUpdate.get(PRICE_KEY);
 		assertEquals(0, price.compareTo(product.price));
-		assertEquals(productRequestBodyToUpdate.get("subName"), product.subName);
-		assertEquals(productRequestBodyToUpdate.get("holdConditions"), product.holdConditions);
-		assertEquals(productRequestBodyToUpdate.get("packNumber"), product.packNumber);
-		assertEquals(productRequestBodyToUpdate.get("packing"), product.packing);
+		assertEquals(productRequestBodyToUpdate.get(SUB_NAME_KEY), product.subName);
+		assertEquals(productRequestBodyToUpdate.get(HOLD_CONDITIONS_KEY), product.holdConditions);
+		assertEquals(productRequestBodyToUpdate.get(PACK_NUMBER_KEY), product.packNumber);
+		assertEquals(productRequestBodyToUpdate.get(PACKING_KEY), product.packing);
 
 		// Change product's 'inStock' to false
 		Map<String, Object> productInStockFalse = new HashMap<>();
-		productInStockFalse.put("inStock", false);
+		productInStockFalse.put(IN_STOCK_KEY, false);
 		mockMvc.perform(patch(URI_WITH_ID_VAR, productId).headers(authHeader(this.accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(productInStockFalse)))
@@ -168,7 +185,7 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		// Get page of products (size = 3)
 		// Create 5 products
 		accessToken = adminJwtResponse.getAccessToken();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < PRODUCTS_SIZE; i++) {
 			createProductPostRequest();
 		}
 
@@ -185,9 +202,9 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		assertEquals(Product.ProductType.MEAT, productSendRequest.productType);
 
 		// Get products by type
-		mockMvc.perform(get(PRODUCTS_BASE_URL + "?type=" + Product.ProductType.MEAT + "&size=10&page=0"))
+		mockMvc.perform(get(GET_PRODUCTS_BY_TYPE_URL))
 				.andExpect(status().isOk())
-				.andDo(document("get-products-by-type",
+				.andDo(document(GET_PRODUCTS_BY_TYPE_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 	}
@@ -197,14 +214,14 @@ public class ProductIntegrationTest extends BaseIntegrationTest {
 		return objectMapper.readValue(mockMvc.perform(get(URI_WITH_ID_VAR, productId).headers(authHeader(accessToken)))
 						.andExpect(status().isOk())
 						.andExpect(jsonPath(ID_JSON).value(productId))
-						.andExpect(jsonPath(NAME_JSON).value(requestBody.get("name")))
-						.andExpect(jsonPath(SUB_NAME_JSON).value(requestBody.get("subName")))
-						.andExpect(jsonPath(PICTURE_JSON).value(requestBody.get("picture")))
-						.andExpect(jsonPath(DESC_JSON).value(requestBody.get("description")))
-						.andExpect(jsonPath(PICTURE_JSON).value(requestBody.get("picture")))
-						.andExpect(jsonPath(HOLD_CONDITIONS_JSON).value(requestBody.get("holdConditions")))
-						.andExpect(jsonPath(PACK_NUMBER_JSON).value(requestBody.get("packNumber")))
-						.andExpect(jsonPath(PACKING_JSON).value(requestBody.get("packing")))
+						.andExpect(jsonPath(NAME_JSON).value(requestBody.get(NAME_KEY)))
+						.andExpect(jsonPath(SUB_NAME_JSON).value(requestBody.get(SUB_NAME_KEY)))
+						.andExpect(jsonPath(PICTURE_JSON).value(requestBody.get(PICTURE_KEY)))
+						.andExpect(jsonPath(DESC_JSON).value(requestBody.get(DESCRIPTION_KEY)))
+						.andExpect(jsonPath(PICTURE_JSON).value(requestBody.get(PICTURE_KEY)))
+						.andExpect(jsonPath(HOLD_CONDITIONS_JSON).value(requestBody.get(HOLD_CONDITIONS_KEY)))
+						.andExpect(jsonPath(PACK_NUMBER_JSON).value(requestBody.get(PACK_NUMBER_KEY)))
+						.andExpect(jsonPath(PACKING_JSON).value(requestBody.get(PACKING_KEY)))
 						.andReturn().getResponse().getContentAsString(),
 				ProductDTO.class);
 	}

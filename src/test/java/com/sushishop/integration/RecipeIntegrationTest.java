@@ -39,10 +39,20 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 
 
 	private static final int DEFAULT_PRODUCTS_SIZE = 5;
-	private static final String PRODUCTS_JSON_PATH = "$.products";
 	private static final String URI_WITH_ID_VAR = RECIPES_BASE_URL + "/{recipeId}";
 	private static final int RECIPE_COMPONENT_SIZE = 4;
 	private static final int WHOLE_PRODUCTS_SIZE = DEFAULT_PRODUCTS_SIZE + RECIPE_COMPONENT_SIZE;
+	private static final String TEST_EMAIL = "test@test12.com";
+	private static final String TEST_PHONE = "+3809711123";
+	private static final String NAME_KEY = "name";
+	private static final String SUB_NAME_KEY = "subName";
+	private static final String PRODUCTS_KEY = "products";
+	private static final String PRODUCT_IDS_KEY = "productIds";
+	private static final String UPDATE_RECIPE_DOC = "update-recipe";
+	private static final String GET_RECIPE_DOC = "get-recipe";
+	private static final String ID_KEY = "id";
+	private static final String REMOVE_RECIPE_DOC = "remove-recipe";
+	private static final String GET_RECIPE_LIST_DOC = "get-recipes-list";
 
 	@Test
 	@Sql("classpath:clean.sql")
@@ -55,7 +65,7 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		accessToken = jwtResponse.getAccessToken();
 
 		// Create recipe
-		JwtResponse adminJwtResponce = signUpRequest(User.UserRole.ROLE_ADMIN, "testadmin@test.com", "+398094454567");
+		JwtResponse adminJwtResponce = signUpRequest(User.UserRole.ROLE_ADMIN, TEST_EMAIL, TEST_PHONE);
 		accessToken = adminJwtResponce.getAccessToken();
 		RecipeDTOResponse recipeWithFiveProducts = createRecipeWithFiveProducts();
 		String recipeId = recipeWithFiveProducts.id;
@@ -71,7 +81,7 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 				.andExpect(jsonPath(SUB_NAME_JSON).value(recipeWithFiveProducts.subName))
 				.andExpect(jsonPath(PICTURE_JSON).value(recipeWithFiveProducts.picture))
 				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
-				.andExpect(jsonPath(PRODUCTS_JSON_PATH, hasSize(DEFAULT_PRODUCTS_SIZE)))
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(DEFAULT_PRODUCTS_SIZE)))
 				.andReturn().getResponse().getContentAsString();
 
 		// Update created recipe (minus one product)
@@ -81,10 +91,10 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 
 
 		HashMap<String, Object> updateRecipeBody = new HashMap<>();
-		updateRecipeBody.put("name", "Recipe-test-name New recipe name");
-		updateRecipeBody.put("subName", "Recipe-test-sub-name New recipe sub name");
+		updateRecipeBody.put(NAME_KEY, "Recipe-test-name New recipe name");
+		updateRecipeBody.put(SUB_NAME_KEY, "Recipe-test-sub-name New recipe sub name");
 		List<ProductDTO> products = objectMapper
-				.convertValue(recipe.get("products"), new TypeReference<List<ProductDTO>>() {
+				.convertValue(recipe.get(PRODUCTS_KEY), new TypeReference<List<ProductDTO>>() {
 				});
 		products.remove(0);
 
@@ -92,14 +102,14 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 			products.add(createProductSendRequest(createProductDTO(RECIPE_COMPONENT)));
 		}
 
-		updateRecipeBody.put("productIds", products.stream().map(p -> p.id).collect(Collectors.toList()));
+		updateRecipeBody.put(PRODUCT_IDS_KEY, products.stream().map(p -> p.id).collect(Collectors.toList()));
 
 		mockMvc.perform(patch(URI_WITH_ID_VAR, recipe.get("id"))
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(updateRecipeBody)))
 				.andExpect(status().isNoContent())
-				.andDo(document("update-recipe", preprocessRequest(prettyPrint()),
+				.andDo(document(UPDATE_RECIPE_DOC, preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint())));
 
 
@@ -109,11 +119,11 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 				.readValue(mockMvc.perform(get(URI_WITH_ID_VAR, recipeId).headers(authHeader(accessToken)))
 						.andExpect(status().isOk())
 						.andExpect(jsonPath(ID_JSON).value(recipeId))
-						.andExpect(jsonPath(NAME_JSON).value(updateRecipeBody.get("name")))
-						.andExpect(jsonPath(SUB_NAME_JSON).value(updateRecipeBody.get("subName")))
-						.andExpect(jsonPath(PRODUCTS_JSON_PATH,
+						.andExpect(jsonPath(NAME_JSON).value(updateRecipeBody.get(NAME_KEY)))
+						.andExpect(jsonPath(SUB_NAME_JSON).value(updateRecipeBody.get(SUB_NAME_KEY)))
+						.andExpect(jsonPath(PRODUCTS_JSON,
 								hasSize(WHOLE_PRODUCTS_SIZE - 1)))
-						.andDo(document("get-recipe", preprocessRequest(prettyPrint()),
+						.andDo(document(GET_RECIPE_DOC, preprocessRequest(prettyPrint()),
 								preprocessResponse(prettyPrint())))
 						.andReturn().getResponse().getContentAsString(), RecipeDTOResponse.class);
 
@@ -124,11 +134,11 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 
 		// Update created recipe (plus two products)
 		accessToken = adminJwtResponce.getAccessToken();
-		List<String> productIds = (List<String>) updateRecipeBody.get("productIds");
+		List<String> productIds = (List<String>) updateRecipeBody.get(PRODUCT_IDS_KEY);
 		productIds.add(createProductPostRequest().id);
 		productIds.add(createProductPostRequest().id);
 
-		mockMvc.perform(patch(URI_WITH_ID_VAR, recipe.get("id"))
+		mockMvc.perform(patch(URI_WITH_ID_VAR, recipe.get(ID_KEY))
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(updateRecipeBody)))
@@ -141,9 +151,9 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath(ID_JSON).value(recipeId))
-				.andExpect(jsonPath(NAME_JSON).value(updateRecipeBody.get("name")))
-				.andExpect(jsonPath(SUB_NAME_JSON).value(updateRecipeBody.get("subName")))
-				.andExpect(jsonPath(PRODUCTS_JSON_PATH, hasSize(WHOLE_PRODUCTS_SIZE + 1)));
+				.andExpect(jsonPath(NAME_JSON).value(updateRecipeBody.get(NAME_KEY)))
+				.andExpect(jsonPath(SUB_NAME_JSON).value(updateRecipeBody.get(SUB_NAME_KEY)))
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(WHOLE_PRODUCTS_SIZE + 1)));
 
 		// Remove recipe
 		accessToken = adminJwtResponce.getAccessToken();
@@ -151,7 +161,7 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent())
-				.andDo(document("remove-recipe", preprocessRequest(prettyPrint()),
+				.andDo(document(REMOVE_RECIPE_DOC, preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint())));
 
 		// Get removed recipe ( Must be 400 error )
@@ -162,20 +172,22 @@ public class RecipeIntegrationTest extends BaseIntegrationTest {
 		// Create 5 recipes and get page from 3 elements
 
 		List<RecipeDTOResponse> recipeResponses = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < DEFAULT_PRODUCTS_SIZE; i++) {
 			recipeResponses.add(createRecipeWithFiveProducts());
 		}
 
-		mockMvc.perform(get(RECIPES_BASE_URL + "?page=0&size=3")
+		int pageSize = 3;
+		mockMvc.perform(get(RECIPES_BASE_URL + "?page=0&size=" + pageSize)
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath(CONTENT_JSON, hasSize(3)))
-				.andDo(document("get-recipes-list", preprocessRequest(prettyPrint()),
+				.andExpect(jsonPath(CONTENT_JSON, hasSize(pageSize)))
+				.andDo(document(GET_RECIPE_LIST_DOC, preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint())));
 
-		mockMvc.perform(get(RECIPES_BASE_URL + "?page=1&size=2")
+		pageSize = 2;
+		mockMvc.perform(get(RECIPES_BASE_URL + "?page=1&size=" + pageSize)
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath(CONTENT_JSON, hasSize(2)));
+				.andExpect(jsonPath(CONTENT_JSON, hasSize(pageSize)));
 	}
 }

@@ -35,6 +35,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class AuthIntegrationTest extends BaseIntegrationTest {
 
+
+	private static final String REFRESH_TOK_URL = "/refresh-token";
+	private static final String FORGOT_PASS_URL = "/forgot-password?email=";
+
+
+	private static final String CODE_JSON = "$.code";
+
+	private static final String SIGNUP_OK_DOC = "signup-ok";
+	private static final String LOGIN_FORBIDDEN_DOC = "login-forbidden";
+	private static final String REFRESH_TOK_DOC = "refresh-token-ok";
+	private static final String FORGOT_PASS_DOC = "forgot-password";
+
+	private static final String ACCESS_DENIED_CODE = "ACCESS_DENIED";
+	private static final String UPDATE_USER_NEW_PASSWORD = "2342dfs$";
+	private static final String GENERATED_URL_MESSAGE = "Your url to change password: ";
+
 	@Autowired UserService userService;
 	@MockBean EmailClient emailClient;
 
@@ -47,14 +63,14 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 
 		// User Register
 		UserDTO newUserInput = createUserDTO();
-		newUserInput.password = "2342dfs$";
+		newUserInput.password = UPDATE_USER_NEW_PASSWORD;
 		newUserInput.id = null;
-		JwtResponse jwtResponse = objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
+		JwtResponse jwtResponse = objectMapper.readValue(mockMvc.perform(postRequestWithUrl(SIGNUP_URL, newUserInput))
 				.andExpect(status().isCreated())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").isNotEmpty())
-				.andDo(document("signup-ok", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andExpect(MockMvcResultMatchers.jsonPath(ACCESS_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(REFRESH_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).isNotEmpty())
+				.andDo(document(SIGNUP_OK_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString(), JwtResponse.class);
 
 		User user = userService.getUser(jwtResponse.getUserId());
@@ -68,33 +84,33 @@ public class AuthIntegrationTest extends BaseIntegrationTest {
 
 		// Login with invalid credentials
 		loginRequestDTO.password = loginRequestDTO.password + "@";
-		mockMvc.perform(postRequestWithUrl("/login", loginRequestDTO))
+		mockMvc.perform(postRequestWithUrl(LOGIN_URL, loginRequestDTO))
 				.andExpect(status().isForbidden())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.code").value("ACCESS_DENIED"))
-				.andDo(document("login-forbidden",
+				.andExpect(MockMvcResultMatchers.jsonPath(CODE_JSON).value(ACCESS_DENIED_CODE))
+				.andDo(document(LOGIN_FORBIDDEN_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Refresh token
-		mockMvc.perform(get("/refresh-token")
-				.header("Authorization", "Bearer " + jwtResponse.getRefreshToken()))
+		mockMvc.perform(get(REFRESH_TOK_URL)
+				.headers(authHeader(jwtResponse.getRefreshToken())))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(jwtResponse.getUserId()))
-				.andDo(document("refresh-token-ok",
+				.andExpect(MockMvcResultMatchers.jsonPath(ACCESS_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(REFRESH_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(jwtResponse.getUserId()))
+				.andDo(document(REFRESH_TOK_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		// Forgot password
-		mockMvc.perform(post("/forgot-password?email=" + user.getEmail()))
+		mockMvc.perform(post(FORGOT_PASS_URL + user.getEmail()))
 				.andExpect(status().isOk())
-				.andDo(document("forgot-password",
+				.andDo(document(FORGOT_PASS_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
 		Mockito.verify(emailClient)
 				.sendResetPasswordEmail(stringArgumentCaptor.capture(), ArgumentMatchers.eq(user.getEmail()));
 
-		String partOfGeneratedUrl = "Your url to change password: " + forgotPassUrl;
+		String partOfGeneratedUrl = GENERATED_URL_MESSAGE + forgotPassUrl;
 		assertTrue(stringArgumentCaptor.getValue().startsWith(partOfGeneratedUrl));
 	}
 }

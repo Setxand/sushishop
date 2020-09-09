@@ -119,6 +119,7 @@ public class UserService {
 		user.setRole(User.UserRole.ROLE_ANONYMOUS);
 		user.setEmail(UUID.randomUUID().toString());
 		user.setPhone(UUID.randomUUID().toString());
+		user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
 		return userRepo.saveAndFlush(user);
 	}
 }

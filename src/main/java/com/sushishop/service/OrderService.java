@@ -70,6 +70,15 @@ public class OrderService {
 
 		OrderModel savedOrder = orderRepo.saveAndFlush(order);
 
+		Address address = addOrderAddress(savedOrder, user.getAddress());
+		savedOrder.setAddress(addressRepo.saveAndFlush(address));
+
+		savedOrder.setStatus(OrderStatus.ACTIVE);
+
+		return savedOrder;
+	}
+
+	private Address addOrderAddress(OrderModel savedOrder, Address userAddress) {
 		Address address = new Address();
 		address.setId(savedOrder.getId());
 		address.setEntrance(userAddress.getEntrance());
@@ -79,12 +88,7 @@ public class OrderService {
 		address.setRoomNumber(userAddress.getRoomNumber());
 		address.setHouse(userAddress.getHouse());
 		address.setHousing(userAddress.getHousing());
-
-		savedOrder.setAddress(addressRepo.saveAndFlush(address));
-
-		savedOrder.setStatus(OrderStatus.ACTIVE);
-
-		return savedOrder;
+		return address;
 	}
 
 	@Transactional

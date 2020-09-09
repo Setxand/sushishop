@@ -36,6 +36,12 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 	private static final String BY_ID = USERS_BASE_URL + "/{userId}";
 	private static final String EMAIL_JSON_PATH = "$.email";
 	private static final String PHONE_JSON_PATH = "$.phone";
+	private static final String ADD_ADDR_TO_USER_URL = "/v1/users/{userId}/addresses";
+	private static final String ADD_ADDR_TO_USER_DOC = "user-add-address";
+	private static final String NEW_PASSWORD = "12345";
+	private static final String PASSWORD_KEY = "password";
+	private static final String UPDATE_USER_PASSWORD_URL = "/v1/users/passwords";
+	private static final String UPDATE_USER_PASSWORD_DOC = "change-user-password";
 
 	@Autowired UserService userService;
 	@Autowired JwtTokenUtil jwtTokenUtil;
@@ -66,12 +72,12 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
 		// Add address to user
 		AddressDTO addressDTO = TestUtil.createAddressDTO();
-		mockMvc.perform(put(USERS_BASE_URL + "/{userId}/addresses", jwtResponse.getUserId())
+		mockMvc.perform(put(ADD_ADDR_TO_USER_URL, jwtResponse.getUserId())
 				.contentType(MediaType.APPLICATION_JSON)
 				.headers(authHeader(accessToken))
 				.content(objectMapper.writeValueAsString(convertToCorrectMap(addressDTO))))
 				.andExpect(status().isOk())
-				.andDo(document("user-add-address", preprocessRequest(prettyPrint()),
+				.andDo(document(ADD_ADDR_TO_USER_DOC, preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint())));
 
 		// Get user and check address
@@ -86,12 +92,11 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 		assertEquals(jwtResponse.getUserId(), userRequest.address.id);
 
 
-		// Update muser (change password) error
+		// Update user (change password) error
 		Map<String, Object> changePasswordMap = new HashMap<>();
-		String newPassword = "12345";
-		changePasswordMap.put("password", newPassword);
+		changePasswordMap.put(PASSWORD_KEY, NEW_PASSWORD);
 
-		mockMvc.perform(patch("/v1/users/passwords")
+		mockMvc.perform(patch(UPDATE_USER_PASSWORD_URL)
 				.headers(authHeader(accessToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(changePasswordMap)))
@@ -101,12 +106,12 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 		String changePasswordToken = jwtTokenUtil
 				.generateToken(user.getId(), user.getEmail(), JwtTokenUtil.TokenType.RESET_PASSWORD);
 
-		mockMvc.perform(patch("/v1/users/passwords")
+		mockMvc.perform(patch(UPDATE_USER_PASSWORD_URL)
 				.headers(authHeader(changePasswordToken))
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(changePasswordMap)))
 				.andExpect(status().isOk())
-				.andDo(document("change-user-password", preprocessRequest(prettyPrint()),
+				.andDo(document(UPDATE_USER_PASSWORD_DOC, preprocessRequest(prettyPrint()),
 				preprocessResponse(prettyPrint())));
 
 
@@ -114,7 +119,7 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
 		LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
 		loginRequestDTO.email = user.getEmail();
-		loginRequestDTO.password = newPassword;
+		loginRequestDTO.password = NEW_PASSWORD;
 
 		signInRequest(user.getId(), loginRequestDTO);
 	}

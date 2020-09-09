@@ -40,9 +40,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
 public class OrderIntegrationTest extends BaseIntegrationTest {
 
-	private static final String USER_ID_JSON = "$.userId";
 	private static final String CHECKOUT_FORM_SNIPPET =
 			"<form method=\"post\" action=\"https://www.liqpay.ua/api/3/checkout\"";
+	private static final String CREATE_ORDER_DOC = "create-order";
+	private static final String GET_ORDER_URL = "/v1/users/{userId}/active-order";
+	private static final String STATUS_JSON = "$.status";
+	private static final String CITY_JSON = "$.address.city";
+	private static final String STREET_JSON = "$.address.street";
+	private static final String HOUSE_JSON = "$.address.house";
+	private static final String HOUSING_JSON = "$.address.housing";
+	private static final String ENTRANCE_JSON = "$.address.entrance";
+	private static final String FLOOR_JSON = "$.address.floor";
+	private static final String ROOM_NUM_JSON = "$.address.roomNumber";
+	private static final String ORDER_NUM_JSON = "$.orderNumber";
+	private static final String GET_ORDER_DOC = "get-order";
+	private static final String CODE_JSON = "$.code";
+	private static final String INVALID_STATE_ERR = "INVALID_STATE";
+	private static final String MESSAGE_JSON = "$.message";
+	private static final String ONLY_ONE_MESSAGE = "Active order must be only one";
+	private static final String UPDATE_ORDER_ADDR_URL = "/v1/orders/{orderId}/addresses";
+	private static final String UPDATE_ORDER_ADDR_DOC = "add-order-address";
+	private static final String CHECKOUT_URL = "/v1/users/{userId}/payments";
+	private static final String CHECKOUT_DOC = "checkout";
+	private static final String CANCEL_ORDER_URL = "/v1/orders/{orderId}";
+	private static final String CANCEL_ORDER_DOC = "cancel-order";
+	private static final String FIND_USER_ORDERS_DOC = "find-user-orders";
+	private static final int PRODUCTS_SIZE = 5;
 
 	@Autowired UserService userService;
 
@@ -72,69 +95,70 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		accessToken = jwtResponse.getAccessToken();
 		mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
-				.andDo(document("create-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document(CREATE_ORDER_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 
 		// Get order
-		OrderDTO order = objectMapper.readValue(mockMvc.perform(get("/v1/users/{userId}/active-order", user.getId())
+		OrderDTO order = objectMapper.readValue(mockMvc.perform(get(GET_ORDER_URL, user.getId())
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
-				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
-				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
-				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
-				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
-				.andExpect(jsonPath("$.address.entrance").value(user.getAddress().getEntrance()))
-				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
-				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
-				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath(STATUS_JSON).value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath(CITY_JSON).value(user.getAddress().getCity()))
+				.andExpect(jsonPath(STREET_JSON).value(user.getAddress().getStreet()))
+				.andExpect(jsonPath(HOUSE_JSON).value(user.getAddress().getHouse()))
+				.andExpect(jsonPath(HOUSING_JSON).value(user.getAddress().getHousing()))
+				.andExpect(jsonPath(ENTRANCE_JSON).value(user.getAddress().getEntrance()))
+				.andExpect(jsonPath(FLOOR_JSON).value(user.getAddress().getFloor()))
+				.andExpect(jsonPath(ROOM_NUM_JSON).value(user.getAddress().getRoomNumber()))
+				.andExpect(jsonPath(ORDER_NUM_JSON).isEmpty())
 				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
-				.andDo(document("get-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
+				.andDo(document(GET_ORDER_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 
 		// Create another order while active order is exists
 		mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$.code").value("INVALID_STATE"))
-				.andExpect(jsonPath("$.message").value("Active order must be only one"));
+				.andExpect(jsonPath(CODE_JSON).value(INVALID_STATE_ERR))
+				.andExpect(jsonPath(MESSAGE_JSON).value(ONLY_ONE_MESSAGE));
 
 
 		// Update order address
 		AddressDTO addressToUpdate = TestUtil.createAddressDTO();
 		addressToUpdate.created = null;
 		HashMap<String, Object> addressMap = objectMapper
-				.convertValue(addressToUpdate, new TypeReference<HashMap<String, Object>>() {});
+				.convertValue(addressToUpdate, new TypeReference<HashMap<String, Object>>() {
+				});
 		addressMap.entrySet()
 				.removeAll(addressMap.entrySet().stream().filter(m -> m.getValue() == null).collect(Collectors.toList()));
 
-		mockMvc.perform(patchRequestWithUrl("/v1/orders/{orderId}/addresses", addressMap, order.id))
-				.andExpect(jsonPath("$.products", hasSize(order.products.size())))
-				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
-				.andExpect(jsonPath("$.address.city").value(addressToUpdate.city))
-				.andExpect(jsonPath("$.address.street").value(addressToUpdate.street))
-				.andExpect(jsonPath("$.address.house").value(addressToUpdate.house))
-				.andExpect(jsonPath("$.address.housing").value(addressToUpdate.housing))
-				.andExpect(jsonPath("$.address.entrance").value(addressToUpdate.entrance))
-				.andExpect(jsonPath("$.address.floor").value(addressToUpdate.floor))
-				.andExpect(jsonPath("$.address.roomNumber").value(addressToUpdate.roomNumber))
-				.andDo(document("add-order-address",
+		mockMvc.perform(patchRequestWithUrl(UPDATE_ORDER_ADDR_URL, addressMap, order.id))
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(order.products.size())))
+				.andExpect(jsonPath(STATUS_JSON).value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath(CITY_JSON).value(addressToUpdate.city))
+				.andExpect(jsonPath(STREET_JSON).value(addressToUpdate.street))
+				.andExpect(jsonPath(HOUSE_JSON).value(addressToUpdate.house))
+				.andExpect(jsonPath(HOUSING_JSON).value(addressToUpdate.housing))
+				.andExpect(jsonPath(ENTRANCE_JSON).value(addressToUpdate.entrance))
+				.andExpect(jsonPath(FLOOR_JSON).value(addressToUpdate.floor))
+				.andExpect(jsonPath(ROOM_NUM_JSON).value(addressToUpdate.roomNumber))
+				.andDo(document(UPDATE_ORDER_ADDR_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 
 		// Checkout
-		String paymentForm = mockMvc.perform(get("/v1/users/{userId}/payments", jwtResponse.getUserId())
+		String paymentForm = mockMvc.perform(get(CHECKOUT_URL, jwtResponse.getUserId())
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andDo(document("checkout", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andDo(document(CHECKOUT_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString();
 
 		assertTrue(paymentForm.startsWith(CHECKOUT_FORM_SNIPPET));
 
 		// Cancel order
-		mockMvc.perform(delete("/v1/orders/{orderId}", order.id)
+		mockMvc.perform(delete(CANCEL_ORDER_URL, order.id)
 				.headers(authHeader(accessToken)))
-				.andDo(document("cancel-order", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andDo(document(CANCEL_ORDER_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andExpect(status().isNoContent());
 
 		// Find orders by user
@@ -144,18 +168,18 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		accessToken = jwtResponse.getAccessToken();
 		OrderDTO order1 = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.products", hasSize(cart.products.size())))
-				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
-				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
-				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
-				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
-				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
-				.andExpect(jsonPath("$.address.entrance").value(user.getAddress().getEntrance()))
-				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
-				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
-				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(cart.products.size())))
+				.andExpect(jsonPath(STATUS_JSON).value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath(CITY_JSON).value(user.getAddress().getCity()))
+				.andExpect(jsonPath(STREET_JSON).value(addressToUpdate.street))
+				.andExpect(jsonPath(HOUSE_JSON).value(addressToUpdate.house))
+				.andExpect(jsonPath(HOUSING_JSON).value(addressToUpdate.housing))
+				.andExpect(jsonPath(ENTRANCE_JSON).value(addressToUpdate.entrance))
+				.andExpect(jsonPath(FLOOR_JSON).value(addressToUpdate.floor))
+				.andExpect(jsonPath(ROOM_NUM_JSON).value(addressToUpdate.roomNumber))
+				.andExpect(jsonPath(ORDER_NUM_JSON).isEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
-				.andDo(document("find-user-orders",
+				.andDo(document(FIND_USER_ORDERS_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 
@@ -170,25 +194,25 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 	}
 
 	private void cancelOrder(String orderId) throws Exception {
-		mockMvc.perform(delete("/v1/orders/{orderId}", orderId)
+		mockMvc.perform(delete(CANCEL_ORDER_URL, orderId)
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isNoContent());
 	}
 
 	private OrderDTO getOrder(User user) throws Exception {
-		return objectMapper.readValue(mockMvc.perform(get("/v1/users/{userId}/active-order", user.getId())
+		return objectMapper.readValue(mockMvc.perform(get(GET_ORDER_URL, user.getId())
 				.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
-				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
-				.andExpect(jsonPath("$.products", hasSize(5)))
-				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
-				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
-				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
-				.andExpect(jsonPath("$.address.entrance").value(user.getAddress().getEntrance()))
-				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
-				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
-				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath(STATUS_JSON).value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath(CITY_JSON).value(user.getAddress().getCity()))
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(PRODUCTS_SIZE)))
+				.andExpect(jsonPath(STREET_JSON).value(user.getAddress().getStreet()))
+				.andExpect(jsonPath(HOUSE_JSON).value(user.getAddress().getHouse()))
+				.andExpect(jsonPath(HOUSING_JSON).value(user.getAddress().getHousing()))
+				.andExpect(jsonPath(ENTRANCE_JSON).value(user.getAddress().getEntrance()))
+				.andExpect(jsonPath(FLOOR_JSON).value(user.getAddress().getFloor()))
+				.andExpect(jsonPath(ROOM_NUM_JSON).value(user.getAddress().getRoomNumber()))
+				.andExpect(jsonPath(ORDER_NUM_JSON).isEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 	}
@@ -201,16 +225,17 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 		accessToken = jwtResponse.getAccessToken();
 		OrderDTO dto = objectMapper.readValue(mockMvc.perform(postRequest(null, user.getId()))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.products", hasSize(5)))
-				.andExpect(jsonPath("$.status").value(OrderModel.OrderStatus.ACTIVE.name()))
-				.andExpect(jsonPath("$.address.city").value(user.getAddress().getCity()))
-				.andExpect(jsonPath("$.address.street").value(user.getAddress().getStreet()))
-				.andExpect(jsonPath("$.address.house").value(user.getAddress().getHouse()))
-				.andExpect(jsonPath("$.address.housing").value(user.getAddress().getHousing()))
-				.andExpect(jsonPath("$.address.entrance").value(user.getAddress().getEntrance()))
-				.andExpect(jsonPath("$.address.floor").value(user.getAddress().getFloor()))
-				.andExpect(jsonPath("$.address.roomNumber").value(user.getAddress().getRoomNumber()))
-				.andExpect(jsonPath("$.orderNumber").isEmpty())
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(PRODUCTS_SIZE)))
+				.andExpect(jsonPath(STATUS_JSON).value(OrderModel.OrderStatus.ACTIVE.name()))
+				.andExpect(jsonPath(CITY_JSON).value(user.getAddress().getCity()))
+				.andExpect(jsonPath(PRODUCTS_JSON, hasSize(PRODUCTS_SIZE)))
+				.andExpect(jsonPath(STREET_JSON).value(user.getAddress().getStreet()))
+				.andExpect(jsonPath(HOUSE_JSON).value(user.getAddress().getHouse()))
+				.andExpect(jsonPath(HOUSING_JSON).value(user.getAddress().getHousing()))
+				.andExpect(jsonPath(ENTRANCE_JSON).value(user.getAddress().getEntrance()))
+				.andExpect(jsonPath(FLOOR_JSON).value(user.getAddress().getFloor()))
+				.andExpect(jsonPath(ROOM_NUM_JSON).value(user.getAddress().getRoomNumber()))
+				.andExpect(jsonPath(ORDER_NUM_JSON).isEmpty())
 				.andExpect(jsonPath(USER_ID_JSON).value(user.getId()))
 				.andReturn().getResponse().getContentAsString(), OrderDTO.class);
 
@@ -219,7 +244,7 @@ public class OrderIntegrationTest extends BaseIntegrationTest {
 	}
 
 	private CartDTO createCart(String userId) throws Exception {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < PRODUCTS_SIZE; i++) {
 			ProductDTO product = createProductPostRequest();
 			putInTheCart(product, userId);
 		}

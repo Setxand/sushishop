@@ -37,13 +37,32 @@ public class BaseIntegrationTest {
 	protected static final String CONTENT_JSON = "$.content";
 	protected static final String CREATED_JSON = "$.created";
 	protected static final String PICTURE_JSON = "$.picture";
+	protected static final String ACCESS_TOK_JSON = "$.accessToken";
+	protected static final String REFRESH_TOK_JSON = "$.refreshToken";
+	protected static final String USER_ID_JSON = "$.userId";
+	protected static final String PRODUCTS_JSON = "$.products";
+
 	protected static final String PRODUCTS_BASE_URL = "/v1/products";
 	protected static final String RECIPES_BASE_URL = "/v1/recipes";
 	protected static final String USERS_BASE_URL = "/v1/users";
 	protected static final String ORDERS_BASE_URL = USERS_BASE_URL + "/{userId}/orders";
 	protected static final String CARTS_BASE_URL = USERS_BASE_URL + "/{userId}/carts";
+	protected static final String LOGIN_URL = "/login";
+	protected static final String SIGNUP_URL = "/signup";
+	private static final String ADDRESSES_URL = "/{userId}/addresses";
+
 	private static final String GET_PRODUCTS_DOC = "get-products-list";
+	private static final String CREATE_RECIPE_DOC = "create-recipe";
+	private static final String LOGIN_DOC = "login-ok";
+
+	private static final int RECIPE_PRODUCTS_NUM = 5;
+	private static final int GET_PRODUCTS_PAGE_SIZE = 3;
+	private static final String SIGN_UP_PASSWORD = "1111dfd@";
+	private static final String CONTENT_KEY = "content";
+
 	private static final Map<Class<? extends BaseIntegrationTest>, String> baseUrlMap = new HashMap<>();
+	private static final String GET_PRODUCTS_PAGE_URL = PRODUCTS_BASE_URL + "?type=%s&page=0&size=" +
+			GET_PRODUCTS_PAGE_SIZE;
 
 	static {
 		baseUrlMap.put(ProductIntegrationTest.class, PRODUCTS_BASE_URL);
@@ -53,11 +72,9 @@ public class BaseIntegrationTest {
 	}
 
 	@Autowired protected MockMvc mockMvc;
-
 	@Autowired protected ObjectMapper objectMapper;
 
 	protected String accessToken = "";
-
 
 	protected ProductDTO createProductPostRequest() throws Exception {
 		return createProductSendRequest(createProductDTO());
@@ -75,19 +92,17 @@ public class BaseIntegrationTest {
 	}
 
 	protected List<ProductDTO> getProducts(Product.ProductType type) throws Exception {
-		int pageSize = 3;
-
 		Map<String, Object> map = objectMapper.readValue(mockMvc.perform(
-				get(PRODUCTS_BASE_URL + "?type=" + type.name() + "&page=0&size=" + pageSize)
+				get(String.format(GET_PRODUCTS_PAGE_URL, type.name()))
 						.headers(authHeader(accessToken)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath(CONTENT_JSON, hasSize(pageSize)))
+				.andExpect(jsonPath(CONTENT_JSON, hasSize(GET_PRODUCTS_PAGE_SIZE)))
 				.andDo(document(GET_PRODUCTS_DOC,
 						preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString(), new TypeReference<Map<String, Object>>() {
 		});
 
-		return objectMapper.convertValue(map.get("content"),
+		return objectMapper.convertValue(map.get(CONTENT_KEY),
 				new TypeReference<List<ProductDTO>>() {
 				});
 	}
@@ -134,7 +149,7 @@ public class BaseIntegrationTest {
 	}
 
 	protected void addTestAddressToUser(String userId, AddressDTO address) throws Exception {
-		mockMvc.perform(put(USERS_BASE_URL + "/{userId}/addresses", userId)
+		mockMvc.perform(put(USERS_BASE_URL + ADDRESSES_URL, userId)
 				.contentType(MediaType.APPLICATION_JSON)
 				.headers(authHeader(accessToken))
 				.content(objectMapper.writeValueAsString(address)))
@@ -145,7 +160,7 @@ public class BaseIntegrationTest {
 		// Create products for the recipe
 
 		List<ProductDTO> productDTOS = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < RECIPE_PRODUCTS_NUM; i++) {
 			productDTOS.add(createProductPostRequest());
 		}
 		RecipeDTORequest recipeRequest = createRequestRecipe(productDTOS.stream().map(p -> p.id)
@@ -158,8 +173,8 @@ public class BaseIntegrationTest {
 				.andExpect(MockMvcResultMatchers.jsonPath(ID_JSON).isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath(NAME_JSON).value(recipeRequest.name))
 				.andExpect(jsonPath(PICTURE_JSON).value(recipeRequest.picture))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.products", hasSize(5)))
-				.andDo(document("create-recipe", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+				.andExpect(MockMvcResultMatchers.jsonPath(PRODUCTS_JSON, hasSize(RECIPE_PRODUCTS_NUM)))
+				.andDo(document(CREATE_RECIPE_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.andReturn().getResponse().getContentAsString();
 
 		return objectMapper.readValue(recipeJsonResponse, RecipeDTOResponse.class);
@@ -167,13 +182,13 @@ public class BaseIntegrationTest {
 
 	protected JwtResponse signUpRequest() throws Exception {
 		UserDTO newUserInput = createUserDTO();
-		newUserInput.password = "1111dfd@";
+		newUserInput.password = SIGN_UP_PASSWORD;
 		newUserInput.id = null;
-		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
+		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl(SIGNUP_URL, newUserInput))
 				.andExpect(status().isCreated())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(ACCESS_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(REFRESH_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).isNotEmpty())
 				.andReturn().getResponse().getContentAsString(), JwtResponse.class);
 	}
 
@@ -182,13 +197,13 @@ public class BaseIntegrationTest {
 		newUserInput.role = role.name();
 		newUserInput.email = email;
 		newUserInput.phone = phone;
-		newUserInput.password = "1111dfd@";
+		newUserInput.password = SIGN_UP_PASSWORD;
 		newUserInput.id = null;
-		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl("/signup", newUserInput))
+		return objectMapper.readValue(mockMvc.perform(postRequestWithUrl(SIGNUP_URL, newUserInput))
 				.andExpect(status().isCreated())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(ACCESS_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(REFRESH_TOK_JSON).isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).isNotEmpty())
 				.andReturn().getResponse().getContentAsString(), JwtResponse.class);
 	}
 
@@ -203,7 +218,7 @@ public class BaseIntegrationTest {
 	protected CartDTO getCart(String userId) throws Exception {
 		return objectMapper.readValue(mockMvc.perform(get(CARTS_BASE_URL, userId)
 				.headers(authHeader(accessToken)))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(userId))
+				.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(userId))
 				.andExpect(jsonPath(CREATED_JSON).isNotEmpty())
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), CartDTO.class);
 	}
@@ -216,14 +231,18 @@ public class BaseIntegrationTest {
 
 	protected JwtResponse signInRequest(String userId, LoginRequestDTO loginRequest) throws Exception {
 		return objectMapper.readValue(
-				mockMvc.perform(postRequestWithUrl("/login", loginRequest))
+				mockMvc.perform(postRequestWithUrl(LOGIN_URL, loginRequest))
 						.andExpect(status().isAccepted())
-						.andExpect(MockMvcResultMatchers.jsonPath("$.accessToken").isNotEmpty())
-						.andExpect(MockMvcResultMatchers.jsonPath("$.refreshToken").isNotEmpty())
-						.andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(userId))
-						.andDo(document("login-ok", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
+						.andExpect(MockMvcResultMatchers.jsonPath(ACCESS_TOK_JSON).isNotEmpty())
+						.andExpect(MockMvcResultMatchers.jsonPath(REFRESH_TOK_JSON).isNotEmpty())
+						.andExpect(MockMvcResultMatchers.jsonPath(USER_ID_JSON).value(userId))
+						.andDo(document(LOGIN_DOC, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 						.andReturn().getResponse().getContentAsString(),
 				JwtResponse.class);
+	}
+
+	protected void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
 }
