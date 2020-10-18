@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.UUID;
 
@@ -29,6 +30,12 @@ public class UserService {
 	private final JwtTokenUtil jwtTokenUtil;
 	private final String forgotPasswordUrl;
 
+	@Value("${admin.email}")
+	private String adminEmail;
+
+	@Value("${admin.password}")
+	private String adminPassword;
+
 	public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder,
 					   AddressRepository addressRepo,
 					   EmailClient emailClient,
@@ -40,6 +47,15 @@ public class UserService {
 		this.emailClient = emailClient;
 		this.jwtTokenUtil = jwtTokenUtil;
 		this.forgotPasswordUrl = forgotPasswordUrl;
+	}
+
+	@PostConstruct
+	public void createDefaultAdmin() {
+		User user = new User();
+		user.setEmail(adminEmail);
+		user.setPassword(passwordEncoder.encode(adminPassword));
+		user.setRole(User.UserRole.ROLE_ADMIN);
+		userRepo.findByEmail(user.getEmail()).orElseGet(() -> userRepo.saveAndFlush(user));
 	}
 
 	public User findByEmail(String email) {

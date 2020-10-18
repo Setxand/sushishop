@@ -34,8 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserIntegrationTest extends BaseIntegrationTest {
 
 	private static final String BY_ID = USERS_BASE_URL + "/{userId}";
-	private static final String EMAIL_JSON_PATH = "$.email";
-	private static final String PHONE_JSON_PATH = "$.phone";
 	private static final String ADD_ADDR_TO_USER_URL = "/v1/users/{userId}/addresses";
 	private static final String ADD_ADDR_TO_USER_DOC = "user-add-address";
 	private static final String NEW_PASSWORD = "12345";
